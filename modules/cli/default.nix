@@ -11,6 +11,7 @@
     ./git.nix
     ./lazygit.nix
     ./bottom.nix
+    ./tealdeer.nix
   ];
 
   options = {me.cli.enable = lib.mkEnableOption "Enable CLI Tools";};
@@ -23,5 +24,6 @@
     me.cli.git.enable = true;
     me.cli.lazygit.enable = true;
     me.cli.bottom.enable = true;
+    me.cli.tealdeer.enable = true;
   };
 }
