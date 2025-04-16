@@ -33,8 +33,5 @@
       modules = [./home/ethan/home.nix];
       extraSpecialArgs = {neovim-config = inputs.neovim-config;};
     };
-    devShells.${system}.default = pkgs.mkShell {
-      packages = with pkgs; [nixd alejandra zsh];
-    };
   };
 }

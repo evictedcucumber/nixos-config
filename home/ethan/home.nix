@@ -1,6 +1,6 @@
 {
   config,
-  # pkgs,
+  pkgs,
   ...
 }: {
   home.username = "ethan";
@@ -22,7 +22,7 @@
     cacheHome = "${config.home.homeDirectory}/.local/cache";
   };
 
-  # home.packages = with pkgs; [ ];
+  home.packages = with pkgs; [alejandra nixd];
 
   home.file = {};
 
