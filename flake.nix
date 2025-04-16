@@ -35,12 +35,6 @@
     };
     devShells.${system}.default = pkgs.mkShell {
       packages = with pkgs; [nixd alejandra zsh];
-
-      shellHook = ''
-        if [[ "$(basename "$0")" != "zsh" ]]; then
-            exec ${pkgs.zsh}/bin/zsh -l
-        fi
-      '';
     };
   };
 }
