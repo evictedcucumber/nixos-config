@@ -5,7 +5,7 @@
 }: {
   imports = [
     ./shells
-    ./yazi.nix
+    ./yazi
     ./tmux.nix
     ./neovim.nix
     ./git.nix

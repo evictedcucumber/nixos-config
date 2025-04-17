@@ -25,10 +25,8 @@
     programs.yazi.enable = true;
     programs.yazi.package = pkgs.yazi;
     programs.yazi.enableZshIntegration = true;
-    programs.yazi.settings = {manager = {show_hidden = true;};};
-    home.file.".config/yazi/theme.toml".source = builtins.fetchurl {
-      url = "https://github.com/catppuccin/yazi/raw/main/themes/mocha/catppuccin-mocha-lavender.toml";
-      sha256 = "0dfpm723nvsvr8q69q3mzyvz4n711z3030x5izrliff5kl1i0z6q";
-    };
+    home.file.".config/yazi/yazi.toml".source = ./yazi.toml;
+    home.file.".config/yazi/theme.toml".source = ./theme.toml;
+    home.file.".config/yazi/keymap.toml".source = ./keymap.toml;
   };
 }
