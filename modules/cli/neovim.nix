@@ -28,6 +28,10 @@
       neovim-unwrapped
     ];
 
+    home.sessionVariables = {
+      EDITOR = "nvim";
+    };
+
     home.file = {
       ".config/nvim/init.lua".source = "${neovim-config}/init.lua";
       ".config/nvim/after".source = "${neovim-config}/after";
