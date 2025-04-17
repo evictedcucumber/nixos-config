@@ -22,7 +22,7 @@
     cacheHome = "${config.home.homeDirectory}/.local/cache";
   };
 
-  home.packages = with pkgs; [alejandra nixd];
+  home.packages = with pkgs; [alejandra nixd harper];
 
   home.file = {};
 
