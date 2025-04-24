@@ -71,15 +71,14 @@
         }
       ];
       sessionVariables = {PURE_GIT_PULL = "0";};
-      initExtraBeforeCompInit = ''
+      initContent = ''
         zstyle :compinstall filename "''${ZDOTDIR}/.zshrc"
         zstyle ':completion:*' use-cache on
         zstyle ':completion:*' cache-path "''${XDG_CACHE_HOME}/zsh/.zcompcache"
         zstyle ':completion:*' menu no
         zstyle ':fzf-tab:complete:cd:*' fzf=preview 'ls $realpath'
         zstyle ':fzf-tab:*' switch-group '<' '>'
-      '';
-      initExtra = ''
+
         setopt correct
         setopt extendedglob
         setopt nocaseglob
