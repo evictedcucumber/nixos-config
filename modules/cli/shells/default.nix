@@ -57,7 +57,8 @@
       lt = "ls -T -I='.git'";
       "z-" = "z -";
       "z.." = "z ..";
-      "nixdev" = "nix develop --command \${SHELL}";
+      nixdev = "nix develop --command \${SHELL}";
+      mux = "tmuxinator";
     };
 
     me.cli.shells.zsh.enable = true;
