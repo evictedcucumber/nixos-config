@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  username,
+  pkgs,
   ...
 }: {
   options = {me.cli.git.enable = lib.mkEnableOption "Enable GIT";};
@@ -18,5 +18,7 @@
       commit.gpgsign = true;
       tag.gpgSign = true;
     };
+
+    home.packages = with pkgs; [pre-commit];
   };
 }
