@@ -71,23 +71,19 @@
         unbind x
         bind x kill-pane
 
-        unbind C-n
-        bind -n C-n next-window
-        unbind C-p
-        bind -n C-p previous-window
-        unbind n
-        bind n switch-client -n
-        unbind p
-        bind p switch-client -p
+        unbind M-n
+        bind -n M-n next-window
+        unbind M-p
+        bind -n M-p previous-window
 
-        unbind h
-        bind h select-pane -L
-        unbind j
-        bind j select-pane -D
-        unbind k
-        bind k select-pane -U
-        unbind l
-        bind l select-pane -R
+        unbind M-h
+        bind -n M-h select-pane -L
+        unbind M-j
+        bind -n M-j select-pane -D
+        unbind M-k
+        bind -n M-k select-pane -U
+        unbind M-l
+        bind -n M-l select-pane -R
 
         bind-key -T copy-mode-vi v send-keys -X begin-selection
         bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
