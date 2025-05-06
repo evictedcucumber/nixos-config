@@ -70,7 +70,10 @@
           };
         }
       ];
-      sessionVariables = {PURE_GIT_PULL = "0";};
+      sessionVariables = {
+        PURE_GIT_PULL = "0";
+        TERM = "xterm-256color";
+      };
       initContent = ''
         zstyle :compinstall filename "''${ZDOTDIR}/.zshrc"
         zstyle ':completion:*' use-cache on
