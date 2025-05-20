@@ -21,15 +21,17 @@
       unzip
       wget
       nodejs
-      cargo
-      rustc
       sqlite
       tree-sitter
-      neovim-unwrapped
+      neovim
+      stylua
+      lua-language-server
+      rust-bin.stable.latest.minimal
     ];
 
     home.sessionVariables = {
       EDITOR = "nvim";
+      RUSTC_VERSION = "nightly";
     };
 
     home.file = {
