@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }: {
   options = {me.cli.bottom.enable = lib.mkEnableOption "Enable bottom";};
