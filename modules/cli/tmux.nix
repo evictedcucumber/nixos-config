@@ -76,15 +76,6 @@
         unbind M-p
         bind -n M-p previous-window
 
-        unbind M-h
-        bind -n M-h select-pane -L
-        unbind M-j
-        bind -n M-j select-pane -D
-        unbind M-k
-        bind -n M-k select-pane -U
-        unbind M-l
-        bind -n M-l select-pane -R
-
         bind-key -T copy-mode-vi v send-keys -X begin-selection
         bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
         unbind -T copy-mode-vi MouseDragEnd1Pane
