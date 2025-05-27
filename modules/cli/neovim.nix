@@ -16,7 +16,6 @@
       python3Packages.pip
       python3Packages.virtualenv
       lua5_1
-      lua51Packages.jsregexp
       lua51Packages.sqlite
       unzip
       wget
@@ -31,7 +30,6 @@
 
     home.sessionVariables = {
       EDITOR = "nvim";
-      RUSTC_VERSION = "nightly";
     };
 
     home.file = {
