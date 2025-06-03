@@ -48,6 +48,7 @@
     me.cli.shells.shellAliases = {
       v = "nvim";
       vv = "NVIM_APPNAME=neovim nvim";
+      e = "emacsclient -c -a 'emacs'";
       cat = "bat";
       mkdir = "mkdir -p";
       rg = "rg --color=always";

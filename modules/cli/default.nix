@@ -7,6 +7,7 @@
     ./shells
     ./yazi
     ./tmux.nix
+    ./emacs.nix
     ./neovim.nix
     ./git.nix
     ./lazygit.nix
@@ -20,6 +21,7 @@
     me.cli.shells.enable = true;
     me.cli.yazi.enable = true;
     me.cli.tmux.enable = true;
+    me.cli.emacs.enable = true;
     me.cli.neovim.enable = true;
     me.cli.git.enable = true;
     me.cli.lazygit.enable = true;
