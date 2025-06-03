@@ -26,6 +26,10 @@
       stylua
       lua-language-server
       rust-bin.stable.latest.minimal
+
+      #LSP servers
+      alejandra
+      nixd
     ];
 
     home.sessionVariables = {
