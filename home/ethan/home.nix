@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{config, ...}: {
   home.username = "ethan";
   home.homeDirectory = "/home/${config.home.username}";
   home.stateVersion = "24.11";
@@ -21,12 +17,6 @@
     stateHome = "${config.home.homeDirectory}/.local/state";
     cacheHome = "${config.home.homeDirectory}/.local/cache";
   };
-
-  home.packages = with pkgs; [alejandra nixd harper];
-
-  home.file = {};
-
-  home.sessionVariables = {};
 
   programs.home-manager.enable = true;
 }
