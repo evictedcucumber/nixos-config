@@ -95,10 +95,10 @@
 
         mkcd() {
             if [ -d $1 ]; then
-                cd $1
+                __zoxide_z $1
             else
                 mkdir -p $1
-                cd $1
+                __zoxide_z $1
             fi
         }
 
