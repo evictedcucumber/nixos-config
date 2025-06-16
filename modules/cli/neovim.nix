@@ -23,11 +23,10 @@
       sqlite
       tree-sitter
       neovim
-      stylua
-      lua-language-server
       rust-bin.stable.latest.minimal
 
       #LSP servers
+      lua-language-server
       alejandra
       nixd
     ];
@@ -38,7 +37,6 @@
 
     home.file = {
       ".config/nvim/init.lua".source = "${neovim-config}/init.lua";
-      ".config/nvim/after".source = "${neovim-config}/after";
       ".config/nvim/lua".source = "${neovim-config}/lua";
     };
   };
