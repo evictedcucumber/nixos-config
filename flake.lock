@@ -40,11 +40,11 @@
     "neovim-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1749118304,
-        "narHash": "sha256-1K0/sOSJa0/dOtR8cPIJx+m1exzCLhW9n1+MfRDo15o=",
+        "lastModified": 1750077784,
+        "narHash": "sha256-FC7JwjRWx7m0gOHPZIDyB8wR8dFi6W2HKgvjUai+UgE=",
         "owner": "evictedcucumber",
         "repo": "neovim-config",
-        "rev": "03374cf401f78f3cadf9b2a8f41f9cf339cc5e22",
+        "rev": "4b3839b8fe207a7c5da0bd139513fb1b44a6ceb2",
         "type": "github"
       },
       "original": {
