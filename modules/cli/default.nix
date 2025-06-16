@@ -21,7 +21,7 @@
     me.cli.shells.enable = true;
     me.cli.yazi.enable = true;
     me.cli.tmux.enable = true;
-    me.cli.emacs.enable = true;
+    me.cli.emacs.enable = false;
     me.cli.neovim.enable = true;
     me.cli.git.enable = true;
     me.cli.lazygit.enable = true;
