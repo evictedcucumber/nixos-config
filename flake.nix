@@ -5,8 +5,6 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
-    neovim-nightly.inputs.nixpkgs.follows = "nixpkgs";
     neovim-config.url = "github:evictedcucumber/neovim-config/main";
     neovim-config.flake = false;
     rust-overlay.url = "github:oxalica/rust-overlay";
@@ -20,10 +18,7 @@
 
       config.allowUnfree = true;
 
-      overlays = [
-        (import inputs.rust-overlay)
-        (import inputs.neovim-nightly)
-      ];
+      overlays = [(import inputs.rust-overlay)];
     };
   in {
     nixosConfigurations."nixos-wsl" = nixpkgs.lib.nixosSystem {
