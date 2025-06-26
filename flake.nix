@@ -5,7 +5,7 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    neovim-config.url = "github:evictedcucumber/neovim-config/hardened";
+    neovim-config.url = "github:evictedcucumber/neovim-config/main";
     neovim-config.flake = false;
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
