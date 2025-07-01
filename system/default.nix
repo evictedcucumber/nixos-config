@@ -7,7 +7,7 @@
 
   boot.kernelPackages = pkgs.linuxPackages_6_12;
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.11";
 
   services.pcscd.enable = true;
 

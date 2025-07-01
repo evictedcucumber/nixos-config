@@ -1,7 +1,7 @@
 {config, ...}: {
   home.username = "ethan";
   home.homeDirectory = "/home/${config.home.username}";
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.11";
 
   imports = [../../modules/gui ../../modules/cli];
 
