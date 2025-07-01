@@ -1,7 +1,6 @@
 {
   pkgs,
   nixos-wsl,
-  username,
   ...
 }: {
   imports = [
@@ -10,9 +9,15 @@
   ];
 
   wsl.enable = true;
-  wsl.defaultUser = "${username}";
+  wsl.defaultUser = "ethan";
 
-  users.users."${username}" = {
+  users.users."ethan" = {
+    isNormalUser = true;
+    extraGroups = ["wheel"];
+    shell = pkgs.zsh;
+  };
+
+  users.users."ethan-vaxowave" = {
     isNormalUser = true;
     extraGroups = ["wheel"];
     shell = pkgs.zsh;

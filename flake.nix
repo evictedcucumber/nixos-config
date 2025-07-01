@@ -27,7 +27,6 @@
       modules = [./system/nixos-wsl/configuration.nix];
       specialArgs = {
         nixos-wsl = inputs.nixos-wsl;
-        username = "ethan";
         hostname = "nixos-wsl";
       };
     };
@@ -35,6 +34,14 @@
       inherit pkgs;
 
       modules = [./home/ethan/home.nix];
+      extraSpecialArgs = {
+        neovim-config = inputs.neovim-config;
+      };
+    };
+    homeConfigurations."ethan-vaxowave" = inputs.home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+
+      modules = [./home/ethan-vaxowave/home.nix];
       extraSpecialArgs = {
         neovim-config = inputs.neovim-config;
       };
