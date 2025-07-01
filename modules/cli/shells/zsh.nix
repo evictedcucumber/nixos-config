@@ -73,6 +73,7 @@
       sessionVariables = {
         PURE_GIT_PULL = "0";
         TERM = "xterm-256color";
+        PATH = "$PATH:$HOME/.cargo/bin";
       };
       initContent = ''
         zstyle :compinstall filename "''${ZDOTDIR}/.zshrc"
