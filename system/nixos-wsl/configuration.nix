@@ -19,7 +19,7 @@
 
   users.users."ethan-vaxowave" = {
     isNormalUser = true;
-    extraGroups = ["wheel"];
+    extraGroups = [];
     shell = pkgs.zsh;
   };
 
