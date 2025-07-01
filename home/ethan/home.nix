@@ -9,6 +9,7 @@
   me.cli.enable = true;
 
   me.cli.shells.zsh.enable = true;
+  me.cli.git.gpgKey = "8E29907A4CA30E30";
 
   xdg = {
     enable = true;
