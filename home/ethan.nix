@@ -1,6 +1,6 @@
 {
   config,
-  pkgs,
+  stateVersion,
   ...
 }: {
   imports = [
@@ -18,7 +18,7 @@
 
   home.username = "ethan";
   home.homeDirectory = "/home/${config.home.username}";
-  home.stateVersion = "25.11";
+  home.stateVersion = stateVersion;
 
   me.cli.fish.enable = true;
   me.cli.starship.enable = true;

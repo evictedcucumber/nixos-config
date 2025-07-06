@@ -13,6 +13,7 @@
 
   outputs = {nixpkgs, ...} @ inputs: let
     system = "x86_64-linux";
+    stateVersion = "25.11";
     pkgs = import nixpkgs {
       inherit system;
 
@@ -26,6 +27,8 @@
 
       modules = [./system/nixos-wsl/configuration.nix];
       specialArgs = {
+        inherit stateVersion;
+
         nixos-wsl = inputs.nixos-wsl;
         hostname = "nixos-wsl";
       };
@@ -35,6 +38,8 @@
 
       modules = [./home/ethan.nix];
       extraSpecialArgs = {
+        inherit stateVersion;
+
         neovim-config = inputs.neovim-config;
       };
     };

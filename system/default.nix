@@ -1,13 +1,14 @@
 {
   pkgs,
   hostname,
+  stateVersion,
   ...
 }: {
   networking.hostName = "${hostname}";
 
   boot.kernelPackages = pkgs.linuxPackages_6_12;
 
-  system.stateVersion = "25.11";
+  system.stateVersion = stateVersion;
 
   services.pcscd.enable = true;
 
@@ -19,7 +20,6 @@
     xclip
   ];
 
-  programs.zsh.enable = true;
   programs.nix-ld.enable = true;
   programs.gnupg.agent.enable = true;
 
