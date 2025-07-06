@@ -11,12 +11,14 @@
   wsl.enable = true;
   wsl.defaultUser = "ethan";
 
+  programs.fish.enable = true;
   users.users."ethan" = {
     isNormalUser = true;
     extraGroups = ["wheel"];
     shell = pkgs.fish;
   };
 
+  programs.zsh.enable = true;
   users.users."ethan-vaxowave" = {
     isNormalUser = true;
     extraGroups = [];
