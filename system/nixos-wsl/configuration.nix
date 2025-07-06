@@ -14,7 +14,7 @@
   users.users."ethan" = {
     isNormalUser = true;
     extraGroups = ["wheel"];
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
 
   users.users."ethan-vaxowave" = {
