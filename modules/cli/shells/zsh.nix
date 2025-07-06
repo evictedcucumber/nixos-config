@@ -22,7 +22,21 @@
         size = 100000;
       };
       defaultKeymap = "emacs";
-      shellAliases = config.me.cli.shells.shellAliases;
+      shellAliases = {
+        v = "NVIM_APPNAME=neovim nvim";
+        e = "emacsclient -c -a 'emacs'";
+        cat = "bat";
+        mkdir = "mkdir -p";
+        rg = "rg --color=always";
+        grep = "rg";
+        ls = "eza -a -F=always --icons=always --group-directories-first --sort=name -1";
+        la = "ls -l -h --no-time --group";
+        lt = "ls -T -I='.git'";
+        "z-" = "z -";
+        "z.." = "z ..";
+      };
+      nixdev = "nix develop --command \${SHELL}";
+      mux = "tmuxinator";
       autosuggestion = {
         enable = true;
         strategy = ["history" "completion" "match_prev_cmd"];
@@ -60,18 +74,8 @@
             sha256 = "sha256-q26XVS/LcyZPRqDNwKKA9exgBByE0muyuNb0Bbar2lY=";
           };
         }
-        {
-          name = "pure";
-          src = pkgs.fetchFromGitHub {
-            owner = "sindresorhus";
-            repo = "pure";
-            rev = "main";
-            sha256 = "sha256-TbOrnhLHgOvcfsgmL0l3bWY33yLIhG1KSi4ITIPq1+A=";
-          };
-        }
       ];
       sessionVariables = {
-        PURE_GIT_PULL = "0";
         TERM = "xterm-256color";
         PATH = "$PATH:$HOME/.cargo/bin";
       };
@@ -102,12 +106,6 @@
                 __zoxide_z $1
             fi
         }
-
-        __fix_cursor() {
-            echo -ne '\e[5 q'
-        }
-
-        precmd_functions+=(__fix_cursor)
 
         bindkey -r '^f'
         bindkey -s '^f' '^Uyy^M'
