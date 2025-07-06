@@ -7,7 +7,6 @@
   options = {me.cli.tmux.enable = lib.mkEnableOption "Enable TMUX";};
 
   config = lib.mkIf config.me.cli.tmux.enable {
-    programs.tmux.tmuxinator.enable = true;
     programs.tmux.enable = true;
     programs.tmux = {
       terminal = "screen-256color";
