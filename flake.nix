@@ -33,7 +33,7 @@
     homeConfigurations."ethan" = inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
 
-      modules = [./home/ethan/home.nix];
+      modules = [./home/ethan.nix];
       extraSpecialArgs = {
         neovim-config = inputs.neovim-config;
       };
