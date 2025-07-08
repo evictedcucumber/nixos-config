@@ -28,8 +28,8 @@ in {
     me.cli.ripgrep.enable = true;
     me.cli.eza.enable = true;
 
-    programs.fish.enable = true;
     programs.fish = {
+      enable = true;
       loginShellInit = "fastfetch";
       shellInit = "set -u fish_greeting \"\"";
       shellInitLast = ''
@@ -49,6 +49,9 @@ in {
         "z.." = "z ..";
         nixdev = "nix develop --command fish";
       };
+      interactiveShellInit = ''
+        bind \cf yy
+      '';
     };
     home.file.".config/fish/themes/Catppuccin Mocha.theme".source = "${catpuccin_theme}/themes/Catppuccin Mocha.theme";
   };
