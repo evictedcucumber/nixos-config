@@ -46,8 +46,10 @@
     homeConfigurations."ethan-vaxowave" = inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
 
-      modules = [./home/ethan-vaxowave/home.nix];
+      modules = [./home/ethan-vaxowave.nix];
       extraSpecialArgs = {
+        inherit stateVersion;
+
         neovim-config = inputs.neovim-config;
       };
     };
