@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   stateVersion,
   ...
 }: {
@@ -42,6 +43,8 @@
     stateHome = "${config.home.homeDirectory}/.local/state";
     cacheHome = "${config.home.homeDirectory}/.local/cache";
   };
+
+  home.packages = with pkgs; [azure-cli];
 
   programs.home-manager.enable = true;
 }
