@@ -17,12 +17,10 @@
     extraGroups = ["wheel"];
     shell = pkgs.fish;
   };
-
-  programs.zsh.enable = true;
   users.users."ethan-vaxowave" = {
     isNormalUser = true;
     extraGroups = [];
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
 
   fileSystems."/mnt/mydrive" = {
