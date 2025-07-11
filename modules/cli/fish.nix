@@ -51,6 +51,8 @@ in {
       };
       interactiveShellInit = ''
         bind \cf yy
+        bind \cj down-or-search
+        bind \ck up-or-search
       '';
     };
     home.file.".config/fish/themes/Catppuccin Mocha.theme".source = "${catpuccin_theme}/themes/Catppuccin Mocha.theme";
