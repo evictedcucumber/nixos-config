@@ -1,0 +1,51 @@
+theme "catppuccin-mocha";
+pane_frames false;
+
+show_startup_tips false;
+show_release_notes false;
+
+keybinds clear-defaults=true {
+        shared {
+                bind "Ctrl Space" { SwitchToMode "locked"; }
+        }
+        shared_except "normal" {
+                bind "Esc" { SwitchToMode "normal"; }
+        }
+        normal {
+                bind "Alt n" { GoToNextTab; SwitchToMode "normal"; }
+                bind "Alt p" { GoToPreviousTab; SwitchToMode "normal"; }
+        }
+        locked {
+                bind "d" { Detach; }
+                bind "r" { SwitchToMode "renametab"; }
+                bind "s" { SwitchToMode "scroll"; }
+                bind "c" { NewTab; SwitchToMode "normal"; }
+                bind "x" { CloseTab; SwitchToMode "normal"; }
+                bind "w" {
+                        LaunchOrFocusPlugin "zellij:session-manager" {
+                                floating true
+                                move_to_focued_tab true
+                        };
+                        SwitchToMode "normal";
+                }
+        }
+        scroll {
+                bind "k" { ScrollUp; }
+                bind "j" { ScrollDown; }
+                bind "Ctrl u" { HalfPageScrollUp; }
+                bind "Ctrl d" { HalfPageScrollDown; }
+                bind "/" { SwitchToMode "entersearch"; }
+                bind "e" { EditScrollback; SwitchToMode "Normal"; }
+        }
+        entersearch {
+                bind "Enter" { SwitchToMode "search"; }
+        }
+        search {
+                bind "n" { Search "down"; }
+                bind "N" { Search "up"; }
+        }
+        renametab {
+                bind "Ctrl c" { UndoRenameTab; SwitchToMode "normal"; }
+                bind "Enter" { SwitchToMode "normal"; }
+        }
+}

@@ -9,11 +9,11 @@
     ../modules/cli/starship.nix
     ../modules/cli/fd.nix
     ../modules/cli/yazi
-    ../modules/cli/tmux.nix
     ../modules/cli/neovim.nix
     ../modules/cli/git.nix
     ../modules/cli/lazygit.nix
     ../modules/cli/tealdeer.nix
+    ../modules/cli/zellij
   ];
 
   home.username = "ethan";
@@ -22,10 +22,10 @@
 
   me.cli.fish.enable = true;
   me.cli.starship.enable = true;
-  me.cli.tmux.enable = true;
   me.cli.neovim.enable = true;
   me.cli.lazygit.enable = true;
   me.cli.tealdeer.enable = true;
+  me.cli.zellij.enable = true;
   me.cli.git = {
     enable = true;
     gpgKey = "8E29907A4CA30E30";
