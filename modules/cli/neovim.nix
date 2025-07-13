@@ -23,17 +23,28 @@
       sqlite
       tree-sitter
       neovim
-      rust-bin.stable.latest.minimal
 
       #LSP servers
       lua-language-server
-      alejandra
+      stylua
       nixd
+      alejandra
+      marksman
+      prettierd
+      (rust-bin.stable.latest.default.override {
+        extensions = ["rust-analyzer"];
+      })
+      vscode-extensions.vadimcn.vscode-lldb
+      autotools-language-server
+      taplo
     ];
 
     home.sessionVariables = {
       EDITOR = "nvim";
     };
+    home.sessionPath = [
+      "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter"
+    ];
 
     home.file = {
       ".config/nvim/init.lua".source = "${neovim-config}/init.lua";
