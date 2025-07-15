@@ -24,19 +24,31 @@
       tree-sitter
       neovim
 
-      #LSP servers
+      # LSP Servers, Formatters, and Debuggers
+      # lua
       lua-language-server
       stylua
+      # /lua
+      # nix
       nixd
       alejandra
+      # /nix
+      # markdown
       marksman
       prettierd
+      # /markdown
+      # rust
       (rust-bin.stable.latest.default.override {
         extensions = ["rust-analyzer"];
       })
       vscode-extensions.vadimcn.vscode-lldb
-      autotools-language-server
+      # /rust
+      # # makefile
+      # autotools-language-server
+      # # /makefile
+      # toml
       taplo
+      # /toml
     ];
 
     home.sessionVariables = {
