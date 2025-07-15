@@ -1,8 +1,9 @@
-theme "catppuccin-mocha";
-pane_frames false;
+theme "catppuccin-mocha"
 
-show_startup_tips false;
-show_release_notes false;
+show_startup_tips false
+show_release_notes false
+
+mouse_mode false
 
 keybinds clear-defaults=true {
         shared {
