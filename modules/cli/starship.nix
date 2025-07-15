@@ -53,6 +53,9 @@
         cmd_duration = {
           min_time = 5000;
         };
+        nix_shell = {
+          format = "via [$symbol$name]($style) ";
+        };
       };
     };
   };
