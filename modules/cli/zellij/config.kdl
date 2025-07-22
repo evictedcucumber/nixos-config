@@ -5,6 +5,8 @@ show_release_notes false
 
 mouse_mode false
 
+default_shell "fish"
+
 keybinds clear-defaults=true {
         shared {
                 bind "Ctrl Space" { SwitchToMode "locked"; }
@@ -18,10 +20,11 @@ keybinds clear-defaults=true {
         }
         locked {
                 bind "d" { Detach; }
+                bind "q" { Quit; }
                 bind "r" { SwitchToMode "renametab"; }
                 bind "s" { SwitchToMode "scroll"; }
                 bind "c" { NewTab; SwitchToMode "normal"; }
-                bind "x" { CloseTab; SwitchToMode "normal"; }
+                bind "x" { CloseFocus; SwitchToMode "normal"; }
                 bind "w" {
                         LaunchOrFocusPlugin "zellij:session-manager" {
                                 floating true
@@ -29,6 +32,19 @@ keybinds clear-defaults=true {
                         };
                         SwitchToMode "normal";
                 }
+                bind "\\" { NewPane "Right"; SwitchToMode "normal"; }
+                bind "-" { NewPane "Down"; SwitchToMode "normal"; }
+                bind "h" { MoveFocus "Left"; SwitchToMode "normal"; }
+                bind "j" { MoveFocus "Down"; SwitchToMode "normal"; }
+                bind "k" { MoveFocus "Up"; SwitchToMode "normal"; }
+                bind "l" { MoveFocus "Right"; SwitchToMode "normal"; }
+                bind "R" { SwitchToMode "resize"; }
+        }
+        resize {
+                bind "h" { Resize "Left"; SwitchToMode "resize"; }
+                bind "j" { Resize "Down"; SwitchToMode "resize"; }
+                bind "k" { Resize "Up"; SwitchToMode "resize"; }
+                bind "l" { Resize "Right"; SwitchToMode "resize"; }
         }
         scroll {
                 bind "k" { ScrollUp; }
