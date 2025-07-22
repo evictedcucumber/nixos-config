@@ -17,6 +17,7 @@ in {
     ./zoxide.nix
     ./eza.nix
     ./ripgrep.nix
+    ./nix-your-shell.nix
   ];
 
   options = {me.cli.fish.enable = lib.mkEnableOption "Enable Fish";};
@@ -27,6 +28,10 @@ in {
     me.cli.zoxide.enable = true;
     me.cli.ripgrep.enable = true;
     me.cli.eza.enable = true;
+    me.cli.nix-your-shell = {
+      enable = true;
+      enableFish = true;
+    };
 
     programs.fish = {
       enable = true;
@@ -47,7 +52,6 @@ in {
         lt = "eza -a -F=always --icons always --group-directories-first --sort=name -1 --colour always -T -I='.git'";
         "z-" = "z -";
         "z.." = "z ..";
-        nixdev = "nix develop --command fish";
       };
       interactiveShellInit = ''
         bind \cf yy
@@ -55,6 +59,7 @@ in {
         bind \ck up-or-search
       '';
     };
+
     home.file.".config/fish/themes/Catppuccin Mocha.theme".source = "${catpuccin_theme}/themes/Catppuccin Mocha.theme";
   };
 }
