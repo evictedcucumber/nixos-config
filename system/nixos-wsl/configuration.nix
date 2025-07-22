@@ -17,11 +17,6 @@
     extraGroups = ["wheel"];
     shell = pkgs.fish;
   };
-  users.users."ethan-vaxowave" = {
-    isNormalUser = true;
-    extraGroups = [];
-    shell = pkgs.fish;
-  };
 
   fileSystems."/mnt/mydrive" = {
     device = "G:/My\\040Drive";

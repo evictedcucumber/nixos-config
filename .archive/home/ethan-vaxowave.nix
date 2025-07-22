@@ -4,6 +4,12 @@
   stateVersion,
   ...
 }: {
+  # users.users."ethan-vaxowave" = {
+  #   isNormalUser = true;
+  #   extraGroups = [];
+  #   shell = pkgs.fish;
+  # };
+
   imports = [
     ../modules/cli/fish.nix
     ../modules/cli/fzf.nix
@@ -27,10 +33,7 @@
   me.cli.neovim.enable = true;
   me.cli.lazygit.enable = true;
   me.cli.tealdeer.enable = true;
-  me.cli.git = {
-    enable = true;
-    gpgKey = "8E29907A4CA30E30";
-  };
+  me.cli.git.enable = true;
   me.cli.yazi = {
     enable = true;
     enableFish = true;
