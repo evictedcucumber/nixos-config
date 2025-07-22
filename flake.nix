@@ -7,6 +7,7 @@
 
     neovim-config.url = "github:evictedcucumber/neovim-config/main";
     neovim-config.flake = false;
+
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
