@@ -13,6 +13,7 @@
     ../modules/cli/git.nix
     ../modules/cli/lazygit.nix
     ../modules/cli/tealdeer.nix
+    ../modules/cli/direnv.nix
     ../modules/cli/zellij
   ];
 
@@ -26,6 +27,7 @@
   me.cli.lazygit.enable = true;
   me.cli.tealdeer.enable = true;
   me.cli.zellij.enable = true;
+  me.cli.direnv.enable = true;
   me.cli.git = {
     enable = true;
     gpgKey = "8E29907A4CA30E30";
