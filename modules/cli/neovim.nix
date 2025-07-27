@@ -23,6 +23,8 @@
       sqlite
       tree-sitter
       neovim
+      nodejs
+      yarn
 
       # LSP Servers, Formatters, and Debuggers
       # lua
