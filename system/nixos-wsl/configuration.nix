@@ -21,6 +21,13 @@
   fileSystems."/mnt/mydrive" = {
     device = "G:/My\\040Drive";
     fsType = "drvfs";
-    options = ["dmask=0077" "fmask=0177" "gid=100" "uid=1000"];
+    options = [
+      "metadata"
+      "case=dir"
+      "dmask=0077"
+      "fmask=0177"
+      "gid=100"
+      "uid=1000"
+    ];
   };
 }
