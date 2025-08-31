@@ -7,9 +7,9 @@
     #/usr/bin/env bash
 
     while true; do
-      ${pkgs.inotify-tools}/bin/inotifywait -r -e modify,create,delete,move "/mnt/mydrive/[97] Obsidian Vault" /home/ethan/myvault
+      ${pkgs.inotify-tools}/bin/inotifywait -r -e modify,create,delete,move "/mnt/c/Users/ethan/OneDrive/[97] Obsidian Vault" /home/ethan/myvault
       ${pkgs.unison}/bin/unison \
-        -root "/mnt/mydrive/[97] Obsidian Vault" \
+        -root "/mnt/c/Users/ethan/OneDrive/[97] Obsidian Vault" \
         -root "/home/ethan/myvault" \
         -batch -prefer=newer -fat
     done
@@ -30,19 +30,6 @@ in {
     shell = pkgs.fish;
   };
   nix.settings.trusted-users = ["ethan"];
-
-  fileSystems."/mnt/mydrive" = {
-    device = "G:/My\\040Drive";
-    fsType = "drvfs";
-    options = [
-      "metadata"
-      "case=dir"
-      "dmask=0077"
-      "fmask=0177"
-      "gid=100"
-      "uid=1000"
-    ];
-  };
 
   environment.systemPackages = with pkgs; [unison inotify-tools];
   systemd.user.services.unison-watch = {
