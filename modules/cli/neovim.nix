@@ -15,6 +15,7 @@
       python3
       python3Packages.pip
       python3Packages.virtualenv
+      python3Packages.pylatexenc
       lua5_1
       lua51Packages.sqlite
       unzip
