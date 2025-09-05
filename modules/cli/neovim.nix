@@ -47,7 +47,7 @@
       vscode-extensions.vadimcn.vscode-lldb
       # /rust
       # # makefile
-      # autotools-language-server
+      autotools-language-server
       # # /makefile
       # toml
       taplo
