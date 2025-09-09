@@ -3,16 +3,13 @@
   nixos-wsl,
   ...
 }: let
-  unisonWatchScript = pkgs.writeShellScript "unison-watch" ''
+  unisonScript = pkgs.writeShellScript "unison-watch" ''
     #/usr/bin/env bash
 
-    while true; do
-      ${pkgs.inotify-tools}/bin/inotifywait -r -e modify,create,delete,move "/mnt/c/Users/ethan/OneDrive/[97] Obsidian Vault" /home/ethan/myvault
-      ${pkgs.unison}/bin/unison \
-        -root "/mnt/c/Users/ethan/OneDrive/[97] Obsidian Vault" \
-        -root "/home/ethan/myvault" \
-        -batch -prefer=newer -fat
-    done
+    ${pkgs.unison}/bin/unison \
+      -root "/mnt/c/Users/ethan/OneDrive/[97] Obsidian Vault" \
+      -root "/home/ethan/myvault" \
+      -batch -prefer=newer -fat -auto -confirmbigdel
   '';
 in {
   imports = [
@@ -31,13 +28,19 @@ in {
   };
   nix.settings.trusted-users = ["ethan"];
 
-  environment.systemPackages = with pkgs; [unison inotify-tools];
-  systemd.user.services.unison-watch = {
+  environment.systemPackages = with pkgs; [unison];
+  systemd.user.services."unison-watch" = {
     description = "Run unison-watch.sh to sync obsidian vault";
     serviceConfig = {
-      ExecStart = unisonWatchScript;
-      Restart = "always";
+      Type = "oneshot";
+      ExecStart = unisonScript;
     };
-    wantedBy = ["default.target"];
+  };
+  systemd.user.timers."unison-watch" = {
+    timerConfig = {
+      OnBootSec = "30s";
+      OnUnitActiveSec = "30s";
+    };
+    wantedBy = ["timers.target"];
   };
 }
