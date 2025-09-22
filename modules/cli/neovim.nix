@@ -52,6 +52,9 @@
       # toml
       taplo
       # /toml
+      # harper
+      harper
+      # /harper
     ];
 
     home.sessionVariables = {
