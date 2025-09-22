@@ -3,7 +3,7 @@
   nixos-wsl,
   ...
 }: let
-  unisonScript = pkgs.writeShellScript "unison-watch" ''
+  obsidianVaultSyncScript = pkgs.writeShellScript "obsidian-vault-sync" ''
     #/usr/bin/env bash
 
     ${pkgs.unison}/bin/unison \
@@ -29,14 +29,14 @@ in {
   nix.settings.trusted-users = ["ethan"];
 
   environment.systemPackages = with pkgs; [unison];
-  systemd.user.services."unison-watch" = {
-    description = "Run unison-watch.sh to sync obsidian vault";
+  systemd.user.services."obsidian-vault-sync" = {
+    description = "Run obsidian-vault-sync.sh to sync obsidian vault";
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = unisonScript;
+      ExecStart = obsidianVaultSyncScript;
     };
   };
-  systemd.user.timers."unison-watch" = {
+  systemd.user.timers."obsidian-vault-sync" = {
     timerConfig = {
       OnBootSec = "30s";
       OnUnitActiveSec = "30s";
