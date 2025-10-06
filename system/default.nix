@@ -24,5 +24,18 @@
   programs.gnupg.agent.enable = true;
 
   nix.nixPath = ["nixpkgs=${pkgs.path}"];
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+    auto-optimise-store = true;
+  };
+
+  nix.optimise = {
+    automatic = true;
+    dates = ["Tues 10:00"];
+  };
+  nix.gc = {
+    automatic = true;
+    dates = ["Tues 10:00"];
+  };
 }
