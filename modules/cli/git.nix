@@ -15,19 +15,18 @@
   config = lib.mkIf config.me.cli.git.enable {
     programs.git = {
       enable = true;
-      userName = "Ethan";
-      userEmail = "95688781+evictedcucumber@users.noreply.github.com";
-      extraConfig =
-        {
-          init.defaultbranch = "main";
-          pull.rebase = true;
-          rebase.updaterefs = true;
-        }
-        // (lib.mkIf (config.me.cli.git.gpgKey != "") {
-          user.signingkey = "${config.me.cli.git.gpgKey}";
-          commit.gpgsign = true;
-          tag.gpgSign = true;
-        });
+      settings = {
+        user = {
+          name = "Ethan";
+          email = "95688781+evictedcucumber@users.noreply.github.com";
+          signingkey = lib.mkIf (config.me.cli.git.gpgKey != "") "${config.me.cli.git.gpgKey}";
+        };
+        init.defaultbranch = "main";
+        pull.rebase = true;
+        rebase.updaterefs = true;
+        commit.gpgsign = lib.mkIf (config.me.cli.git.gpgKey != "") true;
+        tag.gpgSign = lib.mkIf (config.me.cli.git.gpgKey != "") true;
+      };
     };
   };
 }
