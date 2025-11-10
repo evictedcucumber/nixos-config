@@ -48,6 +48,7 @@
       # /rust
       # # makefile
       autotools-language-server
+      mbake
       # # /makefile
       # toml
       taplo
