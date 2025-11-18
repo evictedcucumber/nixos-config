@@ -44,4 +44,5 @@
     dates = ["Tues 10:00"];
   };
 
+  i18n.defaultLocale = "en_ZA.UTF-8";
 }
