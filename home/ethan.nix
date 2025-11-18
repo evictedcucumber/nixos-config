@@ -1,6 +1,7 @@
 {
   config,
   stateVersion,
+  username,
   ...
 }: {
   imports = [
@@ -17,7 +18,7 @@
     ../modules/cli/zellij
   ];
 
-  home.username = "ethan";
+  home.username = "${username}";
   home.homeDirectory = "/home/${config.home.username}";
   home.stateVersion = stateVersion;
 

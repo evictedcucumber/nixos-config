@@ -22,6 +22,7 @@
 
       overlays = [(import inputs.rust-overlay)];
     };
+    defaultUser = "ethan";
   in {
     nixosConfigurations."nixos-wsl" = nixpkgs.lib.nixosSystem {
       inherit system;
@@ -32,26 +33,18 @@
 
         nixos-wsl = inputs.nixos-wsl;
         hostname = "nixos-wsl";
+        username = defaultUser;
       };
     };
-    homeConfigurations."ethan" = inputs.home-manager.lib.homeManagerConfiguration {
+    homeConfigurations."${defaultUser}" = inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
 
-      modules = [./home/ethan.nix];
+      modules = [./home/${defaultUser}.nix];
       extraSpecialArgs = {
         inherit stateVersion;
 
         neovim-config = inputs.neovim-config;
-      };
-    };
-    homeConfigurations."ethan-vaxowave" = inputs.home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-
-      modules = [./home/ethan-vaxowave.nix];
-      extraSpecialArgs = {
-        inherit stateVersion;
-
-        neovim-config = inputs.neovim-config;
+        username = defaultUser;
       };
     };
   };

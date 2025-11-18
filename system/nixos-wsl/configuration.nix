@@ -1,14 +1,15 @@
 {
   pkgs,
   nixos-wsl,
+  username,
   ...
 }: let
   obsidianVaultSyncScript = pkgs.writeShellScript "obsidian-vault-sync" ''
     #/usr/bin/env bash
 
     ${pkgs.unison}/bin/unison \
-      -root "/mnt/c/Users/ethan/OneDrive/[97] Obsidian Vault" \
-      -root "/home/ethan/myvault" \
+      -root "/mnt/c/Users/${username}/Documents/My Obsidian Vault" \
+      -root "/home/${username}/myvault" \
       -batch -prefer=newer -fat -auto -confirmbigdel
   '';
 in {
@@ -17,16 +18,19 @@ in {
     nixos-wsl.nixosModules.wsl
   ];
 
-  wsl.enable = true;
-  wsl.defaultUser = "ethan";
+  wsl = {
+    enable = true;
+    defaultUser = "${username}";
+    interop.includePath = false;
+  };
 
   programs.fish.enable = true;
-  users.users."ethan" = {
+  users.users."${username}" = {
     isNormalUser = true;
     extraGroups = ["wheel"];
     shell = pkgs.fish;
   };
-  nix.settings.trusted-users = ["ethan"];
+  nix.settings.trusted-users = ["${username}"];
 
   environment.systemPackages = with pkgs; [unison];
   systemd.user.services."obsidian-vault-sync" = {

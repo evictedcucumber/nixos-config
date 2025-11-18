@@ -2,6 +2,7 @@
   pkgs,
   hostname,
   stateVersion,
+  username,
   ...
 }: {
   networking.hostName = "${hostname}";
