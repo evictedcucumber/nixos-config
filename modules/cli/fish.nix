@@ -17,6 +17,7 @@ in {
     ./zoxide.nix
     ./eza.nix
     ./ripgrep.nix
+    ./bottom.nix
     ./nix-your-shell.nix
   ];
 
@@ -28,6 +29,7 @@ in {
     me.cli.zoxide.enable = true;
     me.cli.ripgrep.enable = true;
     me.cli.eza.enable = true;
+    me.cli.bottom.enable = true;
     me.cli.nix-your-shell = {
       enable = true;
       enableFish = true;
