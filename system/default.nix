@@ -23,6 +23,14 @@
 
   programs.nix-ld.enable = true;
   programs.gnupg.agent.enable = true;
+  programs.nh = {
+    enable = true;
+    clean = {
+      enable = true;
+      dates = "Tues 10:00";
+    };
+    flake = "/home/${username}/repos/nixos-config";
+  };
 
   nix.nixPath = ["nixpkgs=${pkgs.path}"];
 
@@ -35,8 +43,5 @@
     automatic = true;
     dates = ["Tues 10:00"];
   };
-  nix.gc = {
-    automatic = true;
-    dates = ["Tues 10:00"];
-  };
+
 }
