@@ -10,7 +10,8 @@
     ${pkgs.unison}/bin/unison \
       -root "/mnt/c/Users/${username}/Documents/My Obsidian Vault" \
       -root "/home/${username}/myvault" \
-      -batch -prefer=newer -fat -auto -confirmbigdel
+      -prefer=newer -fat -confirmbigdel -auto -batch -repeat 2 \
+      -fastcheck true
   '';
 in {
   imports = [
@@ -34,17 +35,15 @@ in {
 
   environment.systemPackages = with pkgs; [unison];
   systemd.user.services."obsidian-vault-sync" = {
-    description = "Run obsidian-vault-sync.sh to sync obsidian vault";
+    description = "Sync obsidian vault between windows an wsl";
+    after = ["default.target"];
+
     serviceConfig = {
-      Type = "oneshot";
       ExecStart = obsidianVaultSyncScript;
+      Restart = "always";
+      RestartSec = 5;
     };
-  };
-  systemd.user.timers."obsidian-vault-sync" = {
-    timerConfig = {
-      OnBootSec = "30s";
-      OnUnitActiveSec = "30s";
-    };
-    wantedBy = ["timers.target"];
+
+    wantedBy = ["default.target"];
   };
 }
