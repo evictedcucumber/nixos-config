@@ -17,6 +17,7 @@
     ../modules/cli/direnv.nix
     ../modules/cli/zellij
     ../modules/gui/wezterm
+    ../modules/gui/ghostty.nix
   ];
 
   home.username = "${username}";
@@ -39,6 +40,8 @@
     enableFish = true;
   };
   me.gui.wezterm.enable = true;
+  me.gui.ghostty.enable = true;
+  me.gui.ghostty.enableFish = true;
 
   xdg = {
     enable = true;
