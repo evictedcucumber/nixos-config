@@ -16,6 +16,7 @@
     ../modules/cli/tealdeer.nix
     ../modules/cli/direnv.nix
     ../modules/cli/zellij
+    ../modules/gui/wezterm
   ];
 
   home.username = "${username}";
@@ -37,6 +38,7 @@
     enable = true;
     enableFish = true;
   };
+  me.gui.wezterm.enable = true;
 
   xdg = {
     enable = true;
