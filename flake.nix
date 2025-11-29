@@ -36,6 +36,17 @@
         username = defaultUser;
       };
     };
+    nixosConfigurations."prawnsuit" = nixpkgs.lib.nixosSystem {
+      inherit system;
+
+      modules = [./system/prawnsuit/configuration.nix];
+      specialArgs = {
+        inherit stateVersion;
+
+        hostname = "prawnsuit";
+        username = defaultUser;
+      };
+    };
     homeConfigurations."${defaultUser}" = inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
 
