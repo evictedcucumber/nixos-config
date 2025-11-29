@@ -16,6 +16,9 @@
     ../modules/cli/tealdeer.nix
     ../modules/cli/direnv.nix
     ../modules/cli/zellij
+    ../modules/gui/wezterm
+    ../modules/gui/ghostty.nix
+    ../modules/gui/zen-browser.nix
   ];
 
   home.username = "${username}";
@@ -31,12 +34,18 @@
   me.cli.direnv.enable = true;
   me.cli.git = {
     enable = true;
-    gpgKey = "8E29907A4CA30E30";
+    gpgKey = "9ECE1D3B3AAE0D67";
   };
   me.cli.yazi = {
     enable = true;
     enableFish = true;
   };
+  me.gui.wezterm.enable = true;
+  me.gui.ghostty = {
+    enable = true;
+    enableFish = true;
+  };
+  me.gui.zen-browser.enable = true;
 
   xdg = {
     enable = true;
