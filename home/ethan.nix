@@ -41,8 +41,10 @@
     enableFish = true;
   };
   me.gui.wezterm.enable = true;
-  me.gui.ghostty.enable = true;
-  me.gui.ghostty.enableFish = true;
+  me.gui.ghostty = {
+    enable = true;
+    enableFish = true;
+  };
   me.gui.zen-browser.enable = true;
 
   xdg = {
