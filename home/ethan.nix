@@ -18,6 +18,7 @@
     ../modules/cli/zellij
     ../modules/gui/wezterm
     ../modules/gui/ghostty.nix
+    ../modules/gui/zen-browser.nix
   ];
 
   home.username = "${username}";
@@ -42,6 +43,7 @@
   me.gui.wezterm.enable = true;
   me.gui.ghostty.enable = true;
   me.gui.ghostty.enableFish = true;
+  me.gui.zen-browser.enable = true;
 
   xdg = {
     enable = true;

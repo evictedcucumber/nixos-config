@@ -10,6 +10,9 @@
 
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
+    zen-browser.url = "github:youwen5/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {nixpkgs, ...} @ inputs: let
@@ -56,6 +59,7 @@
 
         neovim-config = inputs.neovim-config;
         username = defaultUser;
+        zen-browser = inputs.zen-browser;
       };
     };
   };
