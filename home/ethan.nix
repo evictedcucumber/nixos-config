@@ -34,7 +34,7 @@
   me.cli.direnv.enable = true;
   me.cli.git = {
     enable = true;
-    gpgKey = "8E29907A4CA30E30";
+    gpgKey = "9ECE1D3B3AAE0D67";
   };
   me.cli.yazi = {
     enable = true;
