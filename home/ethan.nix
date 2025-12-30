@@ -2,6 +2,7 @@
   config,
   stateVersion,
   username,
+  pkgs,
   ...
 }: {
   imports = [
@@ -24,6 +25,7 @@
   home.username = "${username}";
   home.homeDirectory = "/home/${config.home.username}";
   home.stateVersion = stateVersion;
+  home.packages = with pkgs; [brave obsidian];
 
   me.cli.fish.enable = true;
   me.cli.starship.enable = true;
