@@ -1,28 +1,27 @@
 {
   config,
   stateVersion,
-  username,
   pkgs,
   ...
 }: {
   imports = [
-    ../modules/cli/fish.nix
-    ../modules/cli/fzf.nix
-    ../modules/cli/starship.nix
-    ../modules/cli/fd.nix
-    ../modules/cli/yazi
-    ../modules/cli/neovim.nix
-    ../modules/cli/git.nix
-    ../modules/cli/lazygit.nix
-    ../modules/cli/tealdeer.nix
-    ../modules/cli/direnv.nix
-    ../modules/cli/zellij
-    ../modules/gui/wezterm
-    ../modules/gui/ghostty.nix
-    ../modules/gui/zen-browser.nix
+    ./modules/cli/fish.nix
+    ./modules/cli/fzf.nix
+    ./modules/cli/starship.nix
+    ./modules/cli/fd.nix
+    ./modules/cli/yazi
+    ./modules/cli/neovim.nix
+    ./modules/cli/git.nix
+    ./modules/cli/lazygit.nix
+    ./modules/cli/tealdeer.nix
+    ./modules/cli/direnv.nix
+    ./modules/cli/zellij
+    ./modules/gui/wezterm
+    ./modules/gui/ghostty.nix
+    ./modules/gui/zen-browser.nix
   ];
 
-  home.username = "${username}";
+  home.username = "ethan";
   home.homeDirectory = "/home/${config.home.username}";
   home.stateVersion = stateVersion;
   home.packages = with pkgs; [brave obsidian];

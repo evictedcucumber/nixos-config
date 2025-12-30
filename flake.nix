@@ -1,7 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "nixpkgs/nixpkgs-unstable";
-    nixos-wsl.url = "github:nix-community/nixos-wsl/main";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -25,40 +24,23 @@
 
       overlays = [(import inputs.rust-overlay)];
     };
-    defaultUser = "ethan";
   in {
-    nixosConfigurations."nixos-wsl" = nixpkgs.lib.nixosSystem {
-      inherit system;
-
-      modules = [./system/nixos-wsl/configuration.nix];
-      specialArgs = {
-        inherit stateVersion;
-
-        nixos-wsl = inputs.nixos-wsl;
-        hostname = "nixos-wsl";
-        username = defaultUser;
-      };
-    };
     nixosConfigurations."prawnsuit" = nixpkgs.lib.nixosSystem {
       inherit system;
 
-      modules = [./system/prawnsuit/configuration.nix];
+      modules = [./system.nix];
       specialArgs = {
         inherit stateVersion;
-
-        hostname = "prawnsuit";
-        username = defaultUser;
       };
     };
-    homeConfigurations."${defaultUser}" = inputs.home-manager.lib.homeManagerConfiguration {
+    homeConfigurations."ethan" = inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
 
-      modules = [./home/${defaultUser}.nix];
+      modules = [./home.nix];
       extraSpecialArgs = {
         inherit stateVersion;
 
         neovim-config = inputs.neovim-config;
-        username = defaultUser;
         zen-browser = inputs.zen-browser;
       };
     };
