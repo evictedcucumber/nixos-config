@@ -41,8 +41,9 @@
       enableFishIntegration = config.me.cli.yazi.enableFish;
     };
 
-    home.file.".config/yazi/yazi.toml".source = ./yazi.toml;
-    home.file.".config/yazi/theme.toml".source = ./theme.toml;
-    home.file.".config/yazi/keymap.toml".source = ./keymap.toml;
+    home.file."${config.xdg.configHome}/yazi/yazi.toml".source = ./yazi.toml;
+    home.file."${config.xdg.configHome}/yazi/theme.toml".source = ./theme.toml;
+    home.file."${config.xdg.configHome}/yazi/keymap.toml".source = ./keymap.toml;
+    home.file."${config.xdg.configHome}/yazi/Catppuccin-mocha.tmTheme;".source = ./Catppuccin-mocha.tmTheme;
   };
 }
