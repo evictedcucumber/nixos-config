@@ -21,6 +21,9 @@
     xclip
   ];
 
+  environment.sessionVariables = {
+    NH_FLAKE = "/home/${username}/repos/nixos-config";
+  };
   programs.nix-ld.enable = true;
   programs.gnupg.agent.enable = true;
   programs.nh = {
@@ -29,7 +32,6 @@
       enable = true;
       dates = "Tues 10:00";
     };
-    flake = "/home/${username}/repos/nixos-config";
   };
 
   nix.nixPath = ["nixpkgs=${pkgs.path}"];
@@ -58,4 +60,6 @@
   };
 
   time.timeZone = "Africa/Johannesburg";
+
+  nixpkgs.config.allowUnfree = true;
 }
