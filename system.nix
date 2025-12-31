@@ -75,6 +75,7 @@
       pinentry-all
       openssh
       xclip
+      fuse3
     ];
     sessionVariables = {
       NH_FLAKE = "/home/ethan/repos/nixos-config";
