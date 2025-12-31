@@ -21,10 +21,12 @@
     ./modules/gui/zen-browser.nix
   ];
 
-  home.username = "ethan";
-  home.homeDirectory = "/home/${config.home.username}";
-  home.stateVersion = stateVersion;
-  home.packages = with pkgs; [brave obsidian];
+  home = {
+    username = "ethan";
+    homeDirectory = "/home/${config.home.username}";
+    stateVersion = stateVersion;
+    packages = with pkgs; [brave obsidian];
+  };
 
   me.cli.fish.enable = true;
   me.cli.starship.enable = true;
