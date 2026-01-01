@@ -57,35 +57,35 @@ in {
     ];
     packages = with pkgs;
       [
-        nerd-fonts.jetbrains-mono
-        file
+        brave
         ffmpeg
-        p7zip
+        file
+        imagemagick
         jq
+        nerd-fonts.jetbrains-mono
+        obsidian
+        p7zip
         poppler
         resvg
-        imagemagick
-        brave
-        obsidian
         zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
 
         ## NEOVIM
-        gnumake
         gcc
-        luarocks
-        python3
-        python3Packages.pip
-        python3Packages.virtualenv
-        python3Packages.pylatexenc
-        lua5_1
+        gnumake
         lua51Packages.sqlite
-        unzip
-        wget
-        nodejs
-        sqlite
-        tree-sitter
+        lua5_1
+        luarocks
         neovim
         nodejs
+        nodejs
+        python3
+        python3Packages.pip
+        python3Packages.pylatexenc
+        python3Packages.virtualenv
+        sqlite
+        tree-sitter
+        unzip
+        wget
         yarn
 
         # LSP Servers, Formatters, and Debuggers
@@ -120,11 +120,11 @@ in {
         ## /NEOVIM
       ]
       ++ (with pkgs.bat-extras; [
-        batman
+        batdiff
         batdiff
         batgrep
+        batman
         batpipe
-        batdiff
         batwatch
       ]);
   };

@@ -71,38 +71,40 @@
   environment = {
     systemPackages = with pkgs; [
       git
+      git-lfs
       home-manager
-      pinentry-all
+      ncdu
       openssh
+      pinentry-all
       xclip
-      fuse3
+      gnome-extension-manager
     ];
     sessionVariables = {
       NH_FLAKE = "/home/ethan/repos/nixos-config";
     };
     gnome.excludePackages = with pkgs; [
-      gnome-contacts
-      gnome-weather
-      gnome-clocks
-      gnome-maps
-      gnome-characters
-      gnome-terminal
-      gnome-tour
-      gnome-connections
-      gnome-font-viewer
-      gnome-system-monitor
-      gnome-logs
-      gnome-text-editor
-      gnome-calendar
-      gnome-music
-      gnome-console
-      snapshot
       epiphany
       geary
+      gnome-calendar
+      gnome-characters
+      gnome-clocks
+      gnome-connections
+      gnome-console
+      gnome-contacts
+      gnome-font-viewer
+      gnome-logs
+      gnome-maps
+      gnome-music
+      gnome-system-monitor
+      gnome-terminal
+      gnome-text-editor
+      gnome-tour
+      gnome-weather
+      papers
       seahorse
       simple-scan
+      snapshot
       yelp
-      papers
     ];
   };
 
@@ -118,6 +120,7 @@
     };
     virt-manager.enable = true;
     fish.enable = true;
+    appimage.enable = true;
   };
 
   nix = {
