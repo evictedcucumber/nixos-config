@@ -3,6 +3,7 @@
   pkgs,
   stateVersion,
   zen-browser,
+  helium-browser,
   neovim-config,
   ...
 }: let
@@ -68,6 +69,7 @@ in {
         poppler
         resvg
         zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+        helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
 
         ## NEOVIM
         gcc

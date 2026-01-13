@@ -12,6 +12,8 @@
 
     zen-browser.url = "github:youwen5/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+    helium-browser.url = "github:vikingnope/helium-browser-nix-flake";
+    helium-browser.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {nixpkgs, ...} @ inputs: let
@@ -42,6 +44,7 @@
 
         neovim-config = inputs.neovim-config;
         zen-browser = inputs.zen-browser;
+        helium-browser = inputs.helium-browser;
       };
     };
   };
