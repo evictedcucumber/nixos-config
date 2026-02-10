@@ -63,13 +63,16 @@ in {
         file
         imagemagick
         jq
-        nerd-fonts.jetbrains-mono
         obsidian
         p7zip
         poppler
         resvg
-        zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
         helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+
+        ## FONTS
+        inter
+        nerd-fonts.jetbrains-mono
+        ## /FONTS
 
         ## NEOVIM
         gcc
@@ -89,6 +92,10 @@ in {
         unzip
         wget
         yarn
+        ghostscript
+        tectonic
+        texliveSmall
+        mermaid-cli
 
         # LSP Servers, Formatters, and Debuggers
         # lua
