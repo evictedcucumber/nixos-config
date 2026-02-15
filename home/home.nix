@@ -27,13 +27,13 @@
     owner = "sxyazi";
     repo = "yazi";
     rev = "main";
-    sha256 = "sha256-xOltBlD5nU8kMzh7GPoTtkDD8sEDAzTtaR3LRPDWRS0=";
+    sha256 = "sha256-aHkFb31ox27b5mGtmVW/a2fQkCY9OPOGTcs3tr1zvCs=";
   };
   fishTheme = pkgs.fetchFromGitHub {
     owner = "catppuccin";
     repo = "fish";
     rev = "main";
-    sha256 = "sha256-KD/sWXSXYVlV+n7ft4vKFYpIMBB3PSn6a6jz+ZIMZvQ=";
+    sha256 = "sha256-5CXdzym6Vp+FbKTVBtVdWoh3dODudADIzOLXIyIIxgQ=";
   };
 in {
   imports = [./home-gui.nix];
