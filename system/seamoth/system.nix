@@ -1,4 +1,6 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  username = "ethan";
+in {
   imports = [./hardware.nix];
 
   networking = {
@@ -91,7 +93,7 @@
 
   programs = {
     virt-manager.enable = true;
-    fish.enable = true;
+    appimage.enable = true;
   };
 
   qt = {
@@ -113,12 +115,12 @@
     spiceUSBRedirection.enable = true;
   };
 
-  users.users."ethan" = {
+  users.users."${username}" = {
     isNormalUser = true;
     extraGroups = ["networkmanager" "wheel" "libvirtd" "kvm"];
     shell = pkgs.fish;
   };
-  nix.settings.trusted-users = ["ethan"];
+  nix.settings.trusted-users = [username];
 
   hardware.cpu.intel.updateMicrocode = true;
 }
