@@ -5,7 +5,7 @@
 }: let
   username = "ethan";
 in {
-  import = [nixos-wsl.nixosModules.default];
+  imports = [nixos-wsl.nixosModules.default];
 
   boot.kernelPackages = pkgs.linuxPackages_6_18;
 
