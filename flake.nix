@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/master";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -14,13 +14,14 @@
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
     helium-browser.url = "github:vikingnope/helium-browser-nix-flake";
     helium-browser.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
   };
 
   outputs = {nixpkgs, ...} @ inputs: let
-    system = "x86_64-linux";
-    stateVersion = "25.11";
+    stateVersion = "26.05";
     pkgs = import nixpkgs {
-      inherit system;
+      system = "x86_64-linux";
 
       config.allowUnfree = true;
 
@@ -28,14 +29,29 @@
     };
   in {
     nixosConfigurations."seamoth" = nixpkgs.lib.nixosSystem {
-      inherit system;
+      inherit pkgs;
 
       modules = [
+        nixpkgs.nixosModules.readOnlyPkgs
         ./system
         ./system/seamoth/system.nix
       ];
       specialArgs = {
         inherit stateVersion;
+      };
+    };
+    nixosConfigurations."snowfox" = nixpkgs.lib.nixosSystem {
+      inherit pkgs;
+
+      modules = [
+        nixpkgs.nixosModules.readOnlyPkgs
+        ./system
+        ./system/snowfox/system.nix
+      ];
+      specialArgs = {
+        inherit stateVersion;
+
+        nixos-wsl = inputs.nixos-wsl;
       };
     };
     homeConfigurations."ethan" = inputs.home-manager.lib.homeManagerConfiguration {

@@ -35,7 +35,6 @@
   };
 
   nix = {
-    nixPath = ["nixpkgs=${pkgs.path}"];
     settings = {
       experimental-features = ["nix-command" "flakes"];
       auto-optimise-store = true;
@@ -62,6 +61,4 @@
   };
 
   time.timeZone = "Africa/Johannesburg";
-
-  nixpkgs.config.allowUnfree = true;
 }
