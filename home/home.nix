@@ -2,42 +2,42 @@
   config,
   pkgs,
   stateVersion,
-  zen-browser,
-  helium-browser,
   neovim-config,
   ...
 }: let
-  bat_theme = pkgs.fetchFromGitHub {
+  batTheme = pkgs.fetchFromGitHub {
     owner = "catppuccin";
     repo = "bat";
     rev = "main";
     sha256 = "sha256-lJapSgRVENTrbmpVyn+UQabC9fpV1G1e+CdlJ090uvg=";
   };
-  bottom_theme = pkgs.fetchFromGitHub {
+  bottomTheme = pkgs.fetchFromGitHub {
     owner = "catppuccin";
     repo = "bottom";
     rev = "main";
     sha256 = "sha256-dfukdk70ug1lRGADKBnvMhkl+3tsY7F+UAwTS2Qyapk=";
   };
-  yazi_theme = pkgs.fetchFromGitHub {
+  yaziTheme = pkgs.fetchFromGitHub {
     owner = "catppuccin";
     repo = "yazi";
     rev = "main";
     sha256 = "sha256-Og33IGS9pTim6LEH33CO102wpGnPomiperFbqfgrJjw=";
   };
-  yazi_config = pkgs.fetchFromGitHub {
+  yaziConfig = pkgs.fetchFromGitHub {
     owner = "sxyazi";
     repo = "yazi";
     rev = "main";
     sha256 = "sha256-xOltBlD5nU8kMzh7GPoTtkDD8sEDAzTtaR3LRPDWRS0=";
   };
-  fish_theme = pkgs.fetchFromGitHub {
+  fishTheme = pkgs.fetchFromGitHub {
     owner = "catppuccin";
     repo = "fish";
     rev = "main";
     sha256 = "sha256-KD/sWXSXYVlV+n7ft4vKFYpIMBB3PSn6a6jz+ZIMZvQ=";
   };
 in {
+  imports = [./home-gui.nix];
+
   home = {
     username = "ethan";
     homeDirectory = "/home/${config.home.username}";
@@ -58,16 +58,13 @@ in {
     ];
     packages = with pkgs;
       [
-        brave
         ffmpeg
         file
         imagemagick
         jq
-        obsidian
         p7zip
         poppler
         resvg
-        helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
 
         ## FONTS
         inter
@@ -145,14 +142,14 @@ in {
     stateHome = "${config.home.homeDirectory}/.local/state";
     cacheHome = "${config.home.homeDirectory}/.local/cache";
     configFile = {
-      "bottom/bottom.toml".source = "${bottom_theme}/themes/mocha.toml";
+      "bottom/bottom.toml".source = "${bottomTheme}/themes/mocha.toml";
       "zellij/config.kdl".source = ./configs/zellij-config.kdl;
       "zellij/layouts/default.kdl".source = ./configs/zellij-layout.kdl;
       "yazi/yazi.toml".source = ./configs/yazi-config.toml;
-      "yazi/theme.toml".source = "${yazi_theme}/themes/mocha/catppuccin-mocha-rosewater.toml";
-      "yazi/keymap.toml".source = "${yazi_config}/yazi-config/preset/keymap-default.toml";
-      "yazi/Catppuccin-mocha.tmTheme;".source = "${bat_theme}/themes/Catppuccin Mocha.tmTheme";
-      "fish/themes/Catppuccin Mocha.theme".source = "${fish_theme}/themes/Catppuccin Mocha.theme";
+      "yazi/theme.toml".source = "${yaziTheme}/themes/mocha/catppuccin-mocha-rosewater.toml";
+      "yazi/keymap.toml".source = "${yaziConfig}/yazi-config/preset/keymap-default.toml";
+      "yazi/Catppuccin-mocha.tmTheme;".source = "${batTheme}/themes/Catppuccin Mocha.tmTheme";
+      "fish/themes/Catppuccin Mocha.theme".source = "${fishTheme}/themes/Catppuccin Mocha.theme";
       "nvim/init.lua".source = "${neovim-config}/init.lua";
       "nvim/lua".source = "${neovim-config}/lua";
     };
@@ -193,7 +190,7 @@ in {
     config.theme = "catppuccin";
     syntaxes = {};
     themes.catppuccin = {
-      src = bat_theme;
+      src = batTheme;
       file = "themes/Catppuccin Mocha.tmTheme";
     };
   };
@@ -301,19 +298,6 @@ in {
       };
       cmd_duration.min_time = 5000;
       nix_shell.format = "via [$symbol$name]($style) ";
-    };
-  };
-  programs.ghostty = {
-    enable = true;
-    enableFishIntegration = true;
-    settings = {
-      theme = "Catppuccin Mocha";
-      font-family = "JetBrainsMono Nerd Font";
-      cursor-style-blink = false;
-      maximize = true;
-      window-decoration = "none";
-      window-padding-x = 4;
-      window-padding-y = 2;
     };
   };
 }
