@@ -1,12 +1,8 @@
-{
-  pkgs,
-  stateVersion,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [./hardware.nix];
 
   networking = {
-    hostName = "prawnsuit";
+    hostName = "seamoth";
     networkmanager.enable = true;
     firewall.trustedInterfaces = ["virbr0"];
   };
@@ -19,8 +15,6 @@
     };
     initrd.luks.devices."luks-358340e8-1746-4f95-bc86-754edf01f663".device = "/dev/disk/by-uuid/358340e8-1746-4f95-bc86-754edf01f663";
   };
-
-  system.stateVersion = stateVersion;
 
   services = {
     pcscd.enable = true;
@@ -69,19 +63,6 @@
   };
 
   environment = {
-    systemPackages = with pkgs; [
-      git
-      git-lfs
-      home-manager
-      ncdu
-      openssh
-      pinentry-all
-      xclip
-      gnome-extension-manager
-    ];
-    sessionVariables = {
-      NH_FLAKE = "/home/ethan/repos/nixos-config";
-    };
     gnome.excludePackages = with pkgs; [
       epiphany
       geary
@@ -109,51 +90,9 @@
   };
 
   programs = {
-    nix-ld.enable = true;
-    gnupg.agent.enable = true;
-    nh = {
-      enable = true;
-      clean = {
-        enable = true;
-        dates = "Tues 10:00";
-      };
-    };
     virt-manager.enable = true;
     fish.enable = true;
-    appimage.enable = true;
   };
-
-  nix = {
-    nixPath = ["nixpkgs=${pkgs.path}"];
-    settings = {
-      experimental-features = ["nix-command" "flakes"];
-      auto-optimise-store = true;
-      trusted-users = ["ethan"];
-    };
-    optimise = {
-      automatic = true;
-      dates = ["Tues 10:00"];
-    };
-  };
-
-  i18n = {
-    defaultLocale = "en_ZA.UTF-8";
-    extraLocaleSettings = {
-      LC_ADDRESS = "en_ZA.UTF-8";
-      LC_IDENTIFICATION = "en_ZA.UTF-8";
-      LC_MEASUREMENT = "en_ZA.UTF-8";
-      LC_MONETARY = "en_ZA.UTF-8";
-      LC_NAME = "en_ZA.UTF-8";
-      LC_NUMERIC = "en_ZA.UTF-8";
-      LC_PAPER = "en_ZA.UTF-8";
-      LC_TELEPHONE = "en_ZA.UTF-8";
-      LC_TIME = "en_ZA.UTF-8";
-    };
-  };
-
-  time.timeZone = "Africa/Johannesburg";
-
-  nixpkgs.config.allowUnfree = true;
 
   qt = {
     enable = true;
@@ -179,6 +118,7 @@
     extraGroups = ["networkmanager" "wheel" "libvirtd" "kvm"];
     shell = pkgs.fish;
   };
+  nix.settings.trusted-users = ["ethan"];
 
   hardware.cpu.intel.updateMicrocode = true;
 }

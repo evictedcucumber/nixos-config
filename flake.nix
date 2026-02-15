@@ -27,10 +27,13 @@
       overlays = [(import inputs.rust-overlay)];
     };
   in {
-    nixosConfigurations."prawnsuit" = nixpkgs.lib.nixosSystem {
+    nixosConfigurations."seamoth" = nixpkgs.lib.nixosSystem {
       inherit system;
 
-      modules = [./system.nix];
+      modules = [
+        ./system
+        ./system/seamoth/system.nix
+      ];
       specialArgs = {
         inherit stateVersion;
       };
