@@ -15,6 +15,7 @@
       pinentry-all
       xclip
       gnome-extension-manager
+      wezterm
     ];
     sessionVariables = {
       NH_FLAKE = "/home/ethan/repos/nixos-config";
