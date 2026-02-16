@@ -3,6 +3,7 @@
   pkgs,
   stateVersion,
   neovim-config,
+  helium-browser,
   ...
 }: let
   batTheme = pkgs.fetchFromGitHub {
@@ -36,8 +37,6 @@
     sha256 = "sha256-5CXdzym6Vp+FbKTVBtVdWoh3dODudADIzOLXIyIIxgQ=";
   };
 in {
-  imports = [./home-gui.nix];
-
   home = {
     username = "ethan";
     homeDirectory = "/home/${config.home.username}";
@@ -65,6 +64,12 @@ in {
         p7zip
         poppler
         resvg
+
+        ## GUI
+        brave
+        obsidian
+        helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+        ## /GUI
 
         ## FONTS
         inter
@@ -219,7 +224,7 @@ in {
       user = {
         name = "Ethan";
         email = "95688781+evictedcucumber@users.noreply.github.com";
-        signingkey = "9ECE1D3B3AAE0D67";
+        signingkey = "A2FD5AF74494FD44";
       };
       init.defaultbranch = "main";
       pull.rebase = true;
@@ -298,6 +303,19 @@ in {
       };
       cmd_duration.min_time = 5000;
       nix_shell.format = "via [$symbol$name]($style) ";
+    };
+  };
+  programs.ghostty = {
+    enable = true;
+    enableFishIntegration = true;
+    settings = {
+      theme = "Catppuccin Mocha";
+      font-family = "JetBrainsMono Nerd Font";
+      cursor-style-blink = false;
+      maximize = true;
+      window-decoration = "none";
+      window-padding-x = 4;
+      window-padding-y = 2;
     };
   };
 }
