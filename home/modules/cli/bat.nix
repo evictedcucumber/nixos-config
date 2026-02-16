@@ -15,4 +15,13 @@ in {
       file = "themes/Catppuccin Mocha.tmTheme";
     };
   };
+
+  home.packages = with pkgs.bat-extras; [
+    batdiff
+    batdiff
+    batgrep
+    batman
+    batpipe
+    batwatch
+  ];
 }

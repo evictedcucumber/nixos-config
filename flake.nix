@@ -10,16 +10,17 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
-    zen-browser.url = "github:youwen5/zen-browser-flake";
-    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
     helium-browser.url = "github:vikingnope/helium-browser-nix-flake";
     helium-browser.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
   };
 
-  outputs = {nixpkgs, ...} @ inputs: let
-    stateVersion = "26.05";
+  outputs = {
+    nixpkgs,
+    nixos-wsl,
+    ...
+  } @ inputs: let
     pkgs = import nixpkgs {
       system = "x86_64-linux";
 
@@ -27,42 +28,37 @@
 
       overlays = [(import inputs.rust-overlay)];
     };
+    stateVersion = "26.05";
+    username = "ethan";
+    specialArgs = {
+      inherit stateVersion username;
+    };
   in {
     nixosConfigurations."seamoth" = nixpkgs.lib.nixosSystem {
-      inherit pkgs;
+      inherit pkgs specialArgs;
 
       modules = [
         nixpkgs.nixosModules.readOnlyPkgs
-        ./system
         ./system/seamoth/system.nix
       ];
-      specialArgs = {
-        inherit stateVersion;
-      };
     };
     nixosConfigurations."snowfox" = nixpkgs.lib.nixosSystem {
-      inherit pkgs;
+      inherit pkgs specialArgs;
 
       modules = [
         nixpkgs.nixosModules.readOnlyPkgs
-        ./system
+        nixos-wsl.nixosModules.default
         ./system/snowfox/system.nix
       ];
-      specialArgs = {
-        inherit stateVersion;
-
-        nixos-wsl = inputs.nixos-wsl;
-      };
     };
-    homeConfigurations."ethan" = inputs.home-manager.lib.homeManagerConfiguration {
+    homeConfigurations.${username} = inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
 
       modules = [./home/home.nix];
       extraSpecialArgs = {
-        inherit stateVersion;
+        inherit stateVersion username;
 
         neovim-config = inputs.neovim-config;
-        zen-browser = inputs.zen-browser;
         helium-browser = inputs.helium-browser;
       };
     };

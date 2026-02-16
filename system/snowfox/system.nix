@@ -1,15 +1,14 @@
 {
   pkgs,
-  nixos-wsl,
+  username,
   ...
-}: let
-  username = "ethan";
-in {
-  imports = [nixos-wsl.nixosModules.default];
+}: {
+  imports = [../../system];
 
   boot.kernelPackages = pkgs.linuxPackages_6_18;
 
   wsl.enable = true;
+  wsl.wslConf.interop.appendWindowsPath = false;
 
   networking.hostName = "snowfox";
 

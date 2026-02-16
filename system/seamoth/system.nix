@@ -1,7 +1,5 @@
-{pkgs, ...}: let
-  username = "ethan";
-in {
-  imports = [./hardware.nix];
+{pkgs, ...}: {
+  imports = [./hardware.nix ../../system];
 
   networking = {
     hostName = "seamoth";

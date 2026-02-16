@@ -1,4 +1,11 @@
-{...}: {
+{pkgs, ...}: let
+  fishTheme = pkgs.fetchFromGitHub {
+    owner = "catppuccin";
+    repo = "fish";
+    rev = "main";
+    sha256 = "sha256-5CXdzym6Vp+FbKTVBtVdWoh3dODudADIzOLXIyIIxgQ=";
+  };
+in {
   programs.fish = {
     enable = true;
     loginShellInit = "fastfetch";
@@ -25,4 +32,6 @@
       bind \ck up-or-search
     '';
   };
+
+  xdg.configFile."fish/themes/Catppuccin Mocha.theme".source = "${fishTheme}/themes/Catppuccin Mocha.theme";
 }
