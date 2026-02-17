@@ -14,6 +14,8 @@
     helium-browser.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay/c3e52f66f877cddce4167041546524abb76c0a70";
   };
 
   outputs = {
@@ -26,7 +28,7 @@
 
       config.allowUnfree = true;
 
-      overlays = [(import inputs.rust-overlay)];
+      overlays = [(import inputs.rust-overlay) inputs.neovim-nightly-overlay.overlays.default];
     };
     stateVersion = "26.05";
     username = "ethan";

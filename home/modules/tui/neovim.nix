@@ -55,6 +55,9 @@
     # harper
     harper
     # /harper
+    # go
+    gopls
+    # /go
   ];
 
   xdg.configFile = {
