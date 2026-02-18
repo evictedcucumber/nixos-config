@@ -43,6 +43,7 @@ in {
       p7zip
       poppler
       resvg
+      javaPackages.compiler.openjdk21
 
       ## GUI
       brave
