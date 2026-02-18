@@ -9,17 +9,16 @@
     systemPackages = with pkgs; [
       git
       git-lfs
-      home-manager
       ncdu
       openssh
       pinentry-all
       xclip
       gnome-extension-manager
       wezterm
+      inter
+      nerd-fonts.jetbrains-mono
     ];
-    sessionVariables = {
-      NH_FLAKE = "/home/ethan/repos/nixos-config";
-    };
+    sessionVariables.NH_FLAKE = "/home/ethan/repos/nixos-config";
   };
 
   programs = {

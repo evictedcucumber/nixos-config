@@ -24,4 +24,6 @@ in {
     batpipe
     batwatch
   ];
+
+  home.sessionVariables.BAT_THEME = "catppuccin";
 }

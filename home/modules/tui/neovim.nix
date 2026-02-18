@@ -60,6 +60,11 @@
     # /go
   ];
 
+  home.sessionVariables.EDITOR = "nvim";
+  home.sessionPath = [
+    "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter"
+  ];
+
   xdg.configFile = {
     "nvim/init.lua".source = "${neovim-config}/init.lua";
     "nvim/lua".source = "${neovim-config}/lua";

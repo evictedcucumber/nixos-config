@@ -6,6 +6,12 @@
     sha256 = "sha256-5CXdzym6Vp+FbKTVBtVdWoh3dODudADIzOLXIyIIxgQ=";
   };
 in {
+  imports = [
+    ../cli/fzf.nix
+    ../cli/ripgrep.nix
+    ../cli/zoxide.nix
+  ];
+
   programs.fish = {
     enable = true;
     loginShellInit = "fastfetch";
@@ -32,6 +38,9 @@ in {
       bind \ck up-or-search
     '';
   };
+
+  programs.fastfetch.enable = true;
+  programs.eza.enable = true;
 
   xdg.configFile."fish/themes/Catppuccin Mocha.theme".source = "${fishTheme}/themes/Catppuccin Mocha.theme";
 }

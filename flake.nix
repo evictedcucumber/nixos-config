@@ -56,7 +56,7 @@
     homeConfigurations.${username} = inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
 
-      modules = [./home/home.nix];
+      modules = [./home];
       extraSpecialArgs = {
         inherit stateVersion username;
 

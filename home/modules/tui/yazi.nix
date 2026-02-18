@@ -18,11 +18,32 @@
     sha256 = "sha256-aHkFb31ox27b5mGtmVW/a2fQkCY9OPOGTcs3tr1zvCs=";
   };
 in {
+  imports = [
+    ../cli/fzf.nix
+    ../cli/ripgrep.nix
+    ../cli/zoxide.nix
+  ];
+
   programs.yazi = {
     enable = true;
     package = pkgs.yazi;
     enableFishIntegration = true;
   };
+
+  programs.jq.enable = true;
+  programs.fd.enable = true;
+
+  home.packages = with pkgs; [
+    ffmpeg
+    p7zip
+    poppler
+    file
+    resvg
+    imagemagick
+    xclip
+    wl-clipboard
+    xsel
+  ];
 
   xdg.configFile = {
     "yazi/yazi.toml".source = ../../configs/yazi-config.toml;
