@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  username,
+  helium-browser,
+  ...
+}: {
   imports = [./hardware.nix ../../system];
 
   networking = {
@@ -8,7 +13,6 @@
   };
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_18;
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -113,12 +117,20 @@
     spiceUSBRedirection.enable = true;
   };
 
-  users.users."${username}" = {
-    isNormalUser = true;
-    extraGroups = ["networkmanager" "wheel" "libvirtd" "kvm"];
-    shell = pkgs.fish;
-  };
-  nix.settings.trusted-users = [username];
+  users.users."${username}".extraGroups = ["networkmanager" "libvirtd" "kvm"];
 
   hardware.cpu.intel.updateMicrocode = true;
+
+  home-manager = {
+    extraSpecialArgs = {
+      inherit helium-browser;
+    };
+    users.${username} = {
+      imports = [
+        ../../home/modules/cli
+        ../../home/modules/tui
+        ../../home/modules/gui
+      ];
+    };
+  };
 }
