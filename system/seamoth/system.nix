@@ -95,7 +95,17 @@
 
   programs = {
     virt-manager.enable = true;
-    appimage.enable = true;
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
+    steam = {
+      enable = true;
+      extraPackages = with pkgs; [javaPackages.compiler.openjdk21];
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
+    };
   };
 
   qt = {
