@@ -16,7 +16,7 @@
     me.cli.git.signingkey = "A2FD5AF74494FD44";
 
     home.sessionVariables = {
-      LEDGER_FILE = "/mnt/c/Users/ethan/Documents/My Obsidian Vault/99 - Meta/hledger.journal";
+      LEDGER_FILE = "/mnt/c/Users/ethan/Documents/My Obsidian Vault/97 - Finance/main.journal";
     };
   };
 }
