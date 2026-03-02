@@ -27,7 +27,10 @@
 
       config.allowUnfree = true;
 
-      overlays = [inputs.rust-overlay.overlays.default inputs.neovim-nightly-overlay.overlays.default];
+      overlays = [
+        inputs.rust-overlay.overlays.default
+        inputs.neovim-nightly-overlay.overlays.default
+      ];
     };
     stateVersion = "26.05";
     username = "ethan";
