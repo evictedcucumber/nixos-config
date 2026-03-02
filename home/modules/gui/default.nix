@@ -1,13 +1,9 @@
-{
-  pkgs,
-  helium-browser,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [./ghostty.nix];
 
   home.packages = with pkgs; [
     brave
     obsidian
-    helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    pkgs.nur.repos.Ev357.helium
   ];
 }
