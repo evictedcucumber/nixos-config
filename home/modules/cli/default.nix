@@ -5,6 +5,7 @@
     ./fish.nix
     ./git.nix
     ./nix-your-shell.nix
+    ./nodejs.nix
     ./ripgrep.nix
     ./starship.nix
     ./tealdeer.nix

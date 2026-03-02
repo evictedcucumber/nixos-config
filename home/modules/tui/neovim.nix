@@ -3,6 +3,8 @@
   neovim-config,
   ...
 }: {
+  imports = [../cli/nodejs.nix];
+
   home.packages = with pkgs; [
     gcc
     gnumake
@@ -10,8 +12,6 @@
     lua5_1
     luarocks
     neovim
-    nodejs
-    nodejs
     python3
     python3Packages.pip
     python3Packages.pylatexenc
