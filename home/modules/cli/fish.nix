@@ -1,11 +1,4 @@
-{pkgs, ...}: let
-  fishTheme = pkgs.fetchFromGitHub {
-    owner = "catppuccin";
-    repo = "fish";
-    rev = "main";
-    sha256 = "sha256-5CXdzym6Vp+FbKTVBtVdWoh3dODudADIzOLXIyIIxgQ=";
-  };
-in {
+{config, ...}: {
   imports = [
     ../cli/fzf.nix
     ../cli/ripgrep.nix
@@ -15,7 +8,11 @@ in {
   programs.fish = {
     enable = true;
     loginShellInit = "fastfetch";
-    shellInit = "set -u fish_greeting \"\"";
+    shellInit = ''
+      set -u fish_greeting ""
+
+      fish_config theme choose "Catppuccin Mocha" --color-theme=dark
+    '';
     shellInitLast = ''
       status is-interactive; and begin
         enable_transience
@@ -42,5 +39,5 @@ in {
   programs.fastfetch.enable = true;
   programs.eza.enable = true;
 
-  xdg.configFile."fish/themes/Catppuccin Mocha.theme".source = "${fishTheme}/themes/Catppuccin Mocha.theme";
+  xdg.configFile."fish/themes".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/nixos-config/config/fish/themes";
 }

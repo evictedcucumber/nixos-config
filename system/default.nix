@@ -84,6 +84,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    backupFileExtension = "backup";
 
     users.${username} = let
       configHome = config.home-manager.users.${username}.home.homeDirectory;

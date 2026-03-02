@@ -1,8 +1,5 @@
-{...}: {
+{config, ...}: {
   programs.zellij.enable = true;
 
-  xdg.configFile = {
-    "zellij/config.kdl".source = ../../configs/zellij-config.kdl;
-    "zellij/layouts/default.kdl".source = ../../configs/zellij-layout.kdl;
-  };
+  xdg.configFile."zellij".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/nixos-config/config/zellij";
 }

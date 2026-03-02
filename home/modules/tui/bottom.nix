@@ -1,12 +1,5 @@
-{pkgs, ...}: let
-  bottomTheme = pkgs.fetchFromGitHub {
-    owner = "catppuccin";
-    repo = "bottom";
-    rev = "main";
-    sha256 = "sha256-dfukdk70ug1lRGADKBnvMhkl+3tsY7F+UAwTS2Qyapk=";
-  };
-in {
+{config, ...}: {
   programs.bottom.enable = true;
 
-  xdg.configFile."bottom/bottom.toml".source = "${bottomTheme}/themes/mocha.toml";
+  xdg.configFile."bottom".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/nixos-config/config/bottom";
 }

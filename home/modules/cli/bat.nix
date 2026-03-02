@@ -1,20 +1,9 @@
-{pkgs, ...}: let
-  batTheme = pkgs.fetchFromGitHub {
-    owner = "catppuccin";
-    repo = "bat";
-    rev = "main";
-    sha256 = "sha256-lJapSgRVENTrbmpVyn+UQabC9fpV1G1e+CdlJ090uvg=";
-  };
-in {
-  programs.bat = {
-    enable = true;
-    config.theme = "catppuccin";
-    syntaxes = {};
-    themes.catppuccin = {
-      src = batTheme;
-      file = "themes/Catppuccin Mocha.tmTheme";
-    };
-  };
+{
+  config,
+  pkgs,
+  ...
+}: {
+  programs.bat = {enable = true;};
 
   home.packages = with pkgs.bat-extras; [
     batdiff
@@ -26,4 +15,6 @@ in {
   ];
 
   home.sessionVariables.BAT_THEME = "catppuccin";
+
+  xdg.configFile."bat".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/nixos-config/config/bat";
 }
