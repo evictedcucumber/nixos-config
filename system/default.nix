@@ -3,7 +3,6 @@
   config,
   stateVersion,
   username,
-  neovim-config,
   ...
 }: {
   users.users."${username}" = {
@@ -49,7 +48,7 @@
       inter
       nerd-fonts.jetbrains-mono
     ];
-    sessionVariables.NH_FLAKE = "/home/ethan/repos/nixos-config";
+    sessionVariables.NH_FLAKE = "/home/${username}/repos/nixos-config";
   };
 
   programs = {
@@ -85,12 +84,9 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = {
-      inherit neovim-config;
-    };
 
     users.${username} = let
-      configHome = config.home-manager.users.${username};
+      configHome = config.home-manager.users.${username}.home.homeDirectory;
     in {
       home = {
         inherit username stateVersion;
@@ -99,10 +95,10 @@
 
       xdg = {
         enable = true;
-        configHome = "${configHome.home.homeDirectory}/.config";
-        dataHome = "${configHome.home.homeDirectory}/.local/share";
-        stateHome = "${configHome.home.homeDirectory}/.local/state";
-        cacheHome = "${configHome.home.homeDirectory}/.local/cache";
+        configHome = "${configHome}/.config";
+        dataHome = "${configHome}/.local/share";
+        stateHome = "${configHome}/.local/state";
+        cacheHome = "${configHome}/.local/cache";
       };
     };
   };

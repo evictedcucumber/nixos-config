@@ -1,19 +1,22 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/master";
-    home-manager.url = "github:nix-community/home-manager/master";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-wsl.url = "github:nix-community/NixOS-WSL";
 
-    rust-overlay.url = "github:oxalica/rust-overlay";
-    rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay/c3e52f66f877cddce4167041546524abb76c0a70";
-
-    neovim-config.url = "github:evictedcucumber/neovim-config/main";
-    neovim-config.flake = false;
-
-    helium-browser.url = "github:vikingnope/helium-browser-nix-flake";
-    helium-browser.inputs.nixpkgs.follows = "nixpkgs";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    helium-browser = {
+      url = "github:vikingnope/helium-browser-nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    yazi.url = "github:sxyazi/yazi";
   };
 
   outputs = {
@@ -30,15 +33,12 @@
       overlays = [
         inputs.rust-overlay.overlays.default
         inputs.neovim-nightly-overlay.overlays.default
+        inputs.yazi.overlays.default
       ];
     };
     stateVersion = "26.05";
     username = "ethan";
-    specialArgs = {
-      inherit stateVersion username;
-
-      neovim-config = inputs.neovim-config;
-    };
+    specialArgs = {inherit stateVersion username;};
   in {
     nixosConfigurations."seamoth" = nixpkgs.lib.nixosSystem {
       inherit pkgs;
