@@ -39,5 +39,8 @@
   programs.fastfetch.enable = true;
   programs.eza.enable = true;
 
-  xdg.configFile."fish/themes".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/nixos-config/config/fish/themes";
+  xdg.configFile."fish/themes" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/nixos-config/config/fish/themes";
+    recursive = true;
+  };
 }

@@ -30,5 +30,8 @@
     xsel
   ];
 
-  xdg.configFile."yazi".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/nixos-config/config/yazi";
+  xdg.configFile."yazi" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/nixos-config/config/yazi";
+    recursive = true;
+  };
 }
