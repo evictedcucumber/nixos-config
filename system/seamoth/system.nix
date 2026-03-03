@@ -1,7 +1,6 @@
 {
   pkgs,
   username,
-  helium-browser,
   ...
 }: {
   imports = [./hardware.nix ../../system];
@@ -131,16 +130,11 @@
 
   hardware.cpu.intel.updateMicrocode = true;
 
-  home-manager = {
-    extraSpecialArgs = {
-      inherit helium-browser;
-    };
-    users.${username} = {
-      imports = [
-        ../../home/modules/cli
-        ../../home/modules/tui
-        ../../home/modules/gui
-      ];
-    };
+  home-manager.users.${username} = {
+    imports = [
+      ../../home/modules/cli
+      ../../home/modules/tui
+      ../../home/modules/gui
+    ];
   };
 }
