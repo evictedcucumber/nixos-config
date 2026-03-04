@@ -26,6 +26,10 @@
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -52,13 +56,15 @@
     specialArgs = {inherit stateVersion username;};
   in {
     nixosConfigurations."seamoth" = nixpkgs.lib.nixosSystem {
-      inherit pkgs specialArgs;
+      inherit pkgs;
 
       modules = [
         nixpkgs.nixosModules.readOnlyPkgs
         home-manager.nixosModules.default
         ./system/seamoth/system.nix
       ];
+
+      specialArgs = specialArgs // {hyprland = inputs.hyprland;};
     };
     nixosConfigurations."snowfox" = nixpkgs.lib.nixosSystem {
       inherit pkgs specialArgs;

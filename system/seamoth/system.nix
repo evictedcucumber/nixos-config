@@ -1,6 +1,7 @@
 {
   pkgs,
   username,
+  hyprland,
   ...
 }: {
   imports = [./hardware.nix ../../system];
@@ -17,6 +18,13 @@
       efi.canTouchEfiVariables = true;
     };
     initrd.luks.devices."luks-358340e8-1746-4f95-bc86-754edf01f663".device = "/dev/disk/by-uuid/358340e8-1746-4f95-bc86-754edf01f663";
+  };
+
+  programs.hyprland = {
+    enable = true;
+    package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    xwayland.enable = true;
   };
 
   services = {
