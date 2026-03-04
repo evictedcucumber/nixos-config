@@ -20,7 +20,19 @@
           };
           init.defaultbranch = "main";
           pull.rebase = true;
+          push.autoSetupRemote = true;
           rebase.updaterefs = true;
+          diff = {
+            algorithm = "histogram";
+            colorMoved = "plain";
+            mnemonicPrefix = true;
+          };
+          commit.verbose = true;
+          column.ui = "auto";
+          rerere = {
+            enabled = true;
+            autoupdate = true;
+          };
         } (
           if config.me.cli.git.signingkey != ""
           then {
