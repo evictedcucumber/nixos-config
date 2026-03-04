@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   username,
   hyprland,
   ...
@@ -143,6 +144,7 @@
       ../../home/modules/cli
       ../../home/modules/tui
       ../../home/modules/gui
+      ../../home/modules/gui/hyprland.nix
     ];
   };
 }
