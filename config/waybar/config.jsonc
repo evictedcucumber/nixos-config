@@ -1,0 +1,87 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "top", 
+    "position": "top", 
+    "height": 25, 
+    "spacing": 4, 
+
+    // Choose the order of the modules
+    "modules-left": [
+        "hyprland/workspaces",
+        "custom/sep",
+        "hyprland/window",
+        "custom/sep"
+    ],
+    "modules-center": [
+        "custom/notifications"
+    ],
+    "modules-right": [
+        "custom/sep",
+        "network",
+        "custom/sep",
+        "cpu",
+        "custom/sep",
+        "memory",
+        "custom/sep",
+        "clock",
+        "custom/sep",
+        "battery",
+        "custom/sep",
+        "tray"
+    ],
+
+    // Modules configuration
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false,
+        "warp-on-scroll": false,
+        "format": "{name}",
+    },
+    "hyprland/window" : {
+        "max-length": 40,
+        "seperate-outputs": false
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10,
+    },
+    "clock": {
+        "format-alt": "{:%d-%m-%Y}"
+    },
+    "cpu": {
+        "format": "CPU: {usage}%",
+        "tooltip": false,
+        "on-click": "ghostty --title=Bottom -e btm"
+    },
+    "memory": {
+        "format": "Mem: {used}GiB",
+        "on-click": "ghostty --title=Bottom -e btm"
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "Bat: {capacity}% {icon} {time}",
+        "format-plugged": "{capacity}% ",
+        "format-time": "{H}:{M}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        "format": "Online",
+        "format-disconnected": "Disconnected ⚠",
+        "on-click": "nm-connection-editor"
+    },
+    "custom/sep": {
+        "format" : "|",
+        "interval" : 0
+    },
+    "custom/notifications": {
+        "tooltip": false,
+        "format": "  {}",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "return-type": "json"
+    }
+}

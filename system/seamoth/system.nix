@@ -72,9 +72,13 @@
       };
     };
     fwupd.enable = true;
+    blueman.enable = true;
   };
 
+  hardware.bluetooth.enable = true;
+
   environment = {
+    systemPackages = with pkgs; [networkmanagerapplet];
     gnome.excludePackages = with pkgs; [
       epiphany
       geary
