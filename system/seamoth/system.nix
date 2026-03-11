@@ -16,10 +16,15 @@
   boot = {
     loader = {
       systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
+      grub.useOSProber = false;
+      efi = {
+        efiSysMountPoint = "/boot/efi";
+        canTouchEfiVariables = true;
+      };
     };
-    initrd.luks.devices."luks-358340e8-1746-4f95-bc86-754edf01f663".device = "/dev/disk/by-uuid/358340e8-1746-4f95-bc86-754edf01f663";
   };
+
+  security.sudo.enable = true;
 
   programs.hyprland = {
     enable = true;
@@ -150,5 +155,7 @@
       ../../home/modules/gui
       ../../home/modules/gui/hyprland.nix
     ];
+
+    me.cli.git.signingkey = "CB029F0E386B37C7";
   };
 }
