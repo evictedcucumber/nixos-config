@@ -30,22 +30,25 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.noctalia-qs.follows = "noctalia-qs";
+    };
+    noctalia-qs = {
+      url = "github:noctalia-dev/noctalia-qs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = {
-    nixpkgs,
-    nur,
-    home-manager,
-    nixos-wsl,
-    ...
-  } @ inputs: let
+  outputs = {nixpkgs, ...} @ inputs: let
     pkgs = import nixpkgs {
       system = "x86_64-linux";
 
       config.allowUnfree = true;
 
       overlays = [
-        nur.overlays.default
+        inputs.nur.overlays.default
         inputs.rust-overlay.overlays.default
         inputs.neovim-nightly-overlay.overlays.default
         inputs.yazi.overlays.default
@@ -53,26 +56,24 @@
     };
     stateVersion = "26.05";
     username = "ethan";
-    specialArgs = {inherit stateVersion username;};
+    specialArgs = {inherit stateVersion username inputs;};
   in {
     nixosConfigurations."seamoth" = nixpkgs.lib.nixosSystem {
-      inherit pkgs;
+      inherit pkgs specialArgs;
 
       modules = [
         nixpkgs.nixosModules.readOnlyPkgs
-        home-manager.nixosModules.default
+        inputs.home-manager.nixosModules.default
         ./system/seamoth/system.nix
       ];
-
-      specialArgs = specialArgs // {hyprland = inputs.hyprland;};
     };
     nixosConfigurations."snowfox" = nixpkgs.lib.nixosSystem {
       inherit pkgs specialArgs;
 
       modules = [
         nixpkgs.nixosModules.readOnlyPkgs
-        home-manager.nixosModules.default
-        nixos-wsl.nixosModules.default
+        inputs.home-manager.nixosModules.default
+        inputs.nixos-wsl.nixosModules.default
         ./system/snowfox/system.nix
       ];
     };

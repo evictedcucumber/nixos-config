@@ -1,30 +1,22 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
+  imports = [./noctalia.nix];
+
   home.packages = with pkgs; [
-    hypridle
-    hyprlauncher
-    hyprlock
-    hyprpaper
     hyprtoolkit
-    swaynotificationcenter
-    waybar
+    nautilus
+    catppuccin-cursors.mochaDark
   ];
 
-  xdg.configFile."hypr" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/nixos-config/config/hypr";
-    recursive = true;
+  home.pointerCursor = {
+    name = "catppuccin-mocha-dark-cursors";
+    package = pkgs.catppuccin-cursors.mochaDark;
+    size = 24;
+    hyprcursor.enable = true;
   };
 
-  xdg.configFile."waybar" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/nixos-config/config/waybar";
-    recursive = true;
-  };
-
-  xdg.configFile."swaync" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/nixos-config/config/swaync";
-    recursive = true;
+  xdg.configFile = {
+    "hypr/hyprland.conf".source = ../../../config/hypr/hyprland.conf;
+    "hypr/windowrules.conf".source = ../../../config/hypr/windowrules.conf;
+    "hypr/bindings.conf".source = ../../../config/hypr/bindings.conf;
   };
 }

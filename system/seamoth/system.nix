@@ -1,8 +1,7 @@
 {
   pkgs,
-  config,
   username,
-  hyprland,
+  inputs,
   ...
 }: {
   imports = [./hardware.nix ../../system];
@@ -28,18 +27,21 @@
 
   programs.hyprland = {
     enable = true;
-    package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     xwayland.enable = true;
   };
 
   services = {
     pcscd.enable = true;
-    displayManager.gdm = {
-      enable = true;
-      wayland = true;
+    displayManager = {
+      gdm.enable = false;
+      sddm = {
+        enable = true;
+        autoNumlock = true;
+        theme = "catppuccin-mocha-rosewater";
+      };
     };
-    desktopManager.gnome.enable = true;
     xserver = {
       enable = true;
       excludePackages = [pkgs.xterm];
@@ -61,54 +63,11 @@
     };
     avahi.enable = false;
     upower.enable = true;
-    power-profiles-daemon.enable = false;
-    tlp = {
-      enable = true;
-      settings = {
-        TLP_AUTO_SWITCH = 1;
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
-        DEVICES_TO_DISABLE_ON_STARTUP = "bluetooth wwan";
-        DEVICES_TO_ENABLE_ON_STARTUP = "wifi";
-        PCIE_ASPM_ON_AC = "performance";
-        PCIE_ASPM_ON_BAT = "powersave";
-      };
-    };
+    power-profiles-daemon.enable = true;
     fwupd.enable = true;
-    blueman.enable = true;
   };
 
   hardware.bluetooth.enable = true;
-
-  environment = {
-    systemPackages = with pkgs; [networkmanagerapplet];
-    gnome.excludePackages = with pkgs; [
-      epiphany
-      geary
-      gnome-calendar
-      gnome-characters
-      gnome-clocks
-      gnome-connections
-      gnome-console
-      gnome-contacts
-      gnome-font-viewer
-      gnome-logs
-      gnome-maps
-      gnome-music
-      gnome-system-monitor
-      gnome-terminal
-      gnome-text-editor
-      gnome-tour
-      gnome-weather
-      papers
-      seahorse
-      simple-scan
-      snapshot
-      yelp
-    ];
-  };
 
   programs = {
     virt-manager.enable = true;
@@ -127,7 +86,6 @@
 
   qt = {
     enable = true;
-    platformTheme = "gnome";
     style = "adwaita-dark";
   };
 
@@ -148,8 +106,22 @@
 
   hardware.cpu.intel.updateMicrocode = true;
 
+  environment.systemPackages = with pkgs; [
+    (
+      pkgs.catppuccin-sddm.override {
+        flavor = "mocha";
+        accent = "rosewater";
+        font = "Inter";
+        fontSize = "9";
+        loginBackground = true;
+      }
+    )
+    weston
+  ];
+
   home-manager.users.${username} = {
     imports = [
+      inputs.noctalia.homeModules.default
       ../../home/modules/cli
       ../../home/modules/tui
       ../../home/modules/gui

@@ -3,7 +3,7 @@
     enable = true;
     enableFishIntegration = true;
     settings = {
-      theme = "Catppuccin Mocha";
+      theme = "noctalia";
       font-family = "JetBrainsMono Nerd Font";
       cursor-style-blink = false;
       maximize = true;

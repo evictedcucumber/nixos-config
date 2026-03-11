@@ -45,13 +45,15 @@
       openssh
       pinentry-all
       xclip
-      gnome-extension-manager
       wezterm
-      inter
-      nerd-fonts.jetbrains-mono
     ];
     sessionVariables.NH_FLAKE = "/home/${username}/repos/nixos-config";
   };
+
+  fonts.packages = with pkgs; [
+    inter
+    nerd-fonts.jetbrains-mono
+  ];
 
   programs = {
     nix-ld.enable = true;
@@ -87,6 +89,7 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "backup";
+    overwriteBackup = true;
 
     users.${username} = let
       configHome = config.home-manager.users.${username}.home.homeDirectory;
