@@ -64,6 +64,7 @@
       modules = [
         nixpkgs.nixosModules.readOnlyPkgs
         inputs.home-manager.nixosModules.default
+        ./system/core.nix
         ./system/seamoth/system.nix
       ];
     };
@@ -74,6 +75,7 @@
         nixpkgs.nixosModules.readOnlyPkgs
         inputs.home-manager.nixosModules.default
         inputs.nixos-wsl.nixosModules.default
+        ./system/core.nix
         ./system/snowfox/system.nix
       ];
     };
