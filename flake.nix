@@ -57,27 +57,30 @@
     stateVersion = "26.05";
     username = "ethan";
     specialArgs = {inherit stateVersion username inputs;};
+    moduleImports = [
+      nixpkgs.nixosModules.readOnlyPkgs
+      inputs.home-manager.nixosModules.default
+      ./system/core.nix
+    ];
   in {
     nixosConfigurations."seamoth" = nixpkgs.lib.nixosSystem {
       inherit pkgs specialArgs;
 
-      modules = [
-        nixpkgs.nixosModules.readOnlyPkgs
-        inputs.home-manager.nixosModules.default
-        ./system/core.nix
-        ./system/seamoth/system.nix
-      ];
+      modules =
+        moduleImports
+        ++ [
+          ./system/seamoth.nix
+        ];
     };
     nixosConfigurations."snowfox" = nixpkgs.lib.nixosSystem {
       inherit pkgs specialArgs;
 
-      modules = [
-        nixpkgs.nixosModules.readOnlyPkgs
-        inputs.home-manager.nixosModules.default
-        inputs.nixos-wsl.nixosModules.default
-        ./system/core.nix
-        ./system/snowfox/system.nix
-      ];
+      modules =
+        moduleImports
+        ++ [
+          inputs.nixos-wsl.nixosModules.default
+          ./system/snowfox.nix
+        ];
     };
   };
 }

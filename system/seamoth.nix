@@ -2,10 +2,9 @@
   pkgs,
   username,
   inputs,
+  lib,
   ...
 }: {
-  imports = [./hardware.nix ../../system];
-
   networking = {
     hostName = "seamoth";
     networkmanager.enable = true;
@@ -154,13 +153,59 @@
     weston
   ];
 
+  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
+  boot.initrd.kernelModules = ["dm-snapshot"];
+  boot.kernelModules = ["kvm-intel"];
+  boot.extraModulePackages = [];
+
+  boot.initrd.luks.devices.cryptlvm = {
+    device = "/dev/disk/by-uuid/d4398137-3f81-4596-b493-e019977485af";
+    preLVM = true;
+    allowDiscards = true;
+  };
+
+  fileSystems."/" = {
+    device = "/dev/vg/root";
+    fsType = "btrfs";
+    options = ["subvol=@"];
+  };
+
+  fileSystems."/home" = {
+    device = "/dev/vg/root";
+    fsType = "btrfs";
+    options = ["subvol=@home"];
+  };
+
+  fileSystems."/nix" = {
+    device = "/dev/vg/root";
+    fsType = "btrfs";
+    options = ["subvol=@nix"];
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/nvme0n1p2";
+    fsType = "ext4";
+  };
+
+  fileSystems."/boot/efi" = {
+    device = "/dev/nvme0n1p1";
+    fsType = "vfat";
+    options = ["fmask=0022" "dmask=0022"];
+  };
+
+  swapDevices = [
+    {device = "/dev/vg/swap";}
+  ];
+
+  networking.useDHCP = lib.mkDefault true;
+
   home-manager.users.${username} = {
     imports = [
       inputs.noctalia.homeModules.default
-      ../../home/modules/cli
-      ../../home/modules/tui
-      ../../home/modules/gui
-      ../../home/modules/gui/hyprland.nix
+      ../home/modules/cli
+      ../home/modules/tui
+      ../home/modules/gui
+      ../home/modules/gui/hyprland.nix
     ];
 
     me.cli.git.signingkey = "CB029F0E386B37C7";
