@@ -92,15 +92,38 @@
       dock = {enabled = false;};
       sessionMenu = {
         largeButtonsLayout = "gird";
+        enableCountdown = false;
         powerOptions = [
-          {countdownEnabled = false;}
-          {countdownEnabled = false;}
-          {countdownEnabled = false;}
-          {countdownEnabled = false;}
-          {countdownEnabled = false;}
-          {countdownEnabled = false;}
-          {enabled = false;}
-          {enabled = false;}
+          {
+            action = "lock";
+            enabled = true;
+            keybind = "1";
+          }
+          {
+            action = "suspend";
+            enabled = true;
+            keybind = "2";
+          }
+          {
+            action = "hibernate";
+            enabled = true;
+            keybind = "3";
+          }
+          {
+            action = "reboot";
+            enabled = true;
+            keybind = "4";
+          }
+          {
+            action = "logout";
+            enabled = true;
+            keybind = "5";
+          }
+          {
+            action = "shutdown";
+            enabled = true;
+            keybind = "6";
+          }
         ];
       };
       notifications = {
