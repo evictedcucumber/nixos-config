@@ -2,9 +2,15 @@
   pkgs,
   username,
   inputs,
+  modulesPath,
   lib,
+  config,
   ...
 }: {
+  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+
+  me.system.core.users.extraGroups = ["networkmanager" "libvirtd" "kvm"];
+
   networking = {
     hostName = "seamoth";
     networkmanager.enable = true;
@@ -136,9 +142,7 @@
     spiceUSBRedirection.enable = true;
   };
 
-  users.users."${username}".extraGroups = ["networkmanager" "libvirtd" "kvm"];
-
-  hardware.cpu.intel.updateMicrocode = true;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   environment.systemPackages = with pkgs; [
     (
