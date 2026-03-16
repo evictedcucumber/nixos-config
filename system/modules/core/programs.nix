@@ -17,6 +17,10 @@
         };
       };
       fish.enable = true;
+      appimage = {
+        enable = true;
+        binfmt = true;
+      };
     };
   };
 }

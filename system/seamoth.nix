@@ -2,21 +2,33 @@
   pkgs,
   username,
   inputs,
-  modulesPath,
   lib,
-  config,
   ...
 }: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
-
   me.system.core.users.extraGroups = ["networkmanager" "libvirtd" "kvm"];
+  me.system.core.environment.extraPackages = with pkgs; [
+    (
+      catppuccin-sddm.override {
+        flavor = "mocha";
+        accent = "rosewater";
+        font = "Inter";
+        fontSize = "9";
+        loginBackground = true;
+      }
+    )
+    weston
+  ];
+
+  # Networking Options
+  me.system.core.networking.hostName = "seamoth";
 
   networking = {
-    hostName = "seamoth";
     networkmanager.enable = true;
     firewall.trustedInterfaces = ["virbr0"];
+    useDHCP = lib.mkDefault true;
   };
 
+  # Boot Options
   boot = {
     loader = {
       systemd-boot.enable = true;
@@ -26,19 +38,41 @@
         canTouchEfiVariables = true;
       };
     };
+    initrd = {
+      availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
+      kernelModules = ["dm-snapshot"];
+      luks.devices.cryptlvm = {
+        device = "/dev/disk/by-uuid/d4398137-3f81-4596-b493-e019977485af";
+        preLVM = true;
+        allowDiscards = true;
+      };
+    };
+    kernelModules = ["kvm-intel"];
+    extraModulePackages = [];
   };
 
-  security.sudo.enable = true;
-
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-    xwayland.enable = true;
+  # System Programs
+  programs = {
+    hyprland = let
+      hyprPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
+    in {
+      enable = true;
+      package = hyprPackage.hyprland;
+      portalPackage = hyprPackage.xdg-desktop-portal-hyprland;
+      xwayland.enable = true;
+    };
+    virt-manager.enable = true;
+    steam = {
+      enable = true;
+      extraPackages = with pkgs; [javaPackages.compiler.openjdk21];
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
+    };
   };
 
+  # System Services
   services = {
-    pcscd.enable = true;
     displayManager = {
       gdm.enable = false;
       sddm = {
@@ -47,29 +81,6 @@
         theme = "catppuccin-mocha-rosewater";
       };
     };
-    xserver = {
-      enable = true;
-      excludePackages = [pkgs.xterm];
-      xkb = {
-        layout = "za";
-        variant = "";
-      };
-    };
-    printing.enable = true;
-    pulseaudio.enable = false;
-    pipewire = {
-      enable = true;
-      alsa = {
-        enable = true;
-        support32Bit = true;
-      };
-      pulse.enable = true;
-      jack.enable = true;
-    };
-    avahi.enable = false;
-    upower.enable = true;
-    power-profiles-daemon.enable = true;
-    fwupd.enable = true;
     snapper = {
       configs = {
         root = {
@@ -107,30 +118,7 @@
     };
   };
 
-  hardware.bluetooth.enable = true;
-
-  programs = {
-    virt-manager.enable = true;
-    appimage = {
-      enable = true;
-      binfmt = true;
-    };
-    steam = {
-      enable = true;
-      extraPackages = with pkgs; [javaPackages.compiler.openjdk21];
-      extraCompatPackages = with pkgs; [
-        proton-ge-bin
-      ];
-    };
-  };
-
-  qt = {
-    enable = true;
-    style = "adwaita-dark";
-  };
-
-  security.rtkit.enable = true;
-
+  # Virtualisation
   virtualisation = {
     libvirtd = {
       enable = true;
@@ -142,66 +130,44 @@
     spiceUSBRedirection.enable = true;
   };
 
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-  environment.systemPackages = with pkgs; [
-    (
-      pkgs.catppuccin-sddm.override {
-        flavor = "mocha";
-        accent = "rosewater";
-        font = "Inter";
-        fontSize = "9";
-        loginBackground = true;
-      }
-    )
-    weston
-  ];
-
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
-  boot.initrd.kernelModules = ["dm-snapshot"];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
-
-  boot.initrd.luks.devices.cryptlvm = {
-    device = "/dev/disk/by-uuid/d4398137-3f81-4596-b493-e019977485af";
-    preLVM = true;
-    allowDiscards = true;
+  # Hardware
+  hardware = {
+    cpu.intel.updateMicrocode = true;
+    graphics.enable = true;
+    bluetooth.enable = true;
   };
 
-  fileSystems."/" = {
-    device = "/dev/vg/root";
-    fsType = "btrfs";
-    options = ["subvol=@"];
-  };
-
-  fileSystems."/home" = {
-    device = "/dev/vg/root";
-    fsType = "btrfs";
-    options = ["subvol=@home"];
-  };
-
-  fileSystems."/nix" = {
-    device = "/dev/vg/root";
-    fsType = "btrfs";
-    options = ["subvol=@nix"];
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/nvme0n1p2";
-    fsType = "ext4";
-  };
-
-  fileSystems."/boot/efi" = {
-    device = "/dev/nvme0n1p1";
-    fsType = "vfat";
-    options = ["fmask=0022" "dmask=0022"];
+  # File Systems
+  fileSystems = {
+    "/" = {
+      device = "/dev/vg/root";
+      fsType = "btrfs";
+      options = ["subvol=@"];
+    };
+    "/home" = {
+      device = "/dev/vg/root";
+      fsType = "btrfs";
+      options = ["subvol=@home"];
+    };
+    "/nix" = {
+      device = "/dev/vg/root";
+      fsType = "btrfs";
+      options = ["subvol=@nix"];
+    };
+    "/boot" = {
+      device = "/dev/nvme0n1p2";
+      fsType = "ext4";
+    };
+    "/boot/efi" = {
+      device = "/dev/nvme0n1p1";
+      fsType = "vfat";
+      options = ["fmask=0022" "dmask=0022"];
+    };
   };
 
   swapDevices = [
     {device = "/dev/vg/swap";}
   ];
-
-  networking.useDHCP = lib.mkDefault true;
 
   home-manager.users.${username} = {
     imports = [

@@ -1,14 +1,17 @@
 {...}: {
   imports = [
-    ./modules/boot.nix
-    ./modules/environment.nix
-    ./modules/fonts.nix
-    ./modules/locales.nix
-    ./modules/nix.nix
-    ./modules/programs.nix
-    ./modules/system.nix
-    ./modules/time.nix
-    ./modules/users.nix
+    ./boot.nix
+    ./environment.nix
+    ./fonts.nix
+    ./locales.nix
+    ./networking.nix
+    ./nix.nix
+    ./programs.nix
+    ./security.nix
+    ./services.nix
+    ./system.nix
+    ./time.nix
+    ./users.nix
   ];
 
   me.system.core = {
@@ -18,6 +21,8 @@
     locales.enable = true;
     nix.enable = true;
     programs.enable = true;
+    security.enable = true;
+    services.enable = true;
     system.enable = true;
     time.enable = true;
     users.enable = true;

@@ -77,7 +77,7 @@
                 users.${username} = import ./home/home.nix;
               };
             }
-            ./system/core.nix
+            ./system/modules/core
             ./system/${name}.nix
           ]
           ++ extraInputs;

@@ -3,12 +3,16 @@
   username,
   ...
 }: {
-  networking.hostName = "snowfox";
+  me.system.core.networking.hostName = "snowfox";
 
-  wsl.enable = true;
-  wsl.wslConf.interop.appendWindowsPath = false;
-  wsl.defaultUser = username;
+  # WSL Config
+  wsl = {
+    enable = true;
+    wslConf.interop.appendWindowsPath = false;
+    defaultUser = username;
+  };
 
+  # SystemD Units
   systemd.user.services."vault-sync" = {
     description = "Continuous sync obsidian vault.";
     after = ["default.target"];
