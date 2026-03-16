@@ -57,30 +57,33 @@
     stateVersion = "26.05";
     username = "ethan";
     specialArgs = {inherit stateVersion username inputs;};
-    moduleImports = [
-      nixpkgs.nixosModules.readOnlyPkgs
-      inputs.home-manager.nixosModules.default
-      ./system/core.nix
-    ];
+    systemConfig = name: extraInputs:
+      nixpkgs.lib.nixosSystem {
+        inherit pkgs specialArgs;
+
+        modules =
+          [
+            nixpkgs.nixosModules.readOnlyPkgs
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "backup";
+                overwriteBackup = true;
+
+                extraSpecialArgs = specialArgs;
+
+                users.${username} = import ./home/home.nix;
+              };
+            }
+            ./system/core.nix
+            ./system/${name}.nix
+          ]
+          ++ extraInputs;
+      };
   in {
-    nixosConfigurations."seamoth" = nixpkgs.lib.nixosSystem {
-      inherit pkgs specialArgs;
-
-      modules =
-        moduleImports
-        ++ [
-          ./system/seamoth.nix
-        ];
-    };
-    nixosConfigurations."snowfox" = nixpkgs.lib.nixosSystem {
-      inherit pkgs specialArgs;
-
-      modules =
-        moduleImports
-        ++ [
-          inputs.nixos-wsl.nixosModules.default
-          ./system/snowfox.nix
-        ];
-    };
+    nixosConfigurations."seamoth" = systemConfig "seamoth" [];
+    nixosConfigurations."snowfox" = systemConfig "snowfox" [inputs.nixos-wsl.nixosModules.default];
   };
 }
