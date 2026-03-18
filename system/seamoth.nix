@@ -116,6 +116,23 @@
       };
       snapshotRootOnBoot = true;
     };
+    udev.extraRules = let
+      ppd = "${pkgs.power-profiles-daemon}/bin/powerprofilesctl";
+      sysrun = "${pkgs.systemd}/bin/systemd-run";
+    in ''
+      # Plugged in → performance
+      SUBSYSTEM=="power_supply", KERNEL=="AC*", ATTR{online}=="1", \
+        RUN+="${sysrun} --no-block ${ppd} set performance"
+
+      # Unplugged → balanced
+      SUBSYSTEM=="power_supply", KERNEL=="AC*", ATTR{online}=="0", \
+        RUN+="${sysrun} --no-block ${ppd} set balanced"
+
+      # Battery ≤15% while discharging → power-saver
+      SUBSYSTEM=="power_supply", KERNEL=="BAT*", \
+        ATTR{status}=="Discharging", ATTR{capacity}=="15", \
+        RUN+="${sysrun} --no-block ${ppd} set power-saver"
+    '';
   };
 
   # Virtualisation
