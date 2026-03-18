@@ -133,8 +133,12 @@
   # Hardware
   hardware = {
     cpu.intel.updateMicrocode = true;
-    graphics.enable = true;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
     bluetooth.enable = true;
+    firmware = with pkgs; [linux-firmware];
   };
 
   # File Systems
