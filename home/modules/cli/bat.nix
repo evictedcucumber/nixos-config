@@ -1,12 +1,7 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs;
     [bat]
     ++ (with pkgs.bat-extras; [
-      batdiff
       batdiff
       batgrep
       batman
@@ -15,9 +10,4 @@
     ]);
 
   home.sessionVariables.BAT_THEME = "catppuccin";
-
-  xdg.configFile."bat" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/nixos-config/config/bat";
-    recursive = true;
-  };
 }

@@ -13,10 +13,4 @@
     size = 24;
     hyprcursor.enable = true;
   };
-
-  xdg.configFile = {
-    "hypr/hyprland.conf".source = ../../../config/hypr/hyprland.conf;
-    "hypr/windowrules.conf".source = ../../../config/hypr/windowrules.conf;
-    "hypr/bindings.conf".source = ../../../config/hypr/bindings.conf;
-  };
 }

@@ -54,6 +54,9 @@
     # go
     gopls
     # /go
+    # hyprland
+    hyprls
+    # /hyprland
   ];
 
   home.sessionVariables.EDITOR = "nvim";
