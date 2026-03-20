@@ -3,14 +3,16 @@
   username,
   ...
 }: {
-  imports = [../../system];
+  me.system.core.networking.hostName = "snowfox";
 
-  networking.hostName = "snowfox";
+  # WSL Config
+  wsl = {
+    enable = true;
+    wslConf.interop.appendWindowsPath = false;
+    defaultUser = username;
+  };
 
-  wsl.enable = true;
-  wsl.wslConf.interop.appendWindowsPath = false;
-  wsl.defaultUser = username;
-
+  # SystemD Units
   systemd.user.services."vault-sync" = {
     description = "Continuous sync obsidian vault.";
     after = ["default.target"];
@@ -25,8 +27,8 @@
 
   home-manager.users.${username} = {
     imports = [
-      ../../home/modules/cli
-      ../../home/modules/tui
+      ../home/modules/cli
+      ../home/modules/tui
     ];
 
     me.cli.git.signingkey = "A2FD5AF74494FD44";
