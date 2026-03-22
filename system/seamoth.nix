@@ -199,6 +199,20 @@
       ../home/modules/gui/hyprland.nix
     ];
 
-    me.cli.git.signingkey = "CB029F0E386B37C7";
+    me.home.cli = {
+      git = {
+        enable = true;
+        signingkey = "CB029F0E386B37C7";
+      };
+      bat.enable = true;
+      direnv.enable = true;
+      fzf.enable = true;
+      nix-your-shell.enable = true;
+      nodejs.enable = true;
+      ripgrep.enable = true;
+      starship.enable = true;
+      tealdeer.enable = true;
+      zoxide.enable = true;
+    };
   };
 }

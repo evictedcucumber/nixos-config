@@ -31,8 +31,6 @@
       ../home/modules/tui
     ];
 
-    me.cli.git.signingkey = "A2FD5AF74494FD44";
-
     home.sessionVariables = let
       configHome = config.home-manager.users.${username}.home.sessionVariables;
     in {
@@ -40,6 +38,22 @@
       LEDGER_FILE = "${configHome.LEDGERS_DIR}/main.journal";
       CURRENT_LEDGER_FILE = "${configHome.LEDGERS_DIR}/current.journal";
       YEAR_LEDGER_FILE = "${configHome.LEDGERS_DIR}/2026.journal";
+    };
+
+    me.home.cli = {
+      git = {
+        enable = true;
+        signingkey = "A2FD5AF74494FD44";
+      };
+      bat.enable = true;
+      direnv.enable = true;
+      fzf.enable = true;
+      nix-your-shell.enable = true;
+      nodejs.enable = true;
+      ripgrep.enable = true;
+      starship.enable = true;
+      tealdeer.enable = true;
+      zoxide.enable = true;
     };
   };
 }

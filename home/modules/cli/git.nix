@@ -3,10 +3,13 @@
   lib,
   ...
 }: {
-  options.me.cli.git.signingkey = lib.mkOption {
-    type = lib.types.str;
-    default = "";
-    description = "The signing key used by Git";
+  options.me.home.cli.git = {
+    enable = lib.mkEnableOption "Enable Git Options";
+    signingkey = lib.mkOption {
+      type = lib.types.str;
+      default = "";
+      description = "The signing key used by Git";
+    };
   };
 
   config = {
@@ -34,9 +37,9 @@
             autoupdate = true;
           };
         } (
-          if config.me.cli.git.signingkey != ""
+          if config.me.home.cli.git.signingkey != ""
           then {
-            user.signingkey = config.me.cli.git.signingkey;
+            user.signingkey = config.me.home.cli.git.signingkey;
             commit.gpgsign = true;
             tag.gpgSign = true;
           }

@@ -1,11 +1,20 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [nodejs];
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: {
+  options.me.home.cli.nodejs.enable = lib.mkEnableOption "Enable NodeJS Options";
 
-  home.file.".npmrc".text = ''
-    prefix = ''${HOME}/.npm-global
-  '';
+  config = lib.mkIf config.me.home.cli.nodejs.enable {
+    home.packages = with pkgs; [nodejs];
 
-  home.sessionPath = [
-    "$HOME/.npm-global/bin"
-  ];
+    home.file.".npmrc".text = ''
+      prefix = ''${HOME}/.npm-global
+    '';
+
+    home.sessionPath = [
+      "$HOME/.npm-global/bin"
+    ];
+  };
 }
