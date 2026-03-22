@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   programs.ghostty = {
     enable = true;
     enableFishIntegration = true;
@@ -11,5 +11,6 @@
       window-padding-x = 4;
       window-padding-y = 2;
     };
+    package = pkgs.ghostty;
   };
 }

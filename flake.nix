@@ -39,6 +39,10 @@
       url = "github:noctalia-dev/noctalia-qs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {nixpkgs, ...} @ inputs: let
@@ -52,6 +56,7 @@
         inputs.rust-overlay.overlays.default
         inputs.neovim-nightly-overlay.overlays.default
         inputs.yazi.overlays.default
+        inputs.ghostty.overlays.default
       ];
     };
     stateVersion = "26.05";
