@@ -10,6 +10,7 @@
     enable = true;
     wslConf.interop.appendWindowsPath = false;
     defaultUser = username;
+    interop.register = true;
   };
 
   # SystemD Units
