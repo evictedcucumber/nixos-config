@@ -1,5 +1,15 @@
 {
   inputs = {
+    # :: BASE INPUTS {
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
+    wrapper-modules = {
+      url = "github:BirdeeHub/nix-wrapper-modules";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # :: }
+
+    # :: MAIN REPOSITORIES {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nur = {
       url = "github:nix-community/NUR";
@@ -9,11 +19,16 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # :: }
+
+    # :: WSL {
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # :: }
 
+    # :: PROGRAMS {
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,51 +54,21 @@
       url = "github:noctalia-dev/noctalia-qs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
-
-  outputs = {nixpkgs, ...} @ inputs: let
-    pkgs = import nixpkgs {
-      system = "x86_64-linux";
-
-      config.allowUnfree = true;
-
-      overlays = [
-        inputs.nur.overlays.default
-        inputs.rust-overlay.overlays.default
-        inputs.neovim-nightly-overlay.overlays.default
-        inputs.yazi.overlays.default
-      ];
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    stateVersion = "26.05";
-    username = "ethan";
-    specialArgs = {inherit stateVersion username inputs;};
-    systemConfig = name: extraInputs:
-      nixpkgs.lib.nixosSystem {
-        inherit pkgs specialArgs;
-
-        modules =
-          [
-            nixpkgs.nixosModules.readOnlyPkgs
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                backupFileExtension = "backup";
-                overwriteBackup = true;
-
-                extraSpecialArgs = specialArgs;
-
-                users.${username} = import ./home/home.nix;
-              };
-            }
-            ./system/modules/core
-            ./system/${name}.nix
-          ]
-          ++ extraInputs;
-      };
-  in {
-    nixosConfigurations."seamoth" = systemConfig "seamoth" [];
-    nixosConfigurations."snowfox" = systemConfig "snowfox" [inputs.nixos-wsl.nixosModules.default];
+    # :: }
   };
+
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      imports = [
+        inputs.home-manager.flakeModules.home-manager
+        (inputs.import-tree ./modules)
+      ];
+      _module.args = {
+        username = "ethan";
+      };
+    };
 }
