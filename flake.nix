@@ -3,10 +3,10 @@
     # :: BASE INPUTS {
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
-    wrapper-modules = {
-      url = "github:BirdeeHub/nix-wrapper-modules";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # wrapper-modules = {
+    #   url = "github:BirdeeHub/nix-wrapper-modules";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     # :: }
 
     # :: MAIN REPOSITORIES {
@@ -56,6 +56,18 @@
     };
     ghostty = {
       url = "github:ghostty-org/ghostty";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    lazygit = {
+      url = "github:jesseduffield/lazygit";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-your-shell = {
+      url = "github:MercuryTechnologies/nix-your-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-direnv = {
+      url = "github:nix-community/nix-direnv";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # :: }

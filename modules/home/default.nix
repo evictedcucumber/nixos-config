@@ -4,7 +4,7 @@
   username,
   ...
 }: {
-  flake.nixosModules.sharedHomeConfiguration = {...}: {
+  flake.nixosModules.sharedHomeConfiguration = {hostConfig, ...}: {
     imports = [inputs.home-manager.nixosModules.home-manager];
 
     home-manager = {
@@ -12,7 +12,10 @@
       useUserPackages = true;
       backupFileExtension = "backup";
       overwriteBackup = true;
-      extraSpecialArgs = {inherit inputs username;};
+      extraSpecialArgs = {
+        inherit inputs username;
+        homeConfig = hostConfig.home;
+      };
       users.${username} = self.homeModules.sharedHomeConfiguration;
     };
   };

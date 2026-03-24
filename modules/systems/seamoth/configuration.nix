@@ -1,4 +1,5 @@
 {
+  self,
   inputs,
   username,
   lib,
@@ -35,6 +36,22 @@
       kernelModules = ["kvm-intel"];
       extraModulePackages = [];
     };
+    # :: }
+
+    # :: ENVIRONMENT {
+    environment.systemPackages = with pkgs; [
+      (
+        catppuccin-sddm.override {
+          flavor = "mocha";
+          accent = "rosewater";
+          font = "Inter";
+          fontSize = "9";
+          loginBackground = true;
+        }
+      )
+      wl-clipboard
+      wl-clipboard-x11
+    ];
     # :: }
 
     # :: PROGRAMS {
@@ -183,8 +200,19 @@
     ];
     # :: }
 
+    # :: USERS {
+    users.users.${username}.extraGroups = ["networkmanager" "libvirtd" "kvm"];
+    # :: }
+
     # :: HOME MANAGER {
-    home-manager.users.${username} = {};
+    home-manager.users.${username} = {
+      imports = with self.homeModules; [
+        ghostty
+        obsidian
+        brave
+        helium
+      ];
+    };
     # :: }
   };
 }

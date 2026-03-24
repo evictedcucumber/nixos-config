@@ -1,5 +1,24 @@
-{username, ...}: {
+{
+  self,
+  username,
+  ...
+}: {
   flake.homeModules.sharedHomeConfiguration = {config, ...}: {
+    imports = with self.homeModules; [
+      bat
+      direnv
+      fzf
+      git
+      hledger
+      neovim
+      nix-your-shell
+      ripgrep
+      starship
+      yazi
+      zellij
+      zoxide
+    ];
+
     home = {
       inherit username;
       stateVersion = "26.05";

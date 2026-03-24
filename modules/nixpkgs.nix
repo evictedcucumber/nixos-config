@@ -9,12 +9,15 @@
 
       config.allowUnfree = true;
 
-      overlays = [
-        inputs.nur.overlays.default
-        inputs.rust-overlay.overlays.default
-        inputs.neovim-nightly-overlay.overlays.default
-        inputs.yazi.overlays.default
-        inputs.ghostty.overlays.default
+      overlays = with inputs; [
+        ghostty.overlays.default
+        lazygit.overlays.default
+        neovim-nightly-overlay.overlays.default
+        nix-direnv.overlays.default
+        nix-your-shell.overlays.default
+        nur.overlays.default
+        rust-overlay.overlays.default
+        yazi.overlays.default
       ];
     };
   };

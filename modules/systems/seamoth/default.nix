@@ -12,6 +12,10 @@ in {
       system = "x86_64-linux";
       hostConfig = {
         inherit hostName;
+        home = {
+          gitSigningKey = "CB029F0E386B37C7";
+          hledgerLedgersDir = "/home/${username}/Documents/My Obsidian Vault/97 - Finance";
+        };
       };
     };
 
