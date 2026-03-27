@@ -3,7 +3,7 @@
   username,
   ...
 }: {
-  flake.nixosModules.snowfoxConfiguration = {...}: {
+  flake.nixosModules.snowfoxConfiguration = {pkgs, ...}: {
     imports = [inputs.nixos-wsl.nixosModules.default];
 
     # :: WSL {
@@ -29,8 +29,8 @@
     };
     # :: }
 
-    # :: HOME MANAGER {
-    home-manager.users.${username} = {};
+    # :: ENVIRONMENT {
+    environment.systemPackages = with pkgs; [xclip xsel];
     # :: }
   };
 }

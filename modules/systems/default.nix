@@ -116,28 +116,13 @@
     # :: }
 
     # :: ENVIRONMENT {
-    environment = {
-      systemPackages = with pkgs; [
-        git
-        openssh
-        pinentry-all
-        xclip
-      ];
-      sessionVariables.NH_FLAKE = "/home/${username}/repos/nixos-config";
-    };
+    environment.systemPackages = with pkgs; [pinentry-all];
     # :: }
 
     # :: PROGRAMS {
     programs = {
       nix-ld.enable = true;
       gnupg.agent.enable = true;
-      nh = {
-        enable = true;
-        clean = {
-          enable = true;
-          dates = "Tues 10:00";
-        };
-      };
       fish.enable = true;
       appimage = {
         enable = true;

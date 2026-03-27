@@ -29,5 +29,7 @@
         tag.gpgSign = true;
       };
     };
+
+    programs.gh.enable = true;
   };
 }

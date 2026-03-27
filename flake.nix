@@ -3,10 +3,10 @@
     # :: BASE INPUTS {
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
-    # wrapper-modules = {
-    #   url = "github:BirdeeHub/nix-wrapper-modules";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    devshell = {
+      url = "github:numtide/devshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # :: }
 
     # :: MAIN REPOSITORIES {
@@ -70,6 +70,18 @@
       url = "github:nix-community/nix-direnv";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    television = {
+      url = "github:alexpasmantier/television";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-search-tv = {
+      url = "github:3timeslazy/nix-search-tv";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nh = {
+      url = "github:nix-community/nh";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # :: }
   };
 
@@ -77,6 +89,7 @@
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
         inputs.home-manager.flakeModules.home-manager
+        inputs.devshell.flakeModule
         (inputs.import-tree ./modules)
       ];
       _module.args = {

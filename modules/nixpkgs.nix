@@ -13,6 +13,7 @@
         ghostty.overlays.default
         lazygit.overlays.default
         neovim-nightly-overlay.overlays.default
+        nh.overlays.default
         nix-direnv.overlays.default
         nix-your-shell.overlays.default
         nur.overlays.default
