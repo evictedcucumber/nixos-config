@@ -212,6 +212,8 @@
         obsidian
         brave
         helium
+        hyprland
+        noctalia
       ];
     };
     # :: }

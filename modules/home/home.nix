@@ -5,15 +5,17 @@
 }: {
   flake.homeModules.sharedHomeConfiguration = {config, ...}: {
     imports = with self.homeModules; [
-      allTools
       bat
       direnv
+      fish
       fzf
       git
       hledger
+      java
       neovim
       nh
       nix-your-shell
+      nodejs
       ripgrep
       ssh
       starship

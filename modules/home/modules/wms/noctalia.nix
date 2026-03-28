@@ -1,3 +1,7 @@
-{...}: {
-  flake.homeModules.noctalia = {...}: {};
+{inputs, ...}: {
+  flake.homeModules.noctalia = {...}: {
+    imports = [inputs.noctalia.homeModules.default];
+
+    programs.noctalia-shell.enable = true;
+  };
 }
