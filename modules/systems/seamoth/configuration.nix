@@ -137,6 +137,7 @@
           ATTR{status}=="Discharging", ATTR{capacity}=="15", \
           RUN+="${sysrun} --no-block ${ppd} set power-saver"
       '';
+      gvfs.enable = true;
     };
     # :: }
 
