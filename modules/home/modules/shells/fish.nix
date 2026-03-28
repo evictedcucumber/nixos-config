@@ -1,5 +1,9 @@
-{self, ...}: {
-  flake.homeModules.fish = {...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
+  flake.homeModules.fish = {pkgs, ...}: {
     imports = with self.homeModules; [
       eza
       fastfetch
@@ -11,7 +15,7 @@
       shellInit = ''
         set -u fish_greeting ""
 
-        fish_config theme choose "Catppuccin Mocha" --color-theme=dark
+        fish_config theme choose catppuccin-mocha --color-theme=dark
       '';
       shellAbbrs = {
         v = "NVIM_APPNAME=neovim nvim";
@@ -27,6 +31,9 @@
         bind \cf y
         bind \cj down-or-search
         bind \ck up-or-search
+
+        # Temporary fix for incorrect location in enableFishIntegration for programs.television
+        source ${inputs.television.packages.${pkgs.stdenv.system}.default}/share/fish/vendor_completions.d/tv.fish
       '';
     };
   };

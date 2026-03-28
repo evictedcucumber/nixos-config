@@ -4,7 +4,7 @@
       enable = true;
       clean = {
         enable = true;
-        dates = "Tues 10:00";
+        dates = "Tue 10:00";
       };
       flake = "/home/${username}/repos/nixos-config";
       package = pkgs.nh;

@@ -63,7 +63,7 @@
       };
       optimise = {
         automatic = true;
-        dates = ["Tues 10:00"];
+        dates = ["Tue 10:00"];
       };
     };
     # :: }
