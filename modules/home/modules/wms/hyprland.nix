@@ -10,6 +10,7 @@ in {
       portalPackage = null;
       settings = {
         monitor = [",1920x1080,auto,1.25"];
+        exec-once = ["noctalia-shell"];
         env = [
           "XCURSOR_SIZE,24"
           "HYPRCURSOR_SIZE,24"

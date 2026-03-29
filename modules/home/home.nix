@@ -12,6 +12,7 @@
       git
       hledger
       java
+      lazygit
       neovim
       nh
       nix-your-shell

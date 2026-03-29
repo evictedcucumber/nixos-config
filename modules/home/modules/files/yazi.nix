@@ -12,6 +12,7 @@
       enable = true;
       enableFishIntegration = true;
       package = pkgs.yazi;
+      settings.mgr.show_hidden = true;
     };
 
     home.packages = with pkgs; [

@@ -1,9 +1,5 @@
-{
-  self,
-  inputs,
-  ...
-}: {
-  flake.homeModules.fish = {pkgs, ...}: {
+{self, ...}: {
+  flake.homeModules.fish = {...}: {
     imports = with self.homeModules; [
       eza
       fastfetch
@@ -32,8 +28,6 @@
         bind \cj down-or-search
         bind \ck up-or-search
 
-        # Temporary fix for incorrect location in enableFishIntegration for programs.television
-        source ${inputs.television.packages.${pkgs.stdenv.system}.default}/share/fish/vendor_completions.d/tv.fish
       '';
     };
   };

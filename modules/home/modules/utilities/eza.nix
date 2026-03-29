@@ -3,7 +3,7 @@
     programs.eza = {
       enable = true;
       enableFishIntegration = true;
-      package = inputs.eza.packages.${pkgs.stdenv.system}.default;
+      package = inputs.eza.packages.${pkgs.stdenv.hostPlatform.system}.default;
       git = true;
       icons = "always";
       colors = "always";
