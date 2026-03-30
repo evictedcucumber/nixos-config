@@ -8,26 +8,31 @@
       enable = true;
       enableFishIntegration = true;
       # package = inputs.television.packages.${pkgs.stdenv.hostPlatform.system}.default;
-      settings.ui.theme = "catppuccin";
-      # settings.ui.theme_overrides = {
-      #   background = "#1e1e2e";
-      #   border_fg = "#45475a";
-      #   text_fg = "#cdd6f4";
-      #   dimmed_text_fg = "#6c7086";
-      #   input_text_fg = "#f5e0dc";
-      #   result_count_fg = "#f5e0dc";
-      #   result_name_fg = "#89b4fa";
-      #   result_line_number_fg = "#f9e2af";
-      #   result_value_fg = "#b4befe";
-      #   selection_fg = "#a6e3a1";
-      #   selection_bg = "#313244";
-      #   match_fg = "#a6e3a1";
-      #   preview_title_fg = "#f5e0dc";
-      #   channel_mode_fg = "#1e1e2e";
-      #   channel_mode_bg = "#f5e0dc";
-      #   remote_control_mode_fg = "#1e1e2e";
-      #   remote_control_mode_bg = "#a6e3a1";
-      # };
+      settings = {
+        default_channel = "channels";
+        ui = {
+          theme = "catppuccin";
+          theme_overrides = {
+            background = "#1e1e2e";
+            border_fg = "#45475a";
+            text_fg = "#cdd6f4";
+            dimmed_text_fg = "#6c7086";
+            input_text_fg = "#f5e0dc";
+            result_count_fg = "#f5e0dc";
+            result_name_fg = "#89b4fa";
+            result_line_number_fg = "#f9e2af";
+            result_value_fg = "#b4befe";
+            selection_fg = "#a6e3a1";
+            selection_bg = "#313244";
+            match_fg = "#a6e3a1";
+            preview_title_fg = "#f5e0dc";
+            channel_mode_fg = "#1e1e2e";
+            channel_mode_bg = "#f5e0dc";
+            remote_control_mode_fg = "#1e1e2e";
+            remote_control_mode_bg = "#a6e3a1";
+          };
+        };
+      };
     };
 
     programs.nix-search-tv = {

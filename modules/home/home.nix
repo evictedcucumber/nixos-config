@@ -20,6 +20,7 @@
       ripgrep
       ssh
       starship
+      tealdeer
       tv
       yazi
       zellij
