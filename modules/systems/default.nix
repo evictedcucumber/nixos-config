@@ -60,6 +60,12 @@
           "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
         ];
         trusted-users = [username];
+        warn-dirty = false;
+      };
+      gc = {
+        automatic = true;
+        dates = ["Tue 10:00"];
+        options = "--delete-older-than 14d";
       };
       optimise = {
         automatic = true;
@@ -98,11 +104,20 @@
       upower.enable = true;
       power-profiles-daemon.enable = true;
       fwupd.enable = true;
+      fstrim.enable = true;
     };
     # :: }
 
     # :: SYSTEM {
-    system.stateVersion = "26.05";
+    system = {
+      stateVersion = "26.05";
+      autoUpgrade = {
+        enable = true;
+        allowReboot = false;
+        flake = "/home/${username}/repos/nixos-config";
+        dates = "Tue 10:00";
+      };
+    };
     # :: }
 
     # :: TIME {
