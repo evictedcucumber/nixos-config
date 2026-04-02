@@ -44,6 +44,7 @@
 
     # :: NIX {
     nix = {
+      package = pkgs.nixVersions.latest;
       settings = {
         experimental-features = ["nix-command" "flakes"];
         auto-optimise-store = true;
@@ -109,15 +110,7 @@
     # :: }
 
     # :: SYSTEM {
-    system = {
-      stateVersion = "26.05";
-      autoUpgrade = {
-        enable = true;
-        allowReboot = false;
-        flake = "/home/${username}/repos/nixos-config";
-        dates = "Tue 10:00";
-      };
-    };
+    system.stateVersion = "26.05";
     # :: }
 
     # :: TIME {

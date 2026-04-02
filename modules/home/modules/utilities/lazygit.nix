@@ -2,7 +2,6 @@
   flake.homeModules.lazygit = {pkgs, ...}: {
     programs.lazygit = {
       enable = true;
-      enableFishIntegration = true;
       package = pkgs.lazygit;
       settings.gui.theme = {
         activeBorderColor = ["#89b4fa" "bold"];

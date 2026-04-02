@@ -2,7 +2,6 @@
   flake.homeModules.ghostty = {pkgs, ...}: {
     programs.ghostty = {
       enable = true;
-      enableFishIntegration = true;
       package = pkgs.ghostty;
       settings = {
         theme = "noctalia";

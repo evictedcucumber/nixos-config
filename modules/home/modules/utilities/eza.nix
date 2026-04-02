@@ -2,7 +2,7 @@
   flake.homeModules.eza = {pkgs, ...}: {
     programs.eza = {
       enable = true;
-      enableFishIntegration = true;
+      enableFishIntegration = false;
       package = inputs.eza.packages.${pkgs.stdenv.hostPlatform.system}.default;
       git = true;
       icons = "always";

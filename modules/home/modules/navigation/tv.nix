@@ -6,7 +6,6 @@
   }: {
     programs.television = {
       enable = true;
-      enableFishIntegration = true;
       # package = inputs.television.packages.${pkgs.stdenv.hostPlatform.system}.default;
       settings = {
         default_channel = "channels";

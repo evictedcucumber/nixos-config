@@ -24,9 +24,6 @@
       };
     };
 
-    services.ssh-agent = {
-      enable = true;
-      enableFishIntegration = true;
-    };
+    services.ssh-agent.enable = true;
   };
 }
