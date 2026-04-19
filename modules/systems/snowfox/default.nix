@@ -13,7 +13,7 @@ in {
       hostConfig = {
         inherit hostName;
         home = {
-          gitSigningKey = "A2FD5AF74494FD44";
+          gitSigningKey = "440DB3144C3649BA";
           hledgerLedgersDir = "/home/${username}/myvault/97 - Finance";
         };
       };

@@ -14,7 +14,8 @@
         fish_config theme choose catppuccin-mocha --color-theme=dark
       '';
       shellAbbrs = {
-        v = "NVIM_APPNAME=neovim nvim";
+        # v = "NVIM_APPNAME=neovim nvim";
+        v = "nvim";
         cat = "bat";
         grep = "rg";
         ls = "eza";
