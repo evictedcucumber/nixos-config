@@ -9,6 +9,10 @@
           addKeysToAgent = "yes";
           identityFile = "~/.ssh/github_key";
         };
+        "gitea.homelab.local" = {
+          addKeysToAgent = "yes";
+          identityFile = "~/.ssh/gitea_homelab_key";
+        };
         "*" = {
           forwardAgent = false;
           addKeysToAgent = "no";
