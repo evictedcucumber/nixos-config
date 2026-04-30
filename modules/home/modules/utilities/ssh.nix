@@ -13,6 +13,10 @@
           addKeysToAgent = "yes";
           identityFile = "~/.ssh/gitea_homelab_key";
         };
+        "192.168.1.5" = {
+          addKeysToAgent = "yes";
+          identityFile = "~/.ssh/gitea_homelab_key";
+        };
         "*" = {
           forwardAgent = false;
           addKeysToAgent = "no";
