@@ -138,6 +138,7 @@
           RUN+="${sysrun} --no-block ${ppd} set power-saver"
       '';
       gvfs.enable = true;
+      gnome.gnome-keyring.enable = true;
     };
     # :: }
 
@@ -199,6 +200,13 @@
     swapDevices = [
       {device = "/dev/vg/swap";}
     ];
+    # :: }
+
+    # :: SECURITY {
+    security.pam.services = {
+      login.enableGnomeKeyring = true;
+      sddm.enableGnomeKeyring = true;
+    };
     # :: }
 
     # :: USERS {
