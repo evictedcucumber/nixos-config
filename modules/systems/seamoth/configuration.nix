@@ -222,6 +222,7 @@
         helium
         hyprland
         noctalia
+        spotify
       ];
     };
     # :: }
