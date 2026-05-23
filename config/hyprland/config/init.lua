@@ -1,0 +1,5 @@
+require("config.animations")
+require("config.decoration")
+require("config.general")
+require("config.input")
+require("config.misc")
