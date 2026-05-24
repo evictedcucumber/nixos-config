@@ -6,7 +6,7 @@
   }: {
     programs.television = {
       enable = true;
-      # package = inputs.television.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      package = inputs.television.packages.${pkgs.stdenv.hostPlatform.system}.default;
       settings = {
         default_channel = "channels";
         ui = {
