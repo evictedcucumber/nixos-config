@@ -1,12 +1,9 @@
-{inputs, ...}: {
-  flake.homeModules.tv = {
-    config,
-    pkgs,
-    ...
-  }: {
+{...}: {
+  flake.homeModules.tv = {config, ...}: {
     programs.television = {
       enable = true;
-      package = inputs.television.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      # FIX: fish complete source issue
+      # package = inputs.television.packages.${pkgs.stdenv.hostPlatform.system}.default;
       settings = {
         default_channel = "channels";
         ui = {
