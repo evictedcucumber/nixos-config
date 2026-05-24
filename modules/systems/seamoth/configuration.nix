@@ -1,6 +1,5 @@
 {
   self,
-  inputs,
   username,
   lib,
   ...
@@ -40,15 +39,6 @@
 
     # :: ENVIRONMENT {
     environment.systemPackages = with pkgs; [
-      (
-        catppuccin-sddm.override {
-          flavor = "mocha";
-          accent = "rosewater";
-          font = "Inter";
-          fontSize = "9";
-          loginBackground = true;
-        }
-      )
       wl-clipboard
       wl-clipboard-x11
     ];
@@ -59,6 +49,7 @@
       hyprland = {
         enable = true;
         xwayland.enable = true;
+        withUWSM = true;
       };
       virt-manager.enable = true;
       steam = {
@@ -75,10 +66,15 @@
     services = {
       displayManager = {
         gdm.enable = false;
-        sddm = {
-          enable = true;
-          autoNumlock = true;
-          theme = "catppuccin-mocha-rosewater";
+        sddm.enable = false;
+      };
+      greetd = {
+        enable = true;
+        settings = {
+          default_session = {
+            command = "${pkgs.tuigreet}/bin/tuigreet --sessions /run/current-system/sw/share/wayland-sessions --time --remember --remember-session";
+            user = "greeter";
+          };
         };
       };
       snapper = {
@@ -193,16 +189,11 @@
     # :: }
 
     # :: SWAP {
-    swapDevices = [
-      {device = "/dev/vg/swap";}
-    ];
+    swapDevices = [{device = "/dev/vg/swap";}];
     # :: }
 
     # :: SECURITY {
-    security.pam.services = {
-      login.enableGnomeKeyring = true;
-      sddm.enableGnomeKeyring = true;
-    };
+    security.pam.services.login.enableGnomeKeyring = true;
     # :: }
 
     # :: USERS {
