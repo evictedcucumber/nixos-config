@@ -56,12 +56,8 @@
 
     # :: PROGRAMS {
     programs = {
-      hyprland = let
-        hyprPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
-      in {
+      hyprland = {
         enable = true;
-        package = hyprPackage.hyprland;
-        portalPackage = hyprPackage.xdg-desktop-portal-hyprland;
         xwayland.enable = true;
       };
       virt-manager.enable = true;

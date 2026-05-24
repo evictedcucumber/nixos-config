@@ -37,7 +37,6 @@
     programs.nix-search-tv = {
       enable = config.programs.television.enable;
       enableTelevisionIntegration = true;
-      package = inputs.nix-search-tv.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
   };
 }

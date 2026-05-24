@@ -33,16 +33,8 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    yazi = {
-      url = "github:sxyazi/yazi";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay/80b1f16dba171a70c44c2ee6ec9529876152a7f5";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     noctalia = {
@@ -58,32 +50,8 @@
       url = "github:ghostty-org/ghostty";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    lazygit = {
-      url = "github:jesseduffield/lazygit";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix-your-shell = {
-      url = "github:MercuryTechnologies/nix-your-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix-direnv = {
-      url = "github:nix-community/nix-direnv";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     television = {
       url = "github:alexpasmantier/television";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix-search-tv = {
-      url = "github:3timeslazy/nix-search-tv";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nh = {
-      url = "github:nix-community/nh";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    eza = {
-      url = "github:eza-community/eza";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # :: }

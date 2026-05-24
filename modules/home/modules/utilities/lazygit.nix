@@ -1,8 +1,7 @@
 {...}: {
-  flake.homeModules.lazygit = {pkgs, ...}: {
+  flake.homeModules.lazygit = {...}: {
     programs.lazygit = {
       enable = true;
-      package = pkgs.lazygit;
       settings.gui.theme = {
         activeBorderColor = ["#89b4fa" "bold"];
         inactiveBorderColor = ["#a6adc8"];

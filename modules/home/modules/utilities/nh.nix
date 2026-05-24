@@ -1,5 +1,5 @@
 {username, ...}: {
-  flake.homeModules.nh = {pkgs, ...}: {
+  flake.homeModules.nh = {...}: {
     programs.nh = {
       enable = true;
       clean = {
@@ -7,7 +7,6 @@
         dates = "Tue 10:00";
       };
       flake = "/home/${username}/repos/nixos-config";
-      package = pkgs.nh;
     };
   };
 }

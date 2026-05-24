@@ -1,12 +1,9 @@
 {...}: {
-  flake.homeModules.direnv = {pkgs, ...}: {
+  flake.homeModules.direnv = {...}: {
     programs.direnv = {
       enable = true;
       silent = true;
-      nix-direnv = {
-        enable = true;
-        package = pkgs.nix-direnv;
-      };
+      nix-direnv.enable = true;
     };
   };
 }
