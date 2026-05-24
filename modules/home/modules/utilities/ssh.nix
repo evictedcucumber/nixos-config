@@ -4,18 +4,10 @@
       enable = true;
       package = pkgs.openssh;
       enableDefaultConfig = false;
-      matchBlocks = {
+      settings = {
         "github.com" = {
           addKeysToAgent = "yes";
           identityFile = "~/.ssh/github_key";
-        };
-        "gitea.homelab.local" = {
-          addKeysToAgent = "yes";
-          identityFile = "~/.ssh/gitea_homelab_key";
-        };
-        "192.168.1.5" = {
-          addKeysToAgent = "yes";
-          identityFile = "~/.ssh/gitea_homelab_key";
         };
         "*" = {
           forwardAgent = false;
