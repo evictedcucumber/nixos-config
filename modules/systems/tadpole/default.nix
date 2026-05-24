@@ -21,7 +21,6 @@ in {
 
     modules = [
       inputs.nixpkgs.nixosModules.readOnlyPkgs
-      self.nixosModules.sharedSystemConfiguration
       self.nixosModules.tadpoleConfiguration
     ];
   };
