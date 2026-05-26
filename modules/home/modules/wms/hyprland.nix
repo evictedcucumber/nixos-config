@@ -14,6 +14,6 @@
       hyprcursor.enable = true;
     };
 
-    xdg.configFile."hypr".source = ../../../../config/hyprland;
+    xdg.configFile."hypr".source = ../../../../config/wms/hyprland;
   };
 }
