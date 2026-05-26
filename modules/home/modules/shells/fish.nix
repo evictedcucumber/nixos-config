@@ -15,7 +15,7 @@
       '';
       shellAbbrs = {
         v = "NVIM_APPNAME=neovim nvim";
-        # v = "nvim";
+        vd = "NVIM_APPNAME=neovim DEBUG_PLENARY=true nvim";
         cat = "bat";
         grep = "rg";
         ls = "eza";
