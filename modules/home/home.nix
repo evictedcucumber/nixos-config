@@ -21,6 +21,7 @@
       ssh
       starship
       tealdeer
+      tmux
       tv
       yazi
       zellij
