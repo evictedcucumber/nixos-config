@@ -203,12 +203,13 @@
     # :: HOME MANAGER {
     home-manager.users.${username} = {
       imports = with self.homeModules; [
-        ghostty
-        obsidian
         brave
+        ghostty
         helium
         hyprland
+        mpv
         noctalia
+        obsidian
         spotify
       ];
     };
