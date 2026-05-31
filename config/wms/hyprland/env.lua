@@ -1,7 +1,8 @@
 local envs = {
 	{ "XCURSOR_SIZE", "24" },
+	{ "XCURSOR_THEME", "BreezeX-RosePine-Linux" },
 	{ "HYPRCURSOR_SIZE", "24" },
-	{ "HYPRCURSOR_THEME", "catppuccin-mocha-dark-cursors" },
+	{ "HYPRCURSOR_THEME", "rose-pine-hyprcursor" },
 }
 
 for _, env in ipairs(envs) do

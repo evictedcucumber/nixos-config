@@ -4,7 +4,7 @@
       enable = true;
       package = pkgs.ghostty;
       settings = {
-        theme = "noctalia";
+        theme = "Rose Pine";
         font-family = "JetBrainsMono Nerd Font";
         cursor-style-blink = false;
         maximize = true;

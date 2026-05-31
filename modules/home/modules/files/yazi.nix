@@ -25,5 +25,8 @@
       wl-clipboard
       xsel
     ];
+
+    xdg.configFile."yazi/flavors".source = ../../../../config/files/yazi/flavors;
+    xdg.configFile."yazi/theme.toml".source = ../../../../config/files/yazi/theme.toml;
   };
 }

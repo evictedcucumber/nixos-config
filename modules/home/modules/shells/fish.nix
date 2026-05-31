@@ -11,7 +11,7 @@
       shellInit = ''
         set -u fish_greeting ""
 
-        fish_config theme choose catppuccin-mocha --color-theme=dark
+        fish_config theme choose "Rosé Pine"
       '';
       shellAbbrs = {
         v = "NVIM_APPNAME=neovim nvim";
@@ -30,5 +30,7 @@
         bind \ck up-or-search
       '';
     };
+
+    xdg.configFile."fish/themes".source = ../../../../config/shells/fish/themes;
   };
 }
