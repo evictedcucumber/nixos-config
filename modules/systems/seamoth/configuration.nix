@@ -225,6 +225,7 @@
         gtk
         helium
         hyprland
+        modrinth
         mpv
         noctalia
         obsidian
