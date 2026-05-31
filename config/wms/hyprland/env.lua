@@ -3,6 +3,7 @@ local envs = {
 	{ "XCURSOR_THEME", "BreezeX-RosePine-Linux" },
 	{ "HYPRCURSOR_SIZE", "24" },
 	{ "HYPRCURSOR_THEME", "rose-pine-hyprcursor" },
+	{ "XDG_CURRENT_DESKTOP", "Hyprland" },
 }
 
 for _, env in ipairs(envs) do

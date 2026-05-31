@@ -220,6 +220,7 @@
     home-manager.users.${username} = {
       imports = with self.homeModules; [
         brave
+        flameshot
         ghostty
         gtk
         helium
