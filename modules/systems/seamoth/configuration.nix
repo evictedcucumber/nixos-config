@@ -231,6 +231,7 @@
         obsidian
         qt
         spotify
+        vscode
       ];
     };
     # :: }
