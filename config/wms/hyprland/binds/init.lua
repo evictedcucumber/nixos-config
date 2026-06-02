@@ -14,6 +14,7 @@ local launcher_binds = {
 	{ "SUPER + SPACE", hl.dsp.exec_cmd(ipc .. " launcher toggle") },
 	{ "SUPER + comma", hl.dsp.exec_cmd(ipc .. " settings toggle") },
 	{ "SUPER + L", hl.dsp.exec_cmd(ipc .. " lockScreen lock") },
+	{ "SUPER + X", hl.dsp.exec_cmd(ipc .. " sessionMenu togggle") },
 	{ "CTRL + SHIFT + ESCAPE", hl.dsp.exec_cmd(ipc .. " systemMonitor toggle") },
 	{ "SUPER + SHIFT + S", hl.dsp.exec_cmd("flameshot gui") },
 }
