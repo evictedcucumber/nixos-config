@@ -15,6 +15,7 @@
       extraConfig = ''
         set -g default-terminal "tmux-256color"
         set -as terminal-overrides ",xterm-256color:Tc"
+        set -g status-position top
       '';
     };
   };
