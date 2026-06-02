@@ -41,6 +41,7 @@
     environment.systemPackages = with pkgs; [
       wl-clipboard
       wl-clipboard-x11
+      gcr
     ];
     # :: }
 
@@ -209,7 +210,10 @@
     # :: }
 
     # :: SECURITY {
-    security.pam.services.login.enableGnomeKeyring = true;
+    security.pam.services = {
+      login.enableGnomeKeyring = true;
+      greetd.enableGnomeKeyring = true;
+    };
     # :: }
 
     # :: USERS {
