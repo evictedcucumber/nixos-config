@@ -123,7 +123,7 @@
     # :: }
 
     # :: ENVIRONMENT {
-    environment.systemPackages = with pkgs; [pinentry-all];
+    environment.systemPackages = with pkgs; [pinentry-all libsecret];
     # :: }
 
     # :: PROGRAMS {
