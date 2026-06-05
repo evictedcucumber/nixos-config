@@ -244,4 +244,8 @@
     };
   };
   # :: }
+
+  # :: HOME {
+  home-manager.users.${username} = import ../home/seamoth.nix;
+  # :: }
 }
