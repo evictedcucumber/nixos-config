@@ -1,6 +1,10 @@
+---
 name: Build NixOS
 on:
   push:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   seamoth:
     runs-on: ubuntu-latest
@@ -13,8 +17,8 @@ jobs:
       - uses: cachix/cachix-action@v15
         with:
           name: evictedcucumber
-          signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Build Seamoth
         run: |
           nix build .#nixosConfigurations.seamoth.config.system.build.toplevel \
@@ -31,8 +35,8 @@ jobs:
       - uses: cachix/cachix-action@v15
         with:
           name: evictedcucumber
-          signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Build Snowfox
         run: |
           nix build .#nixosConfigurations.snowfox.config.system.build.toplevel \
@@ -49,10 +53,10 @@ jobs:
       - uses: cachix/cachix-action@v15
         with:
           name: evictedcucumber
-          signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Build Tadpole
-        run: |
+        run: |-
           nix build .#nixosConfigurations.tadpole.config.system.build.toplevel \
             --no-link \
             --print-build-logs
