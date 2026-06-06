@@ -9,6 +9,7 @@
   config = lib.mkIf config.me.terminals.ghostty.enable {
     programs.ghostty = {
       enable = true;
+      enableFishIntegration = config.me.shells.fish.integrations.enable;
       package = pkgs.ghostty;
       settings = {
         theme = "Rose Pine";

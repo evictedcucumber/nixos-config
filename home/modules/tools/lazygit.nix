@@ -8,6 +8,7 @@
   config = lib.mkIf config.me.tools.lazygit.enable {
     programs.lazygit = {
       enable = true;
+      enableFishIntegration = config.me.shells.fish.integrations.enable;
       settings.gui.theme = {
         activeBorderColor = ["#31748f" "bold"];
         inactiveBorderColor = ["#6e6a86"];

@@ -2,7 +2,9 @@
   lib,
   config,
   ...
-}: {
+}: let
+  mkSymlink = link: (import ../../../utilities/mkSymlink.nix) link config;
+in {
   options.me.shells.fish = {
     enable = lib.mkEnableOption "Enable Fish Shell";
     integrations.enable = lib.mkEnableOption "Enable Fish Shell Integrations";
@@ -25,14 +27,10 @@
         grep = "rg";
         find = "fd";
         ls = "eza";
-        ll = "eza -l -h --no-time --group";
+        la = "eza -l -h --no-time --group";
         lt = "eza -T -I='.git'";
         "z-" = "z -";
         "z.." = "z ..";
-      };
-      shellAliases = {
-        la = "ll";
-        tree = "lt";
       };
       interactiveShellInit = ''
         bind \cf y
@@ -41,6 +39,6 @@
       '';
     };
 
-    xdg.configFile."fish/themes".source = ../../../config/shells/fish/themes;
+    xdg.configFile."fish/themes".source = mkSymlink "shells/fish/themes";
   };
 }

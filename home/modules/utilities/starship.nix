@@ -8,6 +8,7 @@
   config = lib.mkIf config.me.utilities.starship.enable {
     programs.starship = {
       enable = true;
+      enableFishIntegration = config.me.shells.fish.integrations.enable;
       enableTransience = true;
       settings = {
         add_newline = true;

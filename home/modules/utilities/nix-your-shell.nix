@@ -8,6 +8,7 @@
   config = lib.mkIf config.me.utilities.nix-your-shell.enable {
     programs.nix-your-shell = {
       enable = true;
+      enableFishIntegration = config.me.shells.fish.integrations.enable;
       nix-output-monitor.enable = true;
     };
   };
