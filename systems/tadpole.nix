@@ -18,4 +18,8 @@
   # :: ENVIRONMENT {
   environment.systemPackages = with pkgs; [xclip xsel];
   # :: }
+
+  # :: HOME {
+  home-manager.users.${username} = import ../home/tadpole.nix;
+  # :: }
 }
