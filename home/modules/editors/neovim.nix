@@ -45,6 +45,10 @@
       # hyprland
       hyprls
       # /hyprland
+      # yaml
+      yamlfix
+      yaml-language-server
+      # /yaml
     ];
 
     home.sessionPath = [
