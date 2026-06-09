@@ -83,6 +83,7 @@
   # :: NETWORKING {
   networking = {
     firewall.trustedInterfaces = ["virbr0"];
+    networkmanager.enable = true;
     useDHCP = lib.mkDefault true;
   };
   # :: }
