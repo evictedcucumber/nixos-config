@@ -1,0 +1,80 @@
+[bar.default]
+center = ["clock", "notifications"]
+end = ["battery", "control-center"]
+start = ["workspaces", "active_window"]
+
+[control_center]
+sidebar = "full"
+sidebar_section = "full"
+
+[[control_center.shortcuts]]
+type = "wifi"
+
+[[control_center.shortcuts]]
+type = "bluetooth"
+
+[[control_center.shortcuts]]
+type = "caffeine"
+
+[[control_center.shortcuts]]
+type = "power_profile"
+
+[desktop_widgets]
+enabled = false
+
+[location]
+auto_locate = true
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = ["lockscreen-login-box@eDP-1"]
+
+[lockscreen_widgets.grid]
+cell_size = 16
+major_interval = 4
+visible = true
+
+[lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+box_height = 0.0
+box_width = 0.0
+cx = 960.0
+cy = 957.0
+output = "eDP-1"
+rotation = 0.0
+type = "login_box"
+
+[notification]
+position = "top_center"
+
+[shell]
+clipboard_enabled = false
+font_family = "Inter"
+polkit_agent = true
+settings_show_advanced = true
+
+[shell.panel]
+session_placement = "centered"
+
+[theme]
+builtin = "Rosé Pine"
+
+[theme.templates]
+enable_builtin_templates = false
+enable_community_templates = false
+
+[wallpaper]
+enabled = false
+
+[widget.active_window]
+capsule = true
+
+[widget.battery]
+capsule = true
+display_mode = "graphic"
+
+[widget.notifications]
+hide_when_no_unread = true
+
+[widget.workspaces]
+display = "name"

@@ -13,7 +13,6 @@ in {
   config = lib.mkIf config.me.wms.noctalia.enable {
     programs.noctalia.enable = true;
 
-    xdg.configFile."noctalia/settings.json".source = mkSymlink "wms/noctalia/settings.json";
-    xdg.configFile."noctalia/plugins.json".source = mkSymlink "wms/noctalia/plugins.json";
+    xdg.configFile."noctalia/config.toml".source = mkSymlink "wms/noctalia/config.toml";
   };
 }

@@ -1,6 +1,6 @@
 require("binds.gestures")
 
-local ipc = "noctalia-shell ipc call"
+local ipc = "noctalia msg"
 
 local mouse_binds = {
 	{ "SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true } },
@@ -11,11 +11,11 @@ local launcher_binds = {
 	{ "SUPER + T", hl.dsp.exec_cmd("ghostty") },
 	{ "SUPER + E", hl.dsp.exec_cmd("nautilus") },
 	{ "SUPER + B", hl.dsp.exec_cmd("helium") },
-	{ "SUPER + SPACE", hl.dsp.exec_cmd(ipc .. " launcher toggle") },
-	{ "SUPER + comma", hl.dsp.exec_cmd(ipc .. " settings toggle") },
-	{ "SUPER + L", hl.dsp.exec_cmd(ipc .. " lockScreen lock") },
-	{ "SUPER + X", hl.dsp.exec_cmd(ipc .. " sessionMenu toggle") },
-	{ "CTRL + SHIFT + ESCAPE", hl.dsp.exec_cmd(ipc .. " systemMonitor toggle") },
+	{ "SUPER + SPACE", hl.dsp.exec_cmd(ipc .. " panel-toggle launcher") },
+	{ "SUPER + comma", hl.dsp.exec_cmd(ipc .. " settings-toggle") },
+	{ "SUPER + L", hl.dsp.exec_cmd(ipc .. " session lock") },
+	{ "SUPER + X", hl.dsp.exec_cmd(ipc .. " panel-toggle session") },
+	-- { "CTRL + SHIFT + ESCAPE", hl.dsp.exec_cmd(ipc .. " systemMonitor toggle") },
 	{ "SUPER + SHIFT + S", hl.dsp.exec_cmd("flameshot gui") },
 }
 
@@ -54,13 +54,12 @@ local workspace_binds = {
 }
 
 local special_binds = {
-	{ "XF86AudioMute", hl.dsp.exec_cmd(ipc .. " volume muteOutput"), { locked = true } },
-	{ "XF86AudioRaiseVolume", hl.dsp.exec_cmd(ipc .. " volume increase"), { repeating = true } },
-	{ "XF86AudioLowerVolume", hl.dsp.exec_cmd(ipc .. " volume decrease"), { repeating = true } },
-	{ "XF86AudioPlay", hl.dsp.exec_cmd(ipc .. " media play"), { locked = true } },
-	{ "XF86AudioPlay", hl.dsp.exec_cmd(ipc .. " media pause"), { locked = true } },
-	{ "XF86MonBrightnessUp", hl.dsp.exec_cmd(ipc .. " brightness increase"), { repeating = true, locked = true } },
-	{ "XF86MonBrightnessDown", hl.dsp.exec_cmd(ipc .. " brightness decrease"), { repeating = true, locked = true } },
+	{ "XF86AudioMute", hl.dsp.exec_cmd(ipc .. " volume-mute"), { locked = true } },
+	{ "XF86AudioRaiseVolume", hl.dsp.exec_cmd(ipc .. " volume-up"), { repeating = true } },
+	{ "XF86AudioLowerVolume", hl.dsp.exec_cmd(ipc .. " volume-down"), { repeating = true } },
+	{ "XF86AudioPlay", hl.dsp.exec_cmd(ipc .. " media toggle"), { locked = true } },
+	{ "XF86MonBrightnessUp", hl.dsp.exec_cmd(ipc .. " brightness-up"), { repeating = true, locked = true } },
+	{ "XF86MonBrightnessDown", hl.dsp.exec_cmd(ipc .. " brightness-down"), { repeating = true, locked = true } },
 }
 
 local function join(...)

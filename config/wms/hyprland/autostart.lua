@@ -1,3 +1,3 @@
 hl.on("hyprland.start", function()
-	hl.exec_cmd("noctalia-shell")
+	hl.exec_cmd("noctalia")
 end)
