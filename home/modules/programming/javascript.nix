@@ -10,8 +10,8 @@
     home.packages = with pkgs; [nodejs_latest];
 
     home.file.".npmrc".text = ''
-      prefix = ''${XDG_DATA_HOME}"/npm
-      cache = ''${XDG_CACHE_HOME}"/npm
+      prefix = ''${XDG_DATA_HOME}/npm
+      cache = ''${XDG_CACHE_HOME}/npm
     '';
 
     home.sessionPath = [
