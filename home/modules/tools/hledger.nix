@@ -24,7 +24,7 @@
     };
 
     xdg.configFile."hledger/hledger.conf".text = ''
-      --pretty
+      --pretty -X R
 
       [ui] --theme=dark
     '';
