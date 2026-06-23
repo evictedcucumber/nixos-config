@@ -90,7 +90,6 @@
 
   # :: SECURITY {
   security.pam.services = {
-    login.enableGnomeKeyring = true;
     greetd.enableGnomeKeyring = true;
   };
   # :: }
@@ -175,7 +174,6 @@
         RUN+="${sysrun} --no-block ${ppd} set power-saver"
     '';
     gvfs.enable = true;
-    gnome.gnome-keyring.enable = true;
   };
   # :: }
 

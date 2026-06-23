@@ -45,6 +45,7 @@
     sudo.enable = true;
     rtkit.enable = true;
     polkit.enable = true;
+    pam.services.login.enableGnomeKeyring = true;
   };
   # :: }
 
@@ -59,6 +60,7 @@
     };
     fwupd.enable = true;
     fstrim.enable = true;
+    gnome.gnome-keyring.enable = true;
   };
   # :: }
 
