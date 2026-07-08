@@ -14,12 +14,8 @@
     };
     databases.sqlite.enable = true;
     editors = {
-      antigravity.enable = true;
-      cursor.enable = true;
       neovim.enable = true;
       vscode.enable = true;
-      windsurf.enable = true;
-      zed.enable = true;
     };
     files = {
       nautilus.enable = true;
