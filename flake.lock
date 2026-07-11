@@ -85,11 +85,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783246335,
-        "narHash": "sha256-Nxw76OwzcwfBDD7xH8neYsbRPYX63cptZjnwtYqCsKg=",
+        "lastModified": 1783680750,
+        "narHash": "sha256-pny0Cli/s2p7BPahjmRUm0jU9Icvh/Vx/2qu0kbAN5E=",
         "owner": "oxcl",
         "repo": "nix-flake-helium-browser",
-        "rev": "a2db476823aa93f9f4bdcd67a9c8173cf93c30f0",
+        "rev": "41c0ce5bac25f928f0714a755d54849be726a848",
         "type": "github"
       },
       "original": {
