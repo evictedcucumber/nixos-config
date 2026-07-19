@@ -21,7 +21,7 @@
       nautilus.enable = true;
       yazi.enable = true;
     };
-    games.modrinth.enable = true;
+    # games.modrinth.enable = true;
     media = {
       flameshot.enable = true;
       mpv.enable = true;
