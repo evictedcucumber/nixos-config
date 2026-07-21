@@ -10,7 +10,7 @@
     overlays = with inputs; [
       helium-overlay.overlays.default
       rust-overlay.overlays.default
-      # neovim-overlay.overlays.default
+      neovim-overlay.overlays.default
       ghostty-overlay.overlays.default
     ];
   };
