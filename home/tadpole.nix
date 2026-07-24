@@ -45,7 +45,10 @@
         enable = true;
         flake = "${config.home.homeDirectory}/repos/nixos-config";
       };
-      ssh.enable = true;
+      ssh = {
+        enable = true;
+        hasGithubKey = true;
+      };
       tealdeer.enable = true;
     };
     utilities = {
