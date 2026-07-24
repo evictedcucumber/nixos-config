@@ -17,7 +17,7 @@
       settings = {
         "github.com" = lib.mkIf config.me.tools.ssh.hasGithubKey {
           addKeysToAgent = "yes";
-          identityFile = "~/.ssh/github_key";
+          identityFile = "~/.ssh/github.key";
         };
         "*" = {
           forwardAgent = false;
