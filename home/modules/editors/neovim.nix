@@ -48,6 +48,10 @@
       yamlfix
       yaml-language-server
       # /yaml
+      # powershell
+      powershell
+      powershell-editor-services
+      # /powershell
     ];
 
     home.sessionPath = [
