@@ -10,7 +10,6 @@
     programs.neovim = {
       enable = true;
       defaultEditor = true;
-      package = pkgs.neovim;
     };
 
     home.packages = with pkgs; [
