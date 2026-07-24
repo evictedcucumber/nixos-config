@@ -7,6 +7,11 @@
   options.me.tools.ssh = {
     enable = lib.mkEnableOption "Enable SSH Config";
     hasGithubKey = lib.mkEnableOption "Enable Github Key";
+    extraConfig = lib.mkOption {
+      type = lib.types.attrs;
+      default = {};
+      description = "Extra settings added to programs.ssh.settings.";
+    };
   };
 
   config = lib.mkIf config.me.tools.ssh.enable {
@@ -14,7 +19,7 @@
       enable = true;
       package = pkgs.openssh;
       enableDefaultConfig = false;
-      settings = {
+      settings = lib.recursiveUpdate {
         "github.com" = lib.mkIf config.me.tools.ssh.hasGithubKey {
           addKeysToAgent = "yes";
           identityFile = "~/.ssh/github.key";
@@ -31,7 +36,7 @@
           controlPath = "~/.ssh/master-%r@%n:%p";
           controlPersist = "no";
         };
-      };
+      } (config.me.tools.ssh.extraConfig);
     };
 
     services.ssh-agent.enable = true;

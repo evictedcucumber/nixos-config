@@ -48,6 +48,15 @@
       ssh = {
         enable = true;
         hasGithubKey = true;
+        extraConfig = {
+          "vs-ssh.visualstudio.com" = {
+            addKeysToAgent = "yes";
+            identityFile = "~/.ssh/sb.key";
+            forwardAgent = true;
+            kbdInteractiveAuthentication = "yes";
+            passwordAuthentication = "no";
+          };
+        };
       };
       tealdeer.enable = true;
     };
