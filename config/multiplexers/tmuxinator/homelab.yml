@@ -1,0 +1,16 @@
+---
+name: homelab
+root: ~/repos
+windows:
+  - ansible-edit:
+      root: ~/repos/ansible-homelab
+      panes: [null]
+  - ansible-run:
+      root: ~/repos/ansible-homelab
+      panes: [null]
+  - benchmark-edit:
+      root: ~/repos/homelab-cis-benchmark
+      panes: [null]
+  - benchmark-run:
+      root: ~/repos/homelab-cis-benchmark
+      panes: [null]

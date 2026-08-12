@@ -14,7 +14,6 @@
           plugin = rose-pine;
           extraConfig = ''
             set -g @rose_pine_variant 'main'
-
             set -g @rose_pine_directory 'on'
           '';
         }
@@ -24,6 +23,9 @@
         set -as terminal-overrides ",xterm-256color:Tc"
         set -g status-position top
       '';
+      tmuxinator.enable = true;
     };
+
+    xdg.configFile."tmuxinator".source = ../../../config/multiplexers/tmuxinator;
   };
 }

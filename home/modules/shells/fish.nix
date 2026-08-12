@@ -13,7 +13,11 @@ in {
   config = lib.mkIf config.me.shells.fish.enable {
     programs.fish = {
       enable = true;
-      loginShellInit = "fastfetch";
+      loginShellInit = ''
+        if test "$TERM" != "tmux-256color"
+          fastfetch
+        end
+      '';
       shellInit = ''
         set -u fish_greeting ""
 
