@@ -21,8 +21,10 @@
       enableDefaultConfig = false;
       settings = lib.recursiveUpdate {
         "github.com" = lib.mkIf config.me.tools.ssh.hasGithubKey {
-          addKeysToAgent = "yes";
-          identityFile = "~/.ssh/github.key";
+          identityFile = "~/.ssh/github_primary_sk.key";
+          hostName = "github.com";
+          user = "git";
+          identitiesOnly = "yes";
         };
         "*" = {
           forwardAgent = false;

@@ -44,7 +44,17 @@
   security = {
     sudo.enable = true;
     rtkit.enable = true;
-    polkit.enable = true;
+    polkit = {
+      enable = true;
+      extraConfig = ''
+        polkit.addRule(function(action, subject) {
+          if (action.id == "org.debian.pcsc-lite.access_pcsc" &&
+              subject.isInGroup("plugdev")) {
+            return polkit.Result.YES;
+          }
+        });
+      '';
+    };
     pam.services.login.enableGnomeKeyring = true;
   };
   # :: }
@@ -61,6 +71,14 @@
     fwupd.enable = true;
     fstrim.enable = true;
     gnome.gnome-keyring.enable = true;
+    pcscd.enable = true;
+    udev = {
+      enable = true;
+      packages = with pkgs; [yubikey-personalization libu2f-host];
+      extraRules = ''
+        SUBSYSTEMS=="usb", ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0407", KERNEL=="hidraw*", MODE="0666", TAG+="uaccess"
+      '';
+    };
   };
   # :: }
 
@@ -88,19 +106,33 @@
   # :: USERS {
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = ["wheel"];
+    extraGroups = ["wheel" "plugdev"];
     shell = pkgs.fish;
   };
   # :: }
 
   # :: ENVIRONMENT {
-  environment.systemPackages = with pkgs; [libsecret];
+  environment.systemPackages = with pkgs; [
+    grub2
+    kmod
+    libfido2
+    libsecret
+    pcsc-tools
+    usbutils
+    vim
+    yubikey-manager
+    yubikey-personalization
+  ];
   # :: }
 
   # :: PROGRAMS {
   programs = {
     nix-ld.enable = true;
-    gnupg.agent.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      pinentryPackage = pkgs.pinentry-curses;
+    };
     fish.enable = true;
   };
   # :: }
