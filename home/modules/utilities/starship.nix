@@ -23,7 +23,7 @@
           iris = "#c4a7e7";
         };
         format = ''
-          $directory$git_branch$git_status$rust
+          $directory$git_branch$git_status$rust$python
           $nix_shell$cmd_duration$character
         '';
         directory = {

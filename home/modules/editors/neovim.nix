@@ -52,6 +52,10 @@
       powershell
       powershell-editor-services
       # /powershell
+      # python
+      pyright
+      black
+      # /python
     ];
 
     home.sessionPath = [
