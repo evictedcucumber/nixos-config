@@ -25,6 +25,8 @@
           hostName = "github.com";
           user = "git";
           identitiesOnly = "yes";
+          controlMaster = "auto";
+          controlPersist = "10m";
         };
         "*" = {
           forwardAgent = false;
