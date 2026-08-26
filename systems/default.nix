@@ -29,10 +29,6 @@
       dates = ["Tue 10:00"];
       options = "--delete-older-than 14d";
     };
-    optimise = {
-      automatic = true;
-      dates = ["Tue 10:00"];
-    };
   };
   # :: }
 
