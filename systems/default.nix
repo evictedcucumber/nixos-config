@@ -26,7 +26,7 @@
     };
     gc = {
       automatic = true;
-      dates = ["Tue 10:00"];
+      dates = ["Tue 10:30"];
       options = "--delete-older-than 14d";
     };
   };
