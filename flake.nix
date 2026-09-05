@@ -2,6 +2,10 @@
   inputs = {
     # :: BASE INPUTS {
     import-tree.url = "github:vic/import-tree";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # :: }
 
     # :: MAIN REPOSITORIES {
@@ -38,6 +42,10 @@
 
   outputs = inputs: let
     mkSystem = import ./utilities/mkSystem.nix {inherit inputs;};
+
+    system = "x86_64-linux";
+    pkgs = import inputs.nixpkgs {inherit system;};
+    treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
   in {
     nixosConfigurations = {
       seamoth = mkSystem {
@@ -59,5 +67,9 @@
         stateVersion = "26.11";
       };
     };
+
+    formatter.${system} = treefmtEval.config.build.wrapper;
+
+    checks.${system}.formatting = treefmtEval.config.build.check inputs.self;
   };
 }
