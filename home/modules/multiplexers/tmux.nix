@@ -3,7 +3,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  mkSymlink = link: (import ../../../utilities/mkSymlink.nix) link config;
+in {
   options.me.multiplexers.tmux.enable = lib.mkEnableOption "Enable TMUX Multiplexer";
 
   config = lib.mkIf config.me.multiplexers.tmux.enable {
@@ -28,6 +30,6 @@
       tmuxinator.enable = true;
     };
 
-    xdg.configFile."tmuxinator".source = ../../../config/multiplexers/tmuxinator;
+    xdg.configFile."tmuxinator".source = mkSymlink "multiplexers/tmuxinator";
   };
 }
