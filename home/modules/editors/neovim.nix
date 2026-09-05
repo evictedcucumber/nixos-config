@@ -35,12 +35,6 @@
       # toml
       taplo
       # /toml
-      # harper
-      harper
-      # /harper
-      # go
-      gopls
-      # /go
       # hyprland
       hyprls
       # /hyprland
