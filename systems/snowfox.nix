@@ -1,19 +1,5 @@
-{
-  inputs,
-  pkgs,
-  username,
-  ...
-}: {
-  imports = [inputs.nixos-wsl.nixosModules.default];
-
-  # :: WSL {
-  wsl = {
-    enable = true;
-    wslConf.interop.appendWindowsPath = false;
-    defaultUser = "${username}";
-    interop.register = true;
-  };
-  # :: }
+{username, ...}: {
+  imports = [./wsl.nix];
 
   # :: SYSTEMD {
   # FIX: Disabled due to issues installing obsidian-headless
@@ -28,10 +14,6 @@
   #   };
   #   wantedBy = ["default.target"];
   # };
-  # :: }
-
-  # :: ENVIRONMENT {
-  environment.systemPackages = with pkgs; [xclip xsel];
   # :: }
 
   # :: HOME {
