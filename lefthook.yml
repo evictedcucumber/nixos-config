@@ -1,0 +1,11 @@
+pre-commit:
+  commands:
+    treefmt:
+      glob: "*.nix"
+      run: nix fmt -- {staged_files}
+      stage_fixed: true
+
+pre-push:
+  commands:
+    flake-check:
+      run: nix flake check

@@ -61,6 +61,7 @@
       eza.enable = true;
       git.enable = true;
       lazygit.enable = true;
+      lefthook.enable = true;
       make.enable = true;
       nh = {
         enable = true;
