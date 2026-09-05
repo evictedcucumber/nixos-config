@@ -20,6 +20,8 @@ home/
 config/                  Raw dotfiles (Hyprland, yazi, fish theme, ...) symlinked into place
 scripts/
   show-modules.sh         Prints which `me.*` options are enabled per host
+  check.sh                 Runs the same format/lint/eval checks as `nix flake check`
+lefthook.yml            Git hook config (see Checks below)
 ```
 
 ## The `me.*` pattern
@@ -59,7 +61,24 @@ This flake wires up [`treefmt-nix`](https://github.com/numtide/treefmt-nix) with
 ```bash
 nix fmt          # format the repo
 nix flake check  # format-check + lint, plus evaluate every host's config
+
+./scripts/check.sh          # same as `nix flake check`, with a friendlier banner
+./scripts/check.sh --fix    # nix fmt, then check
 ```
+
+Git hooks are managed with [lefthook](https://lefthook.dev) (`me.tools.lefthook`, installed via
+Home Manager). Run `lefthook install` once per clone to wire them up:
+
+- `pre-commit` runs `nix fmt` on staged `.nix` files and re-stages anything it reformats.
+- `pre-push` runs the full `nix flake check` (format check + statix + deadnix + evaluate every
+  host).
+
+### Keeping inputs up to date
+
+[`.github/workflows/update-flake-lock.yml`](.github/workflows/update-flake-lock.yml) runs every
+Tuesday at 12:00 (Africa/Johannesburg), `nix flake update`s, verifies `nix flake check` still
+passes, and pushes the updated `flake.lock` straight to `main`. Trigger it manually from the
+Actions tab (`workflow_dispatch`) at any time.
 
 ## License
 
