@@ -50,6 +50,12 @@
       pyright
       black
       # /python
+      # markdown rendering (render-markdown.nvim)
+      python3Packages.pylatexenc # latex2text, for latex-in-markdown rendering
+      # /markdown rendering
+      # file explorer (snacks.nvim)
+      trash-cli # system trash for explorer deletes
+      # /file explorer
     ];
 
     home.sessionPath = [

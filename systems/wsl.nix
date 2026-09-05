@@ -22,6 +22,14 @@
   # :: }
 
   # :: ENVIRONMENT {
-  environment.systemPackages = with pkgs; [xclip xsel];
+  environment.systemPackages = with pkgs; [
+    xclip
+    xsel
+    wsl-open
+    # `wslu` (which provided `wslview`) was removed from nixpkgs; this shim
+    # gives `vim.ui.open()` (and anything else looking for `wslview`) a
+    # binary under the name it actually checks for.
+    (writeShellScriptBin "wslview" ''exec ${wsl-open}/bin/wsl-open "$@"'')
+  ];
   # :: }
 }
