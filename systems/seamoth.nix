@@ -249,7 +249,7 @@
     pinentry-all
     wl-clipboard
     wl-clipboard-x11
-    gcr
+    gcr_4
   ];
   # :: }
 
