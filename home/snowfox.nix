@@ -9,6 +9,15 @@
       enable = true;
       ledgersDir = "${config.home.homeDirectory}/myvault/97 - Finance";
     };
+    ssh.extraConfig = {
+      "tcyclops.homelab.zezura.cc" = {
+        forwardAgent = true;
+        hostName = "10.0.0.2";
+        identitiesOnly = "yes";
+        identityFile = "~/.ssh/ansible-control-node.key";
+        user = "root";
+      };
+    };
   };
   # :: }
 }
