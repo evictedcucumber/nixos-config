@@ -1,5 +1,9 @@
-{...}: {
+{pkgs, ...}: {
   imports = [./default.nix];
+
+  # :: PACKAGES {
+  home.packages = [pkgs.uv];
+  # :: }
 
   # :: ME {
   # Delta on top of the common profile in ./default.nix.
