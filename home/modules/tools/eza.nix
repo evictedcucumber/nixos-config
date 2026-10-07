@@ -10,14 +10,14 @@
       enable = true;
       enableFishIntegration = config.me.shells.fish.integrations.enable;
       git = true;
-      icons = "always";
-      colors = "always";
+      icons = "auto";
+      colors = "auto";
       extraOptions = [
         "-a"
         "-1"
         "--sort=name"
         "--group-directories-first"
-        "-F=always"
+        "--classify=auto"
       ];
       theme = {
         filekinds = {

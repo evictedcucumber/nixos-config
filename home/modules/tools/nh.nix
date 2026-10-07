@@ -15,10 +15,6 @@
   config = lib.mkIf config.me.tools.nh.enable {
     programs.nh = {
       enable = true;
-      clean = {
-        enable = true;
-        dates = "Tue 10:00";
-      };
       flake = config.me.tools.nh.flake;
     };
   };

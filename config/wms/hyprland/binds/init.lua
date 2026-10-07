@@ -1,6 +1,7 @@
 require("binds.gestures")
 
 local ipc = "noctalia msg"
+local app = "uwsm app -- "
 
 local mouse_binds = {
 	{ "SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true } },
@@ -8,19 +9,29 @@ local mouse_binds = {
 }
 
 local launcher_binds = {
-	{ "SUPER + T", hl.dsp.exec_cmd("ghostty") },
-	{ "SUPER + E", hl.dsp.exec_cmd("nautilus") },
-	{ "SUPER + B", hl.dsp.exec_cmd("helium") },
+	{ "SUPER + T", hl.dsp.exec_cmd(app .. "ghostty") },
+	{ "SUPER + E", hl.dsp.exec_cmd(app .. "nautilus") },
+	{ "SUPER + B", hl.dsp.exec_cmd(app .. "helium") },
 	{ "SUPER + SPACE", hl.dsp.exec_cmd(ipc .. " panel-toggle launcher") },
 	{ "SUPER + comma", hl.dsp.exec_cmd(ipc .. " settings-toggle") },
 	{ "SUPER + L", hl.dsp.exec_cmd(ipc .. " session lock") },
 	{ "SUPER + X", hl.dsp.exec_cmd(ipc .. " panel-toggle session") },
 	-- { "CTRL + SHIFT + ESCAPE", hl.dsp.exec_cmd(ipc .. " systemMonitor toggle") },
-	{ "SUPER + SHIFT + S", hl.dsp.exec_cmd("flameshot gui") },
+	{ "SUPER + SHIFT + S", hl.dsp.exec_cmd(app .. "flameshot gui") },
+}
+
+local session_binds = {
+	-- Fallback if noctalia's session menu is unavailable.
+	{ "SUPER + SHIFT + E", hl.dsp.exit() },
 }
 
 local window_binds = {
 	{ "SUPER + W", hl.dsp.window.close() },
+	{ "SUPER + F", hl.dsp.window.fullscreen() },
+	{ "SUPER + left", hl.dsp.focus({ direction = "left" }) },
+	{ "SUPER + right", hl.dsp.focus({ direction = "right" }) },
+	{ "SUPER + up", hl.dsp.focus({ direction = "up" }) },
+	{ "SUPER + down", hl.dsp.focus({ direction = "down" }) },
 	{ "SUPER + V", hl.dsp.window.float() },
 	{ "SUPER + SHIFT + H", hl.dsp.window.move({ direction = "l" }) },
 	{ "SUPER + SHIFT + L", hl.dsp.window.move({ direction = "r" }) },
@@ -55,9 +66,12 @@ local workspace_binds = {
 
 local special_binds = {
 	{ "XF86AudioMute", hl.dsp.exec_cmd(ipc .. " volume-mute"), { locked = true } },
-	{ "XF86AudioRaiseVolume", hl.dsp.exec_cmd(ipc .. " volume-up"), { repeating = true } },
-	{ "XF86AudioLowerVolume", hl.dsp.exec_cmd(ipc .. " volume-down"), { repeating = true } },
+	{ "XF86AudioRaiseVolume", hl.dsp.exec_cmd(ipc .. " volume-up"), { repeating = true, locked = true } },
+	{ "XF86AudioLowerVolume", hl.dsp.exec_cmd(ipc .. " volume-down"), { repeating = true, locked = true } },
+	{ "XF86AudioMicMute", hl.dsp.exec_cmd(ipc .. " mic-mute"), { locked = true } },
 	{ "XF86AudioPlay", hl.dsp.exec_cmd(ipc .. " media toggle"), { locked = true } },
+	{ "XF86AudioNext", hl.dsp.exec_cmd(ipc .. " media next"), { locked = true } },
+	{ "XF86AudioPrev", hl.dsp.exec_cmd(ipc .. " media previous"), { locked = true } },
 	{ "XF86MonBrightnessUp", hl.dsp.exec_cmd(ipc .. " brightness-up"), { repeating = true, locked = true } },
 	{ "XF86MonBrightnessDown", hl.dsp.exec_cmd(ipc .. " brightness-down"), { repeating = true, locked = true } },
 }
@@ -72,7 +86,7 @@ local function join(...)
 	return result
 end
 
-local binds = join(mouse_binds, launcher_binds, window_binds, workspace_binds, special_binds)
+local binds = join(mouse_binds, launcher_binds, session_binds, window_binds, workspace_binds, special_binds)
 
 for _, bind in ipairs(binds) do
 	local keys, dispatch, opts = bind[1], bind[2], bind[3] or {}

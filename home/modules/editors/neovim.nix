@@ -12,6 +12,9 @@
       defaultEditor = true;
     };
 
+    # Config lives in ~/.config/neovim; make $EDITOR use it too.
+    home.sessionVariables.NVIM_APPNAME = "neovim";
+
     home.packages = with pkgs; [
       # lua
       lua-language-server

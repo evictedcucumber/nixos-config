@@ -11,7 +11,6 @@
     "vs-ssh.visualstudio.com" = {
       addKeysToAgent = "yes";
       identityFile = "~/.ssh/sb.key";
-      forwardAgent = true;
       kbdInteractiveAuthentication = "yes";
       passwordAuthentication = "no";
     };

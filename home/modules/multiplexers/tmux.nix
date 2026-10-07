@@ -22,7 +22,7 @@ in {
       ];
       extraConfig = ''
         set -g default-terminal "tmux-256color"
-        set -as terminal-overrides ",xterm-256color:Tc"
+        set -as terminal-features ",xterm-256color:RGB,xterm-ghostty:RGB"
         set -g status-position top
 
         set -g set-clipboard on

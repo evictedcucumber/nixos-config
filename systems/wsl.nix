@@ -1,6 +1,5 @@
 {
   inputs,
-  lib,
   pkgs,
   username,
   ...
@@ -14,11 +13,6 @@
     defaultUser = "${username}";
     interop.register = true;
   };
-  # :: }
-
-  # :: SERVICES {
-  # xserver has no real display to serve under WSL; WSLg handles GUI apps separately.
-  services.xserver.enable = lib.mkForce false;
   # :: }
 
   # :: ENVIRONMENT {

@@ -1,6 +1,4 @@
-require("env")
 require("monitors")
 require("windowrules")
-require("autostart")
 require("config")
 require("binds")

@@ -11,7 +11,10 @@ in {
   options.me.wms.noctalia.enable = lib.mkEnableOption "Enable Noctalia Shell";
 
   config = lib.mkIf config.me.wms.noctalia.enable {
-    programs.noctalia.enable = true;
+    programs.noctalia = {
+      enable = true;
+      systemd.enable = true;
+    };
 
     xdg.configFile."noctalia/config.toml".source = mkSymlink "wms/noctalia/config.toml";
   };

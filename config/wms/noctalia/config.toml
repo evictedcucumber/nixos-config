@@ -22,6 +22,11 @@ type = "power_profile"
 [desktop_widgets]
 enabled = false
 
+[idle.behavior.lock]
+action = "lock"
+enabled = true
+timeout = 600
+
 [location]
 auto_locate = true
 

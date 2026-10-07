@@ -20,7 +20,7 @@
       LEDGERS_DIR = config.me.tools.hledger.ledgersDir;
       LEDGER_FILE = "${config.home.sessionVariables.LEDGERS_DIR}/main.journal";
       CURRENT_LEDGER_FILE = "${config.home.sessionVariables.LEDGERS_DIR}/current.journal";
-      YEAR_LEDGER_FILE = "${config.home.sessionVariables.LEDGERS_DIR}/2026.journal";
+      YEAR_LEDGER_FILE = "${config.home.sessionVariables.LEDGERS_DIR}/$(date +%Y).journal";
     };
 
     xdg.configFile."hledger/hledger.conf".text = ''

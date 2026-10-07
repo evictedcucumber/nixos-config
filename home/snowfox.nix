@@ -11,7 +11,6 @@
     };
     ssh.extraConfig = {
       "tcyclops.homelab.zezura.cc" = {
-        forwardAgent = true;
         hostName = "10.0.0.2";
         identitiesOnly = "yes";
         identityFile = "~/.ssh/ansible-control-node.key";

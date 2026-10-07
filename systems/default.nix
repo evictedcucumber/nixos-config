@@ -57,22 +57,20 @@
 
   # :: SERVICES {
   services = {
-    xserver = {
-      enable = true;
-      xkb = {
-        layout = "za";
-        variant = "";
-      };
-    };
     fwupd.enable = true;
     fstrim.enable = true;
-    gnome.gnome-keyring.enable = true;
+    gnome = {
+      gnome-keyring.enable = true;
+      # SSH keys are FIDO2 (sk) keys served by home-manager's ssh-agent;
+      # keep gcr from claiming SSH_AUTH_SOCK as a second agent.
+      gcr-ssh-agent.enable = false;
+    };
     pcscd.enable = true;
     udev = {
       enable = true;
       packages = with pkgs; [yubikey-personalization libu2f-host];
       extraRules = ''
-        SUBSYSTEMS=="usb", ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0407", KERNEL=="hidraw*", MODE="0666", TAG+="uaccess"
+        SUBSYSTEMS=="usb", ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0407", KERNEL=="hidraw*", TAG+="uaccess"
       '';
     };
   };
@@ -109,7 +107,6 @@
 
   # :: ENVIRONMENT {
   environment.systemPackages = with pkgs; [
-    grub2
     kmod
     libfido2
     libsecret
@@ -126,7 +123,6 @@
     nix-ld.enable = true;
     gnupg.agent = {
       enable = true;
-      enableSSHSupport = true;
       pinentryPackage = pkgs.pinentry-curses;
     };
     fish.enable = true;

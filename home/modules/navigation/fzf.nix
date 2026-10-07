@@ -8,7 +8,8 @@
   config = lib.mkIf config.me.navigation.fzf.enable {
     programs.fzf = {
       enable = true;
-      enableFishIntegration = config.me.shells.fish.integrations.enable;
+      # television owns Ctrl-R/Ctrl-T in fish; don't let fzf rebind them.
+      enableFishIntegration = false;
       defaultOptions = [
         "--color=fg:#908caa,bg:#191724,hl:#ebbcba"
         "--color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba"

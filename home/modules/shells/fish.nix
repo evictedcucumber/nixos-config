@@ -24,8 +24,8 @@ in {
         fish_config theme choose "Rosé Pine"
       '';
       shellAbbrs = {
-        v = "NVIM_APPNAME=neovim nvim";
-        vd = "NVIM_APPNAME=neovim DEBUG_PLENARY=true nvim";
+        v = "nvim";
+        vd = "DEBUG_PLENARY=true nvim";
         cat = "bat";
         catp = "bat -p";
         grep = "rg";

@@ -1,5 +1,5 @@
 {
-  lib,
+  config,
   pkgs,
   username,
   ...
@@ -8,7 +8,6 @@
   boot = {
     loader = {
       systemd-boot.enable = true;
-      grub.useOSProber = false;
       efi = {
         efiSysMountPoint = "/boot/efi";
         canTouchEfiVariables = true;
@@ -84,7 +83,6 @@
   networking = {
     firewall.trustedInterfaces = ["virbr0"];
     networkmanager.enable = true;
-    useDHCP = lib.mkDefault true;
   };
   # :: }
 
@@ -116,7 +114,7 @@
       enable = true;
       settings = {
         default_session = {
-          command = "${pkgs.tuigreet}/bin/tuigreet --sessions /run/current-system/sw/share/wayland-sessions --time --remember --remember-session";
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd '${config.programs.uwsm.package}/bin/uwsm start hyprland-uwsm.desktop'";
           user = "greeter";
         };
       };
@@ -143,16 +141,6 @@
           TIMELINE_LIMIT_MONTHLY = "0";
           TIMELINE_LIMIT_YEARLY = "0";
         };
-        nix = {
-          SUBVOLUME = "/nix";
-          TIMELINE_CREATE = true;
-          TIMELINE_CLEANUP = true;
-          TIMELINE_LIMIT_HOURLY = "0";
-          TIMELINE_LIMIT_DAILY = "0";
-          TIMELINE_LIMIT_WEEKLY = "7";
-          TIMELINE_LIMIT_MONTHLY = "0";
-          TIMELINE_LIMIT_YEARLY = "0";
-        };
       };
       snapshotRootOnBoot = true;
     };
@@ -174,20 +162,6 @@
 
   # :: SYSTEMD {
   systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = ["graphical-session.target"];
-      wants = ["graphical-session.target"];
-      after = ["graphical-session.target"];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
-
     # Battery ≤15% while discharging → power-saver. Polled instead of
     # matched via udev, since udev can only match an exact capacity value
     # and would silently never fire if a reading skips past 15% (e.g.
