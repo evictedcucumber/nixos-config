@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [./default.nix];
 
   # :: ME {
@@ -24,10 +20,6 @@
     terminals.ghostty.enable = true;
     tools = {
       git.settings.signingKey = "CB029F0E386B37C7";
-      hledger = {
-        enable = true;
-        ledgersDir = "${config.home.homeDirectory}/Documents/My Obsidian Vault/97 - Finance";
-      };
     };
     wms = {
       hyprland.enable = true;

@@ -21,7 +21,7 @@
 
   # :: ME {
   # Options common to every host. Host files layer their own extras
-  # (and, for git/hledger/ssh, their own per-host settings) on top.
+  # (and, for git/ssh, their own per-host settings) on top.
   me = {
     archive.zip.enable = true;
     databases.sqlite.enable = true;
