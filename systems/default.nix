@@ -69,8 +69,10 @@
     udev = {
       enable = true;
       packages = with pkgs; [yubikey-personalization libu2f-host];
+      # uaccess only grants ACLs to a seat session; WSL logins have no seat,
+      # so also grant the users group directly or FIDO2 ssh can't open hidraw.
       extraRules = ''
-        SUBSYSTEMS=="usb", ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0407", KERNEL=="hidraw*", TAG+="uaccess"
+        SUBSYSTEMS=="usb", ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0407", KERNEL=="hidraw*", GROUP="users", MODE="0660", TAG+="uaccess"
       '';
     };
   };
