@@ -25,7 +25,6 @@ in {
       '';
       shellAbbrs = {
         v = "nvim";
-        vd = "DEBUG_PLENARY=true nvim";
         cat = "bat";
         catp = "bat -p";
         grep = "rg";

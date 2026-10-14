@@ -14,6 +14,23 @@
 
     # Config lives in ~/.config/neovim; make $EDITOR use it too.
     home.sessionVariables.NVIM_APPNAME = "neovim";
+    xdg.configFile."neovim".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/neovim-config";
+
+    # Tools the config needs that other modules install: rg/fd (snacks
+    # pickers, grepprg), tree-sitter + a C compiler (nvim-treesitter parser
+    # builds), rustfmt/rust-analyzer (rustaceanvim).
+    assertions = [
+      {
+        assertion =
+          config.me.searchers.ripgrep.enable
+          && config.me.searchers.fd.enable
+          && config.me.programming.treesitter.enable
+          && config.me.programming.gcc.enable
+          && config.me.programming.rust.enable;
+        message = "me.editors.neovim needs me.searchers.{ripgrep,fd} and me.programming.{treesitter,gcc,rust} enabled";
+      }
+    ];
 
     home.packages = with pkgs; [
       # lua
@@ -66,6 +83,9 @@
       # bash
       bash-language-server
       # /bash
+      # latex
+      texlab
+      # /latex
     ];
 
     home.sessionPath = [
