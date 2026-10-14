@@ -51,7 +51,7 @@
       # /powershell
       # python
       pyright
-      black
+      ruff
       # /python
       # markdown rendering (render-markdown.nvim)
       python3Packages.pylatexenc # latex2text, for latex-in-markdown rendering
@@ -59,6 +59,13 @@
       # file explorer (snacks.nvim)
       trash-cli # system trash for explorer deletes
       # /file explorer
+      # ansible
+      ansible-lint
+      ansible-language-server
+      # /ansible
+      # bash
+      bash-language-server
+      # /bash
     ];
 
     home.sessionPath = [
