@@ -70,6 +70,16 @@
 
     formatter.${system} = treefmtEval.config.build.wrapper;
 
+    devShells.${system}.default = pkgs.mkShell {
+      packages = [
+        pkgs.lefthook
+        treefmtEval.config.build.wrapper
+      ];
+      shellHook = ''
+        lefthook install >/dev/null
+      '';
+    };
+
     checks.${system}.formatting = treefmtEval.config.build.check inputs.self;
   };
 }
