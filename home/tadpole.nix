@@ -2,7 +2,11 @@
   imports = [./default.nix];
 
   # :: PACKAGES {
-  home.packages = [pkgs.uv];
+  home.packages = with pkgs; [uv azure-cli];
+  # :: }
+
+  # :: SESSION VARIABLES {
+  home.sessionVariables.LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc}/lib";
   # :: }
 
   # :: ME {
