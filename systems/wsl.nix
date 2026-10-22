@@ -1,5 +1,6 @@
 {
   inputs,
+  lib,
   pkgs,
   username,
   ...
@@ -9,7 +10,7 @@
   # :: WSL {
   wsl = {
     enable = true;
-    wslConf.interop.appendWindowsPath = false;
+    wslConf.interop.appendWindowsPath = lib.mkDefault false;
     defaultUser = "${username}";
     interop.register = true;
   };
