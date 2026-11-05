@@ -1,6 +1,15 @@
 {username, ...}: {
   imports = [./wsl.nix];
 
+  # :: NIX {
+  # WSL has no KVM on some Windows builds, so homelab tests run in nspawn, which needs uid-range.
+  nix.settings = {
+    experimental-features = ["auto-allocate-uids"];
+    auto-allocate-uids = true;
+    system-features = ["uid-range"];
+  };
+  # :: }
+
   # :: SYSTEMD {
   # FIX: Disabled due to issues installing obsidian-headless
   # systemd.user.services."vault-sync" = {
