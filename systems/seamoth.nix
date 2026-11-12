@@ -4,6 +4,10 @@
   username,
   ...
 }: {
+  imports = [
+    ./hardware/seamoth.nix
+  ];
+
   # :: BOOT {
   boot = {
     loader = {
@@ -13,22 +17,11 @@
         canTouchEfiVariables = true;
       };
     };
-    initrd = {
-      availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
-      kernelModules = ["dm-snapshot"];
-      luks.devices.cryptlvm = {
-        device = "/dev/disk/by-uuid/d4398137-3f81-4596-b493-e019977485af";
-        allowDiscards = true;
-      };
-    };
-    kernelModules = ["kvm-intel"];
-    extraModulePackages = [];
   };
   # :: }
 
   # :: HARDWARE {
   hardware = {
-    cpu.intel.updateMicrocode = true;
     graphics = {
       enable = true;
       enable32Bit = true;
@@ -36,39 +29,6 @@
     bluetooth.enable = true;
     firmware = with pkgs; [linux-firmware];
   };
-  # :: }
-
-  # :: FILE SYSTEMS {
-  fileSystems = {
-    "/" = {
-      device = "/dev/vg/root";
-      fsType = "btrfs";
-      options = ["subvol=@"];
-    };
-    "/home" = {
-      device = "/dev/vg/root";
-      fsType = "btrfs";
-      options = ["subvol=@home"];
-    };
-    "/nix" = {
-      device = "/dev/vg/root";
-      fsType = "btrfs";
-      options = ["subvol=@nix"];
-    };
-    "/boot" = {
-      device = "/dev/nvme0n1p2";
-      fsType = "ext4";
-    };
-    "/boot/efi" = {
-      device = "/dev/nvme0n1p1";
-      fsType = "vfat";
-      options = ["fmask=0022" "dmask=0022"];
-    };
-  };
-  # :: }
-
-  # :: SWAP {
-  swapDevices = [{device = "/dev/vg/swap";}];
   # :: }
 
   # :: NIX {

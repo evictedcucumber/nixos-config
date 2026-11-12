@@ -12,6 +12,8 @@ utilities/
 systems/
   default.nix            Settings shared by every host (nix.settings, locale, users, ...)
   <host>.nix              Per-host NixOS config (hardware, services, home-manager import)
+  hardware/<host>.nix      Hardware config for bare-metal hosts, like nixos-generate-config's output
+  disko/<host>.nix         Declarative disk layout (partitions, LUKS, LVM, btrfs) for bare-metal hosts
   wsl.nix                  Shared base for WSL hosts (imported by snowfox/tadpole)
 home/
   default.nix             Home Manager options shared by every host, under the `me.*` namespace
