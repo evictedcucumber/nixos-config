@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   config,
   pkgs,
@@ -10,7 +11,7 @@
     programs.ghostty = {
       enable = true;
       enableFishIntegration = config.me.shells.fish.integrations.enable;
-      package = pkgs.ghostty;
+      package = inputs.ghostty-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default;
       settings = {
         theme = "Rose Pine";
         font-family = "JetBrainsMono Nerd Font";
