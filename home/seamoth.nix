@@ -1,5 +1,12 @@
-{pkgs, ...}: {
-  imports = [./default.nix];
+{
+  inputs,
+  pkgs,
+  ...
+}: {
+  imports = [
+    ./default.nix
+    inputs.noctalia.homeModules.default
+  ];
 
   # :: ME {
   # Delta on top of the common profile in ./default.nix.
