@@ -5,7 +5,6 @@
   # Delta on top of the common profile in ./default.nix.
   me = {
     browsers = {
-      brave.enable = true;
       helium.enable = true;
     };
     editors.vscode.enable = true;
