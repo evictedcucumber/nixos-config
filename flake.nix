@@ -72,6 +72,15 @@
       };
     };
 
+    packages.${system}.seamoth-iso =
+      (inputs.nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          target = inputs.self.nixosConfigurations.seamoth;
+          username = "ethan";
+        };
+        modules = [./systems/installer.nix];
+      }).config.system.build.isoImage;
+
     formatter.${system} = treefmtEval.config.build.wrapper;
 
     devShells.${system}.default = pkgs.mkShell {

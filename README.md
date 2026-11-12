@@ -14,6 +14,7 @@ systems/
   <host>.nix              Per-host NixOS config (hardware, services, home-manager import)
   hardware/<host>.nix      Hardware config for bare-metal hosts, like nixos-generate-config's output
   disko/<host>.nix         Declarative disk layout (partitions, LUKS, LVM, btrfs) for bare-metal hosts
+  installer.nix            Installer ISO that formats and installs a disko-managed host offline
   wsl.nix                  Shared base for WSL hosts (imported by snowfox/tadpole)
 home/
   default.nix             Home Manager options shared by every host, under the `me.*` namespace
@@ -57,6 +58,17 @@ nh os switch
 # or
 just switch [host]
 ```
+
+### Installing seamoth from scratch
+
+```bash
+just generate seamoth   # writes seamoth.iso, with seamoth's full system baked in, to the current directory
+```
+
+Write the ISO to a USB stick, boot the laptop from it, and run `sudo install-seamoth`. It asks you to
+confirm before wiping `/dev/nvme0n1`, prompts for the LUKS passphrase, installs seamoth without
+needing the network, and finally asks for a password for `ethan`. After that, `nixos-rebuild switch
+--flake .#seamoth` rebuilds as usual: disko only formats when the install script runs it.
 
 ### Checks
 
