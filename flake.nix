@@ -76,6 +76,7 @@
 
     devShells.${system}.default = pkgs.mkShell {
       packages = [
+        pkgs.just
         pkgs.lefthook
         treefmtEval.config.build.wrapper
       ];

@@ -23,6 +23,7 @@ config/                  Raw dotfiles (Hyprland, yazi, fish theme, ...) symlinke
 scripts/
   show-modules.sh         Prints which `me.*` options are enabled per host
   check.sh                 Runs the same format/lint/eval checks as `nix flake check`
+justfile                Shortcuts for the commands below (`just` lists them)
 lefthook.yml            Git hook config (see Checks below)
 ```
 
@@ -53,6 +54,8 @@ doing a full rebuild.
 sudo nixos-rebuild switch --flake .#<host>
 # or, since `me.tools.nh` is enabled:
 nh os switch
+# or
+just switch [host]
 ```
 
 ### Checks
