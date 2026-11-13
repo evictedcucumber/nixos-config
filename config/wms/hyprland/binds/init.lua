@@ -16,7 +16,6 @@ local launcher_binds = {
 	{ "SUPER + comma", hl.dsp.exec_cmd(ipc .. " settings-toggle") },
 	{ "SUPER + L", hl.dsp.exec_cmd(ipc .. " session lock") },
 	{ "SUPER + X", hl.dsp.exec_cmd(ipc .. " panel-toggle session") },
-	-- { "CTRL + SHIFT + ESCAPE", hl.dsp.exec_cmd(ipc .. " systemMonitor toggle") },
 	{ "SUPER + SHIFT + S", hl.dsp.exec_cmd(app .. "flameshot gui") },
 }
 
@@ -60,8 +59,6 @@ local workspace_binds = {
 	{ "SUPER + SHIFT + 8", hl.dsp.window.move({ workspace = "8", follow = true }) },
 	{ "SUPER + SHIFT + 9", hl.dsp.window.move({ workspace = "9", follow = true }) },
 	{ "SUPER + SHIFT + 0", hl.dsp.window.move({ workspace = "10", follow = true }) },
-	-- { "SUPER + S", hl.dsp.workspace.toggle_special("magic") },
-	-- { "SUPER + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }) },
 }
 
 local special_binds = {
