@@ -14,6 +14,7 @@
 
   # :: BOOT {
   boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
     loader = {
       systemd-boot.enable = true;
       efi = {
@@ -31,19 +32,24 @@
       enable32Bit = true;
     };
     bluetooth.enable = true;
-    firmware = with pkgs; [linux-firmware];
   };
   # :: }
 
   # :: NETWORKING {
   networking = {
-    firewall.trustedInterfaces = ["virbr0"];
+    # DNS and DHCP for libvirt guests.
+    firewall.interfaces.virbr0 = {
+      allowedTCPPorts = [53];
+      allowedUDPPorts = [53 67];
+    };
     networkmanager.enable = true;
   };
   # :: }
 
   # :: SERVICES {
   services = {
+    fwupd.enable = true;
+    fstrim.enable = true;
     printing.enable = true;
     snapper = {
       configs = {
@@ -73,7 +79,15 @@
   };
   # :: }
 
-  # :: VIRTUALISATION :: {
+  # :: SYSTEMD {
+  # Snapper needs these to be subvolumes and doesn't create them itself.
+  systemd.tmpfiles.rules = [
+    "v /.snapshots 0750 root root -"
+    "v /home/.snapshots 0750 root root -"
+  ];
+  # :: }
+
+  # :: VIRTUALISATION {
   virtualisation = {
     libvirtd = {
       enable = true;

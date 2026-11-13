@@ -10,19 +10,8 @@
     ./security.nix
   ];
 
-  # :: BOOT {
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  # :: }
-
   # :: NETWORKING {
   networking.hostName = hostname;
-  # :: }
-
-  # :: SERVICES {
-  services = {
-    fwupd.enable = true;
-    fstrim.enable = true;
-  };
   # :: }
 
   # :: USERS {
