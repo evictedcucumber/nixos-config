@@ -17,10 +17,6 @@
 
   # :: SERVICES {
   services = {
-    displayManager = {
-      gdm.enable = false;
-      sddm.enable = false;
-    };
     greetd = {
       enable = true;
       settings = {
