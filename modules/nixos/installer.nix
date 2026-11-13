@@ -24,7 +24,9 @@ in {
       ${diskoScript}
       nixos-install --no-root-passwd --no-channel-copy --system ${toplevel}
       echo "Set the password for ${username}:"
-      nixos-enter --root /mnt -c 'passwd ${username}'
+      until nixos-enter --root /mnt -c 'passwd ${username}'; do
+        echo "Try again."
+      done
     '')
   ];
 }
