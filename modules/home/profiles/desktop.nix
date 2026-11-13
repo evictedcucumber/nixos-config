@@ -5,6 +5,7 @@
     ../programs/ghostty.nix
     ../programs/hyprland.nix
     ../programs/noctalia.nix
+    ../programs/theme.nix
     ../programs/vscode.nix
   ];
 
@@ -19,4 +20,12 @@
     mpv.enable = true;
     obsidian.enable = true;
   };
+
+  # :: XDG {
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    config.common.default = "*";
+  };
+  # :: }
 }
