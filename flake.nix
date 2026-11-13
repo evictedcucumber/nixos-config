@@ -1,6 +1,10 @@
 {
   inputs = {
     # :: BASE INPUTS {
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
     import-tree.url = "github:vic/import-tree";
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
@@ -44,41 +48,32 @@
     # :: }
   };
 
-  outputs = inputs: let
-    inherit (inputs.nixpkgs) lib;
-    mkSystem = import ./lib/mkSystem.nix {inherit inputs;};
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux"];
 
-    system = "x86_64-linux";
-    username = "ethan";
-    hosts = lib.attrNames (lib.filterAttrs (_: type: type == "directory") (builtins.readDir ./hosts));
-
-    pkgs = import inputs.nixpkgs {inherit system;};
-    treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
-  in {
-    nixosConfigurations = lib.genAttrs hosts (hostname: mkSystem {inherit system hostname username;});
-
-    packages.${system}.seamoth-iso =
-      (lib.nixosSystem {
-        specialArgs = {
-          inherit username;
-          target = inputs.self.nixosConfigurations.seamoth;
-        };
-        modules = [./modules/nixos/installer.nix];
-      }).config.system.build.isoImage;
-
-    formatter.${system} = treefmtEval.config.build.wrapper;
-
-    devShells.${system}.default = pkgs.mkShell {
-      packages = [
-        pkgs.just
-        pkgs.lefthook
-        treefmtEval.config.build.wrapper
+      imports = [
+        inputs.treefmt-nix.flakeModule
+        ./hosts
       ];
-      shellHook = ''
-        lefthook install >/dev/null
-      '';
-    };
 
-    checks.${system}.formatting = treefmtEval.config.build.check inputs.self;
-  };
+      perSystem = {
+        config,
+        pkgs,
+        ...
+      }: {
+        treefmt = import ./treefmt.nix;
+
+        devShells.default = pkgs.mkShell {
+          packages = [
+            pkgs.just
+            pkgs.lefthook
+            config.treefmt.build.wrapper
+          ];
+          shellHook = ''
+            lefthook install >/dev/null
+          '';
+        };
+      };
+    };
 }
