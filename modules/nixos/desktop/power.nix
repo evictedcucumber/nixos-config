@@ -9,11 +9,11 @@
       sysrun = "${pkgs.systemd}/bin/systemd-run";
     in ''
       # Plugged in → performance
-      SUBSYSTEM=="power_supply", KERNEL=="AC*", ATTR{online}=="1", \
+      SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="1", \
         RUN+="${sysrun} --no-block ${ppd} set performance"
 
       # Unplugged → balanced
-      SUBSYSTEM=="power_supply", KERNEL=="AC*", ATTR{online}=="0", \
+      SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="0", \
         RUN+="${sysrun} --no-block ${ppd} set balanced"
     '';
   };
