@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   vscodeWrapped = pkgs.symlinkJoin {
     name = "vscode-wrapped";
     paths = [pkgs.vscode];

@@ -1,7 +1,4 @@
-{
-  config,
-  ...
-}: {
+{config, ...}: {
   programs.tealdeer = {
     enable = true;
     enableAutoUpdates = true;

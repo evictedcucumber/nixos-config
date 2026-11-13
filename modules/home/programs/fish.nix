@@ -1,7 +1,4 @@
-{
-  config,
-  ...
-}: let
+{config, ...}: let
   mkSymlink = link: (import ../../../lib/mkSymlink.nix) link config;
 in {
   programs.fish = {
