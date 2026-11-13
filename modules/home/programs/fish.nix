@@ -9,9 +9,7 @@ in {
       end
     '';
     shellInit = ''
-      set -u fish_greeting ""
-
-      fish_config theme choose "Rosé Pine"
+      set -g fish_greeting ""
     '';
     shellAbbrs = {
       v = "nvim";
@@ -26,6 +24,8 @@ in {
       "z.." = "z ..";
     };
     interactiveShellInit = ''
+      fish_config theme choose "Rosé Pine"
+
       bind \cf y
       bind \cj down-or-search
       bind \ck up-or-search
