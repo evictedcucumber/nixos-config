@@ -26,10 +26,6 @@ in {
   home.packages = [pkgs.uv azure-cli];
   # :: }
 
-  # :: SESSION VARIABLES {
-  home.sessionVariables.LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc}/lib";
-  # :: }
-
   # :: ME {
   me.ssh.extraConfig = {
     "vs-ssh.visualstudio.com" = {
