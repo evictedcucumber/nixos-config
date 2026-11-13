@@ -4,100 +4,31 @@
   username,
   ...
 }: {
+  imports = [
+    ./locale.nix
+    ./nix.nix
+    ./security.nix
+  ];
+
   # :: BOOT {
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  # :: }
-
-  # :: NIX {
-  nix = {
-    package = pkgs.nixVersions.latest;
-    settings = {
-      experimental-features = ["nix-command" "flakes"];
-      auto-optimise-store = true;
-      extra-substituters = ["https://nix-community.cachix.org"];
-      extra-trusted-public-keys = ["nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="];
-      trusted-users = [username];
-      warn-dirty = false;
-    };
-    gc = {
-      automatic = true;
-      dates = ["Tue 10:30"];
-      options = "--delete-older-than 14d";
-    };
-  };
   # :: }
 
   # :: NETWORKING {
   networking.hostName = hostname;
   # :: }
 
-  # :: SECURITY {
-  security = {
-    sudo.enable = true;
-    rtkit.enable = true;
-    polkit = {
-      enable = true;
-      extraConfig = ''
-        polkit.addRule(function(action, subject) {
-          if (action.id == "org.debian.pcsc-lite.access_pcsc" &&
-              subject.isInGroup("plugdev")) {
-            return polkit.Result.YES;
-          }
-        });
-      '';
-    };
-    pam.services.login.enableGnomeKeyring = true;
-  };
-  # :: }
-
   # :: SERVICES {
   services = {
     fwupd.enable = true;
     fstrim.enable = true;
-    gnome = {
-      gnome-keyring.enable = true;
-      # SSH keys are FIDO2 (sk) keys served by home-manager's ssh-agent;
-      # keep gcr from claiming SSH_AUTH_SOCK as a second agent.
-      gcr-ssh-agent.enable = false;
-    };
-    pcscd.enable = true;
-    udev = {
-      enable = true;
-      packages = with pkgs; [yubikey-personalization libu2f-host];
-      # uaccess only grants ACLs to a seat session; WSL logins have no seat,
-      # so also grant the users group directly or FIDO2 ssh can't open hidraw.
-      extraRules = ''
-        SUBSYSTEMS=="usb", ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0407", KERNEL=="hidraw*", GROUP="users", MODE="0660", TAG+="uaccess"
-      '';
-    };
   };
-  # :: }
-
-  # :: LOCALE {
-  i18n = {
-    defaultLocale = "en_ZA.UTF-8";
-    extraLocaleSettings = {
-      LC_ADDRESS = "en_ZA.UTF-8";
-      LC_IDENTIFICATION = "en_ZA.UTF-8";
-      LC_MEASUREMENT = "en_ZA.UTF-8";
-      LC_MONETARY = "en_ZA.UTF-8";
-      LC_NAME = "en_ZA.UTF-8";
-      LC_NUMERIC = "en_ZA.UTF-8";
-      LC_PAPER = "en_ZA.UTF-8";
-      LC_TELEPHONE = "en_ZA.UTF-8";
-      LC_TIME = "en_ZA.UTF-8";
-    };
-  };
-  # :: };
-
-  # :: TIME {
-  time.timeZone = "Africa/Johannesburg";
   # :: }
 
   # :: USERS {
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = ["wheel" "plugdev"];
+    extraGroups = ["wheel"];
     shell = pkgs.fish;
   };
   # :: }
@@ -105,24 +36,12 @@
   # :: ENVIRONMENT {
   environment.systemPackages = with pkgs; [
     kmod
-    libfido2
-    libsecret
-    pcsc-tools
     usbutils
     vim
-    yubikey-manager
-    yubikey-personalization
   ];
   # :: }
 
   # :: PROGRAMS {
-  programs = {
-    nix-ld.enable = true;
-    gnupg.agent = {
-      enable = true;
-      pinentryPackage = pkgs.pinentry-curses;
-    };
-    fish.enable = true;
-  };
+  programs.fish.enable = true;
   # :: }
 }
