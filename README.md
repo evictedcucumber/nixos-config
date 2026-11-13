@@ -18,10 +18,11 @@ modules/
     default.nix            Settings shared by every host; imports nix.nix, locale.nix and security.nix
     wsl.nix                Shared base for WSL hosts (imported by snowfox/tadpole)
     installer.nix          Installer ISO that formats and installs a disko-managed host offline
+    desktop/               Graphical session for non-WSL hosts: Hyprland + greetd, audio, power profiles
   home/
     default.nix            Home Manager settings shared by every host
     profiles/              cli.nix, dev.nix (builds on cli) and desktop.nix
-    programs/              One file per program that needs real configuration
+    programs/              One file per program that needs real configuration, plus theme.nix
 lib/
   mkSystem.nix           Builds a nixosSystem from {system, hostname, username}
   mkSymlink.nix          Out-of-store symlink helper for dotfiles kept under config/
@@ -38,7 +39,7 @@ Home Manager config is grouped into three profiles under `modules/home/profiles/
 
 - `cli.nix`: shell, prompt and everyday command-line tools.
 - `dev.nix`: Neovim, compilers and language toolchains. It imports `cli.nix`.
-- `desktop.nix`: the Hyprland session and graphical apps.
+- `desktop.nix`: the Hyprland session, theming and graphical apps.
 
 A profile lists plain packages itself and imports a file from `modules/home/programs/` for anything
 that needs real configuration. Each `hosts/<host>/home.nix` imports the profiles it wants and adds
