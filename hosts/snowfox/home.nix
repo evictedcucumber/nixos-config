@@ -1,7 +1,9 @@
 _: {
+  imports = [../../modules/home/profiles/dev.nix];
+
   # :: ME {
-  me.tools = {
-    git.settings.signingKey = "440DB3144C3649BA";
+  me = {
+    git.signingKey = "440DB3144C3649BA";
     ssh.extraConfig = {
       "tcyclops.homelab.zezura.cc" = {
         hostName = "10.0.0.2";

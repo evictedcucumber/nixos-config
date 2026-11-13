@@ -33,7 +33,7 @@ in
           backupFileExtension = "backup";
           overwriteBackup = true;
           extraSpecialArgs = {inherit inputs username;};
-          users.${username}.imports = [../hosts/${hostname}/home.nix ../home];
+          users.${username}.imports = [../hosts/${hostname}/home.nix ../modules/home];
         };
       }
     ];

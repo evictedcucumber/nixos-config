@@ -1,35 +1,11 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
-    inputs.noctalia.homeModules.default
+    ../../modules/home/profiles/dev.nix
+    ../../modules/home/profiles/desktop.nix
   ];
 
   # :: ME {
-  me = {
-    browsers = {
-      helium.enable = true;
-    };
-    editors.vscode.enable = true;
-    files.nautilus.enable = true;
-    # games.modrinth.enable = true;
-    media = {
-      flameshot.enable = true;
-      mpv.enable = true;
-      spotify.enable = true;
-    };
-    notes.obsidian.enable = true;
-    terminals.ghostty.enable = true;
-    tools = {
-      git.settings.signingKey = "CB029F0E386B37C7";
-    };
-    wms = {
-      hyprland.enable = true;
-      noctalia.enable = true;
-    };
-  };
+  me.git.signingKey = "CB029F0E386B37C7";
   # :: }
 
   # :: GTK {

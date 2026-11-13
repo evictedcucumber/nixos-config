@@ -20,6 +20,8 @@
   });
   azure-cli = pkgs.azure-cli.override {inherit (pkgsWithInvoke2) python3;};
 in {
+  imports = [../../modules/home/profiles/dev.nix];
+
   # :: PACKAGES {
   home.packages = [pkgs.uv azure-cli];
   # :: }
@@ -29,7 +31,7 @@ in {
   # :: }
 
   # :: ME {
-  me.tools.ssh.extraConfig = {
+  me.ssh.extraConfig = {
     "vs-ssh.visualstudio.com" = {
       addKeysToAgent = "yes";
       identityFile = "~/.ssh/sb.key";
