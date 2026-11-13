@@ -1,5 +1,6 @@
 # sudo, polkit, the GNOME keyring, GnuPG, and YubiKey/FIDO2 support.
 {
+  lib,
   pkgs,
   username,
   ...
@@ -36,16 +37,19 @@
       enable = true;
       packages = with pkgs; [yubikey-personalization libu2f-host];
       # uaccess only grants ACLs to a seat session; WSL logins have no seat,
-      # so also grant the users group directly or FIDO2 ssh can't open hidraw.
+      # so also grant the plugdev group directly or FIDO2 ssh can't open hidraw.
       extraRules = ''
-        SUBSYSTEMS=="usb", ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0407", KERNEL=="hidraw*", GROUP="users", MODE="0660", TAG+="uaccess"
+        SUBSYSTEMS=="usb", ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0407", KERNEL=="hidraw*", GROUP="plugdev", MODE="0660", TAG+="uaccess"
       '';
     };
   };
   # :: }
 
   # :: USERS {
-  users.users.${username}.extraGroups = ["plugdev"];
+  users = {
+    groups.plugdev = {};
+    users.${username}.extraGroups = ["plugdev"];
+  };
   # :: }
 
   # :: ENVIRONMENT {
@@ -61,7 +65,7 @@
   # :: PROGRAMS {
   programs.gnupg.agent = {
     enable = true;
-    pinentryPackage = pkgs.pinentry-curses;
+    pinentryPackage = lib.mkDefault pkgs.pinentry-curses;
   };
   # :: }
 }

@@ -18,9 +18,10 @@
   # :: }
 
   # :: ENVIRONMENT {
-  environment.systemPackages = with pkgs; [
-    pinentry-all
-    gcr_4
-  ];
+  environment.systemPackages = [pkgs.gcr_4];
+  # :: }
+
+  # :: PROGRAMS {
+  programs.gnupg.agent.pinentryPackage = pkgs.pinentry-all;
   # :: }
 }
