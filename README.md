@@ -5,41 +5,48 @@ My personal NixOS + Home Manager configuration, managed as a single flake across
 ## Layout
 
 ```
-flake.nix              Inputs and the nixosConfigurations for each host
-utilities/
-  mkSystem.nix          Builds a nixosSystem from {system, hostname, username, stateVersion}
+flake.nix              Inputs and the flake-parts setup (formatter, dev shell, checks)
+hosts/
+  default.nix            Turns every directory here into a nixosConfiguration (and an ISO if it has a disko.nix)
+  <host>/
+    default.nix            Per-host NixOS config, including its stateVersion
+    home.nix               Per-host Home Manager config: the profiles it imports plus its own settings
+    hardware.nix           Hardware config for bare-metal hosts, like nixos-generate-config's output
+    disko.nix              Declarative disk layout (partitions, LUKS, LVM, btrfs) for bare-metal hosts
+modules/
+  nixos/
+    default.nix            Settings shared by every host; imports nix.nix, locale.nix and security.nix
+    wsl.nix                Shared base for WSL hosts (imported by snowfox/tadpole)
+    installer.nix          Installer ISO that formats and installs a disko-managed host offline
+  home/
+    default.nix            Home Manager settings shared by every host
+    profiles/              cli.nix, dev.nix (builds on cli) and desktop.nix
+    programs/              One file per program that needs real configuration
+lib/
+  mkSystem.nix           Builds a nixosSystem from {system, hostname, username}
   mkSymlink.nix          Out-of-store symlink helper for dotfiles kept under config/
-systems/
-  default.nix            Settings shared by every host (nix.settings, locale, users, ...)
-  <host>.nix              Per-host NixOS config (hardware, services, home-manager import)
-  hardware/<host>.nix      Hardware config for bare-metal hosts, like nixos-generate-config's output
-  disko/<host>.nix         Declarative disk layout (partitions, LUKS, LVM, btrfs) for bare-metal hosts
-  installer.nix            Installer ISO that formats and installs a disko-managed host offline
-  wsl.nix                  Shared base for WSL hosts (imported by snowfox/tadpole)
-home/
-  default.nix             Home Manager options shared by every host, under the `me.*` namespace
-  <host>.nix                Per-host Home Manager delta, imported on top of default.nix
-  modules/                One file per tool/app, grouped by category (editors/, tools/, wms/, ...)
 config/                  Raw dotfiles (Hyprland, yazi, fish theme, ...) symlinked into place
 scripts/
-  show-modules.sh         Prints which `me.*` options are enabled per host
-  check.sh                 Runs the same format/lint/eval checks as `nix flake check`
+  check.sh               Runs the same format/lint/eval checks as `nix flake check`
 justfile                Shortcuts for the commands below (`just` lists them)
 lefthook.yml            Git hook config (see Checks below)
 ```
 
-## The `me.*` pattern
+## Profiles
 
-Every optional piece of Home Manager config (an editor, a CLI tool, a WM, ...) lives in its own
-file under `home/modules/`, declares a `me.<category>.<name>.enable` option (plus any settings it
-needs), and wires up the real `programs.*`/`home.*` config behind `lib.mkIf`. `import-tree` pulls
-every file under `home/modules/` in automatically, so adding a new module is just adding a file —
-no import list to maintain.
+Home Manager config is grouped into three profiles under `modules/home/profiles/`:
 
-`home/default.nix` sets the `me.*` options common to all hosts; each `home/<host>.nix` imports it
-and layers host-specific deltas (extra apps, per-host git signing key, etc.) on top. Run
-`./scripts/show-modules.sh [hostname|all]` to see the resolved `me.*` tree for a host without
-doing a full rebuild.
+- `cli.nix`: shell, prompt and everyday command-line tools.
+- `dev.nix`: Neovim, compilers and language toolchains. It imports `cli.nix`.
+- `desktop.nix`: the Hyprland session and graphical apps.
+
+A profile lists plain packages itself and imports a file from `modules/home/programs/` for anything
+that needs real configuration. Each `hosts/<host>/home.nix` imports the profiles it wants and adds
+its own settings on top. Two options cover what differs per host: `me.git.signingKey` and
+`me.ssh.extraConfig`.
+
+To add a host, create `hosts/<name>/default.nix` and `hosts/<name>/home.nix`; it is picked up
+automatically.
 
 ## Hosts
 
@@ -53,7 +60,7 @@ doing a full rebuild.
 
 ```bash
 sudo nixos-rebuild switch --flake .#<host>
-# or, since `me.tools.nh` is enabled:
+# or, with `nh` from the cli profile:
 nh os switch
 # or
 just switch [host]
@@ -83,8 +90,8 @@ nix flake check  # format-check + lint, plus evaluate every host's config
 ./scripts/check.sh --fix    # nix fmt, then check
 ```
 
-Git hooks are managed with [lefthook](https://lefthook.dev) (`me.tools.lefthook`, installed via
-Home Manager). Run `lefthook install` once per clone to wire them up:
+Git hooks are managed with [lefthook](https://lefthook.dev) (installed by the dev profile and the
+dev shell). Run `lefthook install` once per clone to wire them up:
 
 - `pre-commit` runs `nix fmt` on staged `.nix` files and re-stages anything it reformats.
 - `pre-push` runs the full `nix flake check` (format check + statix + deadnix + evaluate every

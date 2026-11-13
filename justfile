@@ -18,11 +18,7 @@ check:
 update:
     nix flake update
 
-# Show resolved me.* modules for a host
-modules host="all":
-    ./scripts/show-modules.sh {{ host }}
-
-# Build seamoth's installer ISO into the current directory as seamoth.iso
+# Build a disko-managed host's installer ISO into the current directory as <host>.iso
 generate host:
-    @[ "{{ host }}" = seamoth ] || { echo "Only seamoth has an installer ISO" >&2; exit 1; }
+    @[ -f hosts/{{ host }}/disko.nix ] || { echo "{{ host }} has no disko layout, so no installer ISO" >&2; exit 1; }
     install -m 644 "$(nix build .#{{ host }}-iso --no-link --print-out-paths)"/iso/*.iso "{{ invocation_directory() }}/{{ host }}.iso"
