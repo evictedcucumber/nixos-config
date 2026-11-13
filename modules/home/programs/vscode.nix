@@ -3,7 +3,7 @@
     name = "vscode-wrapped";
     paths = [pkgs.vscode];
 
-    buildInputs = [pkgs.makeWrapper];
+    nativeBuildInputs = [pkgs.makeWrapper];
 
     postBuild = ''
       wrapProgram $out/bin/code \

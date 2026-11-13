@@ -24,7 +24,6 @@ _: {
         read_only = "  ";
         fish_style_pwd_dir_length = 1;
       };
-      git_status.disabled = false;
       rust = {
         disabled = false;
         symbol = " ";

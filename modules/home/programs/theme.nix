@@ -1,5 +1,11 @@
 # GTK, Qt and cursor theming.
-{pkgs, ...}: {
+{pkgs, ...}: let
+  cursor = {
+    name = "BreezeX-RosePine-Linux";
+    package = pkgs.rose-pine-cursor;
+    size = 24;
+  };
+in {
   # :: GTK {
   gtk = {
     enable = true;
@@ -10,11 +16,6 @@
     iconTheme = {
       name = "rose-pine";
       package = pkgs.rose-pine-icon-theme;
-    };
-    cursorTheme = {
-      name = "BreezeX-RosePine-Linux";
-      package = pkgs.rose-pine-cursor;
-      size = 24;
     };
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = true;
@@ -31,8 +32,8 @@
       color-scheme = "prefer-dark";
       gtk-theme = "adw-gtk3-dark";
       icon-theme = "rose-pine";
-      cursor-theme = "BreezeX-RosePine-Linux";
-      cursor-size = 24;
+      cursor-theme = cursor.name;
+      cursor-size = cursor.size;
     };
   };
   # :: }
@@ -53,13 +54,12 @@
     sessionVariables = {
       GTK_THEME = "adw-gtk3-dark";
     };
-    pointerCursor = {
-      enable = true;
-      name = "BreezeX-RosePine-Linux";
-      package = pkgs.rose-pine-cursor;
-      size = 24;
-      gtk.enable = true;
-    };
+    pointerCursor =
+      cursor
+      // {
+        enable = true;
+        gtk.enable = true;
+      };
   };
   # :: }
 }
