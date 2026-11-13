@@ -99,18 +99,11 @@ nix flake check  # format-check + lint, plus evaluate every host's config
 ```
 
 Git hooks are managed with [lefthook](https://lefthook.dev) (installed by the dev profile and the
-dev shell). Run `lefthook install` once per clone to wire them up:
+dev shell). Entering the dev shell wires them up; outside it, run `lefthook install` once per clone:
 
 - `pre-commit` runs `nix fmt` on staged `.nix` files and re-stages anything it reformats.
 - `pre-push` runs the full `nix flake check` (format check + statix + deadnix + evaluate every
   host).
-
-### Keeping inputs up to date
-
-[`.github/workflows/update-flake-lock.yml`](.github/workflows/update-flake-lock.yml) runs every
-Tuesday at 12:00 (Africa/Johannesburg), `nix flake update`s, verifies `nix flake check` still
-passes, and pushes the updated `flake.lock` straight to `main`. Trigger it manually from the
-Actions tab (`workflow_dispatch`) at any time.
 
 ## License
 
