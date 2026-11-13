@@ -1,11 +1,11 @@
 {
-  config,
   pkgs,
   username,
   ...
 }: {
   imports = [
     ./hardware.nix
+    ../../modules/nixos/desktop
   ];
 
   # :: SYSTEM {
@@ -35,13 +35,6 @@
   };
   # :: }
 
-  # :: NIX {
-  nix.settings = {
-    extra-substituters = ["https://noctalia.cachix.org"];
-    extra-trusted-public-keys = ["noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="];
-  };
-  # :: }
-
   # :: NETWORKING {
   networking = {
     firewall.trustedInterfaces = ["virbr0"];
@@ -49,39 +42,9 @@
   };
   # :: }
 
-  # :: SECURITY {
-  security.pam.services = {
-    greetd.enableGnomeKeyring = true;
-  };
-  # :: }
-
   # :: SERVICES {
   services = {
-    pipewire = {
-      enable = true;
-      alsa = {
-        enable = true;
-        support32Bit = true;
-      };
-      pulse.enable = true;
-      jack.enable = true;
-    };
     printing.enable = true;
-    upower.enable = true;
-    power-profiles-daemon.enable = true;
-    displayManager = {
-      gdm.enable = false;
-      sddm.enable = false;
-    };
-    greetd = {
-      enable = true;
-      settings = {
-        default_session = {
-          command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd '${config.programs.uwsm.package}/bin/uwsm start hyprland-uwsm.desktop'";
-          user = "greeter";
-        };
-      };
-    };
     snapper = {
       configs = {
         root = {
@@ -107,53 +70,6 @@
       };
       snapshotRootOnBoot = true;
     };
-    udev.extraRules = let
-      ppd = "${pkgs.power-profiles-daemon}/bin/powerprofilesctl";
-      sysrun = "${pkgs.systemd}/bin/systemd-run";
-    in ''
-      # Plugged in → performance
-      SUBSYSTEM=="power_supply", KERNEL=="AC*", ATTR{online}=="1", \
-        RUN+="${sysrun} --no-block ${ppd} set performance"
-
-      # Unplugged → balanced
-      SUBSYSTEM=="power_supply", KERNEL=="AC*", ATTR{online}=="0", \
-        RUN+="${sysrun} --no-block ${ppd} set balanced"
-    '';
-    gvfs.enable = true;
-  };
-  # :: }
-
-  # :: SYSTEMD {
-  systemd = {
-    # Battery ≤15% while discharging → power-saver. Polled instead of
-    # matched via udev, since udev can only match an exact capacity value
-    # and would silently never fire if a reading skips past 15% (e.g.
-    # after resume).
-    services.battery-power-saver = {
-      description = "Switch to power-saver profile when battery is low";
-      path = [pkgs.coreutils pkgs.power-profiles-daemon];
-      serviceConfig.Type = "oneshot";
-      script = ''
-        for bat in /sys/class/power_supply/BAT*; do
-          [ -e "$bat/status" ] || continue
-          [ -e "$bat/capacity" ] || continue
-          status=$(cat "$bat/status")
-          capacity=$(cat "$bat/capacity")
-          if [ "$status" = "Discharging" ] && [ "$capacity" -le 15 ]; then
-            powerprofilesctl set power-saver
-          fi
-        done
-      '';
-    };
-
-    timers.battery-power-saver = {
-      description = "Periodically check battery level for power-saver switch";
-      wantedBy = ["timers.target"];
-      timerConfig = {
-        OnBootSec = "1min";
-        OnUnitActiveSec = "1min";
-      };
-    };
   };
   # :: }
 
@@ -170,33 +86,12 @@
   };
   # :: }
 
-  # :: FONT {
-  fonts.packages = with pkgs; [
-    inter
-    nerd-fonts.jetbrains-mono
-  ];
-  # :: }
-
   # :: USERS {
   users.users.${username}.extraGroups = ["networkmanager" "libvirtd" "kvm"];
   # :: }
 
-  # :: ENVIRONMENT {
-  environment.systemPackages = with pkgs; [
-    pinentry-all
-    wl-clipboard
-    wl-clipboard-x11
-    gcr_4
-  ];
-  # :: }
-
   # :: PROGRAMS {
   programs = {
-    hyprland = {
-      enable = true;
-      xwayland.enable = true;
-      withUWSM = true;
-    };
     virt-manager.enable = true;
     steam = {
       enable = true;
