@@ -26,6 +26,7 @@ modules/
 lib/
   mkSystem.nix           Builds a nixosSystem from {system, hostname, username}
   mkSymlink.nix          Out-of-store symlink helper for dotfiles kept under config/
+  mkPathCheck.nix        Activation check that a cloned repo is where its option says
 config/                  Raw dotfiles (Hyprland, yazi, fish theme, ...) symlinked into place
 scripts/
   check.sh               Runs the same format/lint/eval checks as `nix flake check`
@@ -45,6 +46,12 @@ A profile lists plain packages itself and imports a file from `modules/home/prog
 that needs real configuration. Each `hosts/<host>/home.nix` imports the profiles it wants and adds
 its own settings on top. Two options cover what differs per host: `me.git.signingKey` and
 `me.ssh.extraConfig`.
+
+Dotfiles under `config/` and the Neovim config are symlinked from their clones instead of being
+copied into the Nix store, so edits apply without a rebuild. `me.flakePath` (default
+`~/repos/nixos-config`) and `me.neovimConfigPath` (default `~/repos/neovim-config`) say where those
+clones are. If either is missing, Home Manager activation fails with a message naming the option,
+after everything else has been set up.
 
 To add a host, create `hosts/<name>/default.nix` and `hosts/<name>/home.nix`; it is picked up
 automatically.
