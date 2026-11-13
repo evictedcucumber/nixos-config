@@ -13,15 +13,7 @@
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot/efi";
-              mountOptions = ["fmask=0022" "dmask=0022"];
-            };
-          };
-          boot = {
-            size = "1G";
-            content = {
-              type = "filesystem";
-              format = "ext4";
-              mountpoint = "/boot";
+              mountOptions = ["umask=0077"];
             };
           };
           luks = {
