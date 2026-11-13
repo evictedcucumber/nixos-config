@@ -2,15 +2,10 @@
   pkgs,
   hostname,
   username,
-  stateVersion,
   ...
 }: {
   # :: BOOT {
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  # :: }
-
-  # :: SYSTEM {
-  system.stateVersion = stateVersion;
   # :: }
 
   # :: NIX {

@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  mkSymlink = link: (import ../../../utilities/mkSymlink.nix) link config;
+  mkSymlink = link: (import ../../../lib/mkSymlink.nix) link config;
 in {
   options.me.shells.fish = {
     enable = lib.mkEnableOption "Enable Fish Shell";

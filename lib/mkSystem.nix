@@ -2,7 +2,6 @@
   system,
   hostname,
   username,
-  stateVersion,
 }: let
   pkgs = import inputs.nixpkgs {
     inherit system;
@@ -21,11 +20,11 @@
 in
   inputs.nixpkgs.lib.nixosSystem {
     inherit pkgs;
-    specialArgs = {inherit inputs hostname username stateVersion;};
+    specialArgs = {inherit inputs hostname username;};
     modules = [
       inputs.nixpkgs.nixosModules.readOnlyPkgs
-      ../systems
-      ../systems/${hostname}.nix
+      ../modules/nixos
+      ../hosts/${hostname}
       inputs.home-manager.nixosModules.home-manager
       {
         home-manager = {
@@ -33,7 +32,8 @@ in
           useUserPackages = true;
           backupFileExtension = "backup";
           overwriteBackup = true;
-          extraSpecialArgs = {inherit inputs username stateVersion;};
+          extraSpecialArgs = {inherit inputs username;};
+          users.${username}.imports = [../hosts/${hostname}/home.nix ../home];
         };
       }
     ];

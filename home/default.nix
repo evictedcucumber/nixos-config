@@ -1,14 +1,15 @@
 {
   inputs,
   config,
+  osConfig,
   username,
-  stateVersion,
   ...
 }: {
   imports = [(inputs.import-tree ./modules)];
 
   home = {
-    inherit username stateVersion;
+    inherit username;
+    inherit (osConfig.system) stateVersion;
     homeDirectory = "/home/${username}";
   };
 

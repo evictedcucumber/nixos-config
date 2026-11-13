@@ -1,8 +1,5 @@
-{...}: {
-  imports = [./default.nix];
-
+_: {
   # :: ME {
-  # Delta on top of the common profile in ./default.nix.
   me.tools = {
     git.settings.signingKey = "440DB3144C3649BA";
     ssh.extraConfig = {

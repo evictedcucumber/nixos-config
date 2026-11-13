@@ -45,40 +45,25 @@
   };
 
   outputs = inputs: let
-    mkSystem = import ./utilities/mkSystem.nix {inherit inputs;};
+    inherit (inputs.nixpkgs) lib;
+    mkSystem = import ./lib/mkSystem.nix {inherit inputs;};
 
     system = "x86_64-linux";
+    username = "ethan";
+    hosts = lib.attrNames (lib.filterAttrs (_: type: type == "directory") (builtins.readDir ./hosts));
+
     pkgs = import inputs.nixpkgs {inherit system;};
     treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
   in {
-    nixosConfigurations = {
-      seamoth = mkSystem {
-        system = "x86_64-linux";
-        hostname = "seamoth";
-        username = "ethan";
-        stateVersion = "26.11";
-      };
-      snowfox = mkSystem {
-        system = "x86_64-linux";
-        hostname = "snowfox";
-        username = "ethan";
-        stateVersion = "26.11";
-      };
-      tadpole = mkSystem {
-        system = "x86_64-linux";
-        hostname = "tadpole";
-        username = "ethan";
-        stateVersion = "26.11";
-      };
-    };
+    nixosConfigurations = lib.genAttrs hosts (hostname: mkSystem {inherit system hostname username;});
 
     packages.${system}.seamoth-iso =
-      (inputs.nixpkgs.lib.nixosSystem {
+      (lib.nixosSystem {
         specialArgs = {
+          inherit username;
           target = inputs.self.nixosConfigurations.seamoth;
-          username = "ethan";
         };
-        modules = [./systems/installer.nix];
+        modules = [./modules/nixos/installer.nix];
       }).config.system.build.isoImage;
 
     formatter.${system} = treefmtEval.config.build.wrapper;

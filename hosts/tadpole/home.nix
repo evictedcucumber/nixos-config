@@ -20,8 +20,6 @@
   });
   azure-cli = pkgs.azure-cli.override {inherit (pkgsWithInvoke2) python3;};
 in {
-  imports = [./default.nix];
-
   # :: PACKAGES {
   home.packages = [pkgs.uv azure-cli];
   # :: }
@@ -31,7 +29,6 @@ in {
   # :: }
 
   # :: ME {
-  # Delta on top of the common profile in ./default.nix.
   me.tools.ssh.extraConfig = {
     "vs-ssh.visualstudio.com" = {
       addKeysToAgent = "yes";

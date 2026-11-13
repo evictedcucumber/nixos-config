@@ -1,9 +1,9 @@
-{
-  pkgs,
-  username,
-  ...
-}: {
-  imports = [./wsl.nix];
+{pkgs, ...}: {
+  imports = [../../modules/nixos/wsl.nix];
+
+  # :: SYSTEM {
+  system.stateVersion = "26.11";
+  # :: }
 
   # :: WSL {
   # Use the WSL default of appending the Windows PATH, so Windows tools
@@ -13,9 +13,5 @@
 
   # :: PROGRAMS {
   programs.nix-ld.libraries = with pkgs; [stdenv.cc.cc.lib libxcrypt-legacy];
-  # :: }
-
-  # :: HOME {
-  home-manager.users.${username} = import ../home/tadpole.nix;
   # :: }
 }

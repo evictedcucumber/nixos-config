@@ -10,7 +10,7 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     inputs.disko.nixosModules.disko
-    ../disko/seamoth.nix
+    ./disko.nix
   ];
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];

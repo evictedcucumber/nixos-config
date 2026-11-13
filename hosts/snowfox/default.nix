@@ -1,5 +1,9 @@
-{username, ...}: {
-  imports = [./wsl.nix];
+_: {
+  imports = [../../modules/nixos/wsl.nix];
+
+  # :: SYSTEM {
+  system.stateVersion = "26.11";
+  # :: }
 
   # :: NIX {
   # WSL has no KVM on some Windows builds, so homelab tests run in nspawn, which needs uid-range.
@@ -23,9 +27,5 @@
   #   };
   #   wantedBy = ["default.target"];
   # };
-  # :: }
-
-  # :: HOME {
-  home-manager.users.${username} = import ../home/snowfox.nix;
   # :: }
 }

@@ -5,8 +5,12 @@
   ...
 }: {
   imports = [
-    ./hardware/seamoth.nix
+    ./hardware.nix
   ];
+
+  # :: SYSTEM {
+  system.stateVersion = "26.11";
+  # :: }
 
   # :: BOOT {
   boot = {
@@ -202,9 +206,5 @@
       ];
     };
   };
-  # :: }
-
-  # :: HOME {
-  home-manager.users.${username} = import ../home/seamoth.nix;
   # :: }
 }
