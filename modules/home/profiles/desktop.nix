@@ -11,7 +11,6 @@
 
   home.packages = with pkgs; [
     helium
-    # modrinth-app
     nautilus
     spotify
   ];
@@ -20,12 +19,4 @@
     mpv.enable = true;
     obsidian.enable = true;
   };
-
-  # :: XDG {
-  xdg.portal = {
-    enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
-    config.common.default = "*";
-  };
-  # :: }
 }
