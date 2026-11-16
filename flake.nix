@@ -3,45 +3,45 @@
     # :: BASE INPUTS {
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "my-nixpkgs/nixpkgs";
+      inputs.nixpkgs-lib.follows = "nixpkgs/nixpkgs";
     };
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "my-nixpkgs/nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs/nixpkgs";
     };
     # :: }
 
     # :: MAIN REPOSITORIES {
-    my-nixpkgs = {
+    nixpkgs = {
       url = "github:evictedcucumber/nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "my-nixpkgs/nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs/nixpkgs";
     };
     disko = {
       url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "my-nixpkgs/nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs/nixpkgs";
     };
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
-      inputs.nixpkgs.follows = "my-nixpkgs/nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs/nixpkgs";
     };
     # :: }
 
     # :: PROGRAMS {
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "my-nixpkgs/nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs/nixpkgs";
     };
     ghostty-overlay = {
       url = "github:ghostty-org/ghostty";
-      inputs.nixpkgs.follows = "my-nixpkgs/nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs/nixpkgs";
     };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "my-nixpkgs/nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs/nixpkgs";
     };
     # :: }
   };
@@ -61,7 +61,7 @@
         system,
         ...
       }: {
-        _module.args.pkgs = inputs.my-nixpkgs.legacyPackages.${system};
+        _module.args.pkgs = inputs.nixpkgs.legacyPackages.${system};
 
         treefmt = import ./treefmt.nix;
 

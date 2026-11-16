@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    inputs.my-nixpkgs.nixosModules.helium
+    inputs.nixpkgs.nixosModules.helium
     ./audio.nix
     ./hyprland.nix
     ./power.nix

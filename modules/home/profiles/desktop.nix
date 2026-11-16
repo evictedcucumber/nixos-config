@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    inputs.my-nixpkgs.homeModules.helium
+    inputs.nixpkgs.homeModules.helium
     ../programs/flameshot.nix
     ../programs/ghostty.nix
     ../programs/hyprland.nix
