@@ -7,7 +7,7 @@ My personal NixOS + Home Manager configuration, managed as a single flake across
 ```
 flake.nix              Inputs and the flake-parts setup (formatter, dev shell, checks)
 hosts/
-  default.nix            Turns every directory here into a nixosConfiguration (and an ISO if it has a disko.nix)
+  default.nix            Turns every directory here into a nixosConfiguration, plus an ISO (disko hosts) or .wsl builder (WSL hosts)
   <host>/
     default.nix            Per-host NixOS config, including its stateVersion
     home.nix               Per-host Home Manager config: the profiles it imports plus its own settings
@@ -84,6 +84,22 @@ Write the ISO to a USB stick, boot the laptop from it, and run `sudo install-sea
 confirm before wiping `/dev/nvme0n1`, prompts for the LUKS passphrase, installs seamoth without
 needing the network, and finally asks for a password for `ethan`. After that, `nixos-rebuild switch
 --flake .#seamoth` rebuilds as usual: disko only formats when the install script runs it.
+
+### Installing a WSL host
+
+```bash
+just generate snowfox   # or tadpole; writes <host>.wsl to the current directory (asks for sudo)
+```
+
+Copy the file to Windows and install it under the host's name, removing any old copy first:
+
+```powershell
+wsl --unregister snowfox   # only when replacing an existing install; this deletes its data
+wsl --install --from-file snowfox.wsl --name snowfox
+```
+
+Clone this repo to `~/repos/nixos-config` (and the Neovim config to `~/repos/neovim-config`) inside
+the new distro so the dotfile symlinks resolve.
 
 ### Checks
 

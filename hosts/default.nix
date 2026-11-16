@@ -1,4 +1,5 @@
-# Every directory here is a host; one with a disko.nix also gets a `<host>-iso` installer package.
+# Every directory here is a host. One with a disko.nix also gets a `<host>-iso` installer package,
+# and a WSL host gets a `<host>-wsl` package that builds its .wsl file.
 {
   inputs,
   lib,
@@ -11,6 +12,7 @@
 
   hosts = lib.attrNames (lib.filterAttrs (_: type: type == "directory") (builtins.readDir ./.));
   diskoHosts = lib.filter (hostname: builtins.pathExists ./${hostname}/disko.nix) hosts;
+  wslHosts = lib.filter (hostname: inputs.self.nixosConfigurations.${hostname}.config.wsl.enable or false) hosts;
 
   mkIso = hostname:
     (lib.nixosSystem {
@@ -23,5 +25,7 @@
 in {
   flake.nixosConfigurations = lib.genAttrs hosts (hostname: mkSystem {inherit system hostname username;});
 
-  perSystem.packages = lib.listToAttrs (map (hostname: lib.nameValuePair "${hostname}-iso" (mkIso hostname)) diskoHosts);
+  perSystem.packages =
+    lib.listToAttrs (map (hostname: lib.nameValuePair "${hostname}-iso" (mkIso hostname)) diskoHosts)
+    // lib.listToAttrs (map (hostname: lib.nameValuePair "${hostname}-wsl" inputs.self.nixosConfigurations.${hostname}.config.system.build.tarballBuilder) wslHosts);
 }
