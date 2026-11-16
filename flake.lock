@@ -97,26 +97,6 @@
         "type": "github"
       }
     },
-    "helium-overlay": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1794326795,
-        "narHash": "sha256-u/bFiTT2reDPGKDeOWEJMBd7iNYFkbdcIsrymwCF8OU=",
-        "owner": "oxcl",
-        "repo": "nix-flake-helium-browser",
-        "rev": "ee8c73c6432d7337216775ccbe726c3004af6542",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxcl",
-        "repo": "nix-flake-helium-browser",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -158,6 +138,30 @@
         "type": "github"
       }
     },
+    "my-nixpkgs": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "nixpkgs-stable": "nixpkgs-stable"
+      },
+      "locked": {
+        "lastModified": 1794832333,
+        "narHash": "sha256-uLUHnOZOdIXUZqSeGzuZvF0b1IhFtv5Nme9KKtWCcwk=",
+        "owner": "evictedcucumber",
+        "repo": "nixpkgs",
+        "rev": "ec81457fe828821c61062274c9f08279b80fb319",
+        "type": "github"
+      },
+      "original": {
+        "owner": "evictedcucumber",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -195,6 +199,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-stable": {
+      "locked": {
+        "lastModified": 1794552581,
+        "narHash": "sha256-qXFIqA6FCcx7XeDzw0ZNlkDT9UiCzrNDwK8RuU8RcHM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "f1e5c356f35d07e7b71a6b5e6c9338e0b029e0c0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-26.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "noctalia": {
       "inputs": {
         "nixpkgs": [
@@ -220,8 +240,8 @@
         "disko": "disko",
         "flake-parts": "flake-parts",
         "ghostty-overlay": "ghostty-overlay",
-        "helium-overlay": "helium-overlay",
         "home-manager": "home-manager_2",
+        "my-nixpkgs": "my-nixpkgs",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
         "noctalia": "noctalia",

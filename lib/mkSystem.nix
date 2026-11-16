@@ -7,7 +7,7 @@
     inherit system;
     config.allowUnfree = true;
     overlays = with inputs; [
-      helium-overlay.overlays.default
+      my-nixpkgs.overlays.default
       rust-overlay.overlays.default
       # aws-lc-sys >= 0.42 needs a system AWS-LC, which nixpkgs' tectonic doesn't provide yet.
       (final: prev: {

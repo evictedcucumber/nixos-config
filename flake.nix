@@ -13,6 +13,11 @@
 
     # :: MAIN REPOSITORIES {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    my-nixpkgs = {
+      url = "github:evictedcucumber/nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,10 +33,6 @@
     # :: }
 
     # :: PROGRAMS {
-    helium-overlay = {
-      url = "github:oxcl/nix-flake-helium-browser";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
