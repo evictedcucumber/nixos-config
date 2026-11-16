@@ -1,6 +1,11 @@
 # Graphical session shared by non-WSL hosts.
-{pkgs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
+    inputs.my-nixpkgs.nixosModules.helium
     ./audio.nix
     ./hyprland.nix
     ./power.nix
@@ -22,6 +27,7 @@
   # :: }
 
   # :: PROGRAMS {
+  programs.helium.enable = true;
   programs.gnupg.agent.pinentryPackage = pkgs.pinentry-all;
   # :: }
 }

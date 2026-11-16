@@ -1,6 +1,11 @@
 # Hyprland session and graphical apps.
-{pkgs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
+    inputs.my-nixpkgs.homeModules.helium
     ../programs/flameshot.nix
     ../programs/ghostty.nix
     ../programs/hyprland.nix
@@ -10,12 +15,12 @@
   ];
 
   home.packages = with pkgs; [
-    helium
     nautilus
     spotify
   ];
 
   programs = {
+    helium.enable = true;
     mpv.enable = true;
     obsidian.enable = true;
   };
