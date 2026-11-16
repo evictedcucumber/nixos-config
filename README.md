@@ -98,8 +98,8 @@ wsl --unregister snowfox   # only when replacing an existing install; this delet
 wsl --install --from-file snowfox.wsl --name snowfox
 ```
 
-Clone this repo to `~/repos/nixos-config` (and the Neovim config to `~/repos/neovim-config`) inside
-the new distro so the dotfile symlinks resolve.
+The image already holds fresh HTTPS clones of this repo and the Neovim config at `me.flakePath` and
+`me.neovimConfigPath`, so switch their `origin` to SSH if you push from there.
 
 ### Checks
 

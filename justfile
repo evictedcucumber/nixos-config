@@ -27,7 +27,7 @@ generate host:
         install -m 644 "$(nix build .#{{ host }}-iso --no-link --print-out-paths)"/iso/*.iso "$out.iso"
     elif nix eval .#{{ host }}-wsl.name >/dev/null 2>&1; then
         builder="$(nix build .#{{ host }}-wsl --no-link --print-out-paths)"
-        sudo "$builder/bin/nixos-wsl-tarball-builder" "$out.wsl"
+        sudo "$builder/bin/build-{{ host }}-wsl" "$out.wsl"
         sudo chown "$(id -u):$(id -g)" "$out.wsl"
     else
         echo "{{ host }} is neither a disko nor a WSL host, so there is nothing to generate" >&2
