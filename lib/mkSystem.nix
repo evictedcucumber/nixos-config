@@ -3,7 +3,9 @@
   hostname,
   username,
 }: let
-  pkgs = import inputs.nixpkgs {
+  inherit (inputs.my-nixpkgs.inputs) nixpkgs;
+
+  pkgs = import nixpkgs {
     inherit system;
     config.allowUnfree = true;
     overlays = with inputs; [
@@ -18,11 +20,11 @@
     ];
   };
 in
-  inputs.nixpkgs.lib.nixosSystem {
+  nixpkgs.lib.nixosSystem {
     inherit pkgs;
     specialArgs = {inherit inputs hostname username;};
     modules = [
-      inputs.nixpkgs.nixosModules.readOnlyPkgs
+      nixpkgs.nixosModules.readOnlyPkgs
       ../modules/nixos
       ../hosts/${hostname}
       inputs.home-manager.nixosModules.home-manager
