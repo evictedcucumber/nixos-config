@@ -121,15 +121,16 @@
     "home-manager_2": {
       "inputs": {
         "nixpkgs": [
+          "my-nixpkgs",
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1794278858,
-        "narHash": "sha256-rkrJwLgLSHBnXfgoSKIDa+2LLGdTqynsV3GAxOTGhUU=",
+        "lastModified": 1794897420,
+        "narHash": "sha256-hMI9Xg+lxS8kbnxIxL/jPQn688dstoxQAcMEbCb1ax0=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "82ce401aa350502897c3f2e85f384d61cd3b0b6d",
+        "rev": "5b76c5b8eec25fdbce4f43309b3ee10584374a26",
         "type": "github"
       },
       "original": {
@@ -140,18 +141,16 @@
     },
     "my-nixpkgs": {
       "inputs": {
-        "home-manager": [
-          "home-manager"
-        ],
+        "home-manager": "home-manager_2",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1794904465,
-        "narHash": "sha256-88o1UYyIwLcWfNXkvvwiR9chcu2uECPqbkurxIi/yUY=",
+        "lastModified": 1794905801,
+        "narHash": "sha256-K3f1dCXHciH9R5GnDt034nIzafuAJF1Xs8de5aFLlmc=",
         "owner": "evictedcucumber",
         "repo": "nixpkgs",
-        "rev": "eeb9af82e58d2f2b5f428774ec26d48779416b92",
+        "rev": "9d4bae9e921f0fc2cb98fedd9b56b985dfa1062b",
         "type": "github"
       },
       "original": {
@@ -238,7 +237,10 @@
         "disko": "disko",
         "flake-parts": "flake-parts",
         "ghostty-overlay": "ghostty-overlay",
-        "home-manager": "home-manager_2",
+        "home-manager": [
+          "my-nixpkgs",
+          "home-manager"
+        ],
         "my-nixpkgs": "my-nixpkgs",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": [

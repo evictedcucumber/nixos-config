@@ -12,15 +12,9 @@
     # :: }
 
     # :: MAIN REPOSITORIES {
-    my-nixpkgs = {
-      url = "github:evictedcucumber/nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
+    my-nixpkgs.url = "github:evictedcucumber/nixpkgs";
     nixpkgs.follows = "my-nixpkgs/nixpkgs";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    home-manager.follows = "my-nixpkgs/home-manager";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
