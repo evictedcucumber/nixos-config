@@ -9,15 +9,18 @@
       extra-trusted-public-keys = ["nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="];
       warn-dirty = false;
     };
-    gc = {
-      automatic = true;
-      dates = ["Tue 10:30"];
-      options = "--delete-older-than 14d";
-    };
   };
   # :: }
 
   # :: PROGRAMS {
   programs.nix-ld.enable = true;
+  programs.nh = {
+    enable = true;
+    clean = {
+      enable = true;
+      dates = "Tue 10:30";
+      extraArgs = "--keep-since 14d";
+    };
+  };
   # :: }
 }
