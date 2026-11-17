@@ -4,7 +4,15 @@ default:
 
 # Rebuild and switch to a host's config
 switch host=`hostname`:
-    sudo nixos-rebuild switch --flake .#{{ host }}
+    nh os switch . -H {{ host }}
+
+# Build a host's config without switching
+build host=`hostname`:
+    nh os build . -H {{ host }}
+
+# Remove old generations and garbage-collect the store
+clean:
+    nh clean all
 
 # Format the repo
 fmt:

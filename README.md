@@ -67,11 +67,12 @@ automatically.
 ## Usage
 
 ```bash
-sudo nixos-rebuild switch --flake .#<host>
-# or, with `nh` from the cli profile:
-nh os switch
-# or
-just switch [host]
+nh os switch        # build and switch this host
+nh os build         # build without switching
+nh clean all        # remove old generations and garbage-collect the store
+just switch [host]  # nh os switch for any host
+just build [host]   # nh os build for any host
+just clean          # nh clean all
 ```
 
 ### Installing seamoth from scratch
@@ -82,8 +83,8 @@ just generate seamoth   # writes seamoth.iso, with seamoth's full system baked i
 
 Write the ISO to a USB stick, boot the laptop from it, and run `sudo install-seamoth`. It asks you to
 confirm before wiping `/dev/nvme0n1`, prompts for the LUKS passphrase, installs seamoth without
-needing the network, and finally asks for a password for `ethan`. After that, `nixos-rebuild switch
---flake .#seamoth` rebuilds as usual: disko only formats when the install script runs it.
+needing the network, and finally asks for a password for `ethan`. After that, `nh os switch`
+rebuilds as usual: disko only formats when the install script runs it.
 
 ### Installing a WSL host
 
