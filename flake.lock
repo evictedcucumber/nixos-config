@@ -3,7 +3,6 @@
     "disko": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs",
           "nixpkgs"
         ]
       },
@@ -56,7 +55,6 @@
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
-          "nixpkgs",
           "nixpkgs"
         ]
       },
@@ -79,7 +77,6 @@
         "flake-compat": "flake-compat",
         "home-manager": "home-manager",
         "nixpkgs": [
-          "nixpkgs",
           "nixpkgs"
         ],
         "systems": "systems",
@@ -124,7 +121,6 @@
     "home-manager_2": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs",
           "nixpkgs"
         ]
       },
@@ -142,11 +138,32 @@
         "type": "github"
       }
     },
+    "my-nixpkgs": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-stable": "nixpkgs-stable"
+      },
+      "locked": {
+        "lastModified": 1794904465,
+        "narHash": "sha256-88o1UYyIwLcWfNXkvvwiR9chcu2uECPqbkurxIi/yUY=",
+        "owner": "evictedcucumber",
+        "repo": "nixpkgs",
+        "rev": "eeb9af82e58d2f2b5f428774ec26d48779416b92",
+        "type": "github"
+      },
+      "original": {
+        "owner": "evictedcucumber",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat_2",
         "nixpkgs": [
-          "nixpkgs",
           "nixpkgs"
         ]
       },
@@ -165,23 +182,17 @@
       }
     },
     "nixpkgs": {
-      "inputs": {
-        "home-manager": [
-          "home-manager"
-        ],
-        "nixpkgs": "nixpkgs_2",
-        "nixpkgs-stable": "nixpkgs-stable"
-      },
       "locked": {
-        "lastModified": 1794904465,
-        "narHash": "sha256-88o1UYyIwLcWfNXkvvwiR9chcu2uECPqbkurxIi/yUY=",
-        "owner": "evictedcucumber",
+        "lastModified": 1794537146,
+        "narHash": "sha256-Wpz/7x/YWnDIBu7yj6ixe8j6fIMsidd9Y+o1PqPF3iM=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "eeb9af82e58d2f2b5f428774ec26d48779416b92",
+        "rev": "d5cc6833999746cffdfe0598f7bc801a57b887a9",
         "type": "github"
       },
       "original": {
-        "owner": "evictedcucumber",
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -202,26 +213,9 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1794537146,
-        "narHash": "sha256-Wpz/7x/YWnDIBu7yj6ixe8j6fIMsidd9Y+o1PqPF3iM=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "d5cc6833999746cffdfe0598f7bc801a57b887a9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "noctalia": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs",
           "nixpkgs"
         ]
       },
@@ -245,8 +239,12 @@
         "flake-parts": "flake-parts",
         "ghostty-overlay": "ghostty-overlay",
         "home-manager": "home-manager_2",
+        "my-nixpkgs": "my-nixpkgs",
         "nixos-wsl": "nixos-wsl",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": [
+          "my-nixpkgs",
+          "nixpkgs"
+        ],
         "noctalia": "noctalia",
         "rust-overlay": "rust-overlay",
         "treefmt-nix": "treefmt-nix"
@@ -255,7 +253,6 @@
     "rust-overlay": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs",
           "nixpkgs"
         ]
       },
@@ -292,7 +289,6 @@
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs",
           "nixpkgs"
         ]
       },

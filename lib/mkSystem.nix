@@ -3,13 +3,13 @@
   hostname,
   username,
 }: let
-  inherit (inputs.nixpkgs.inputs) nixpkgs;
+  inherit (inputs) nixpkgs;
 
   pkgs = import nixpkgs {
     inherit system;
     config.allowUnfree = true;
     overlays = with inputs; [
-      inputs.nixpkgs.overlays.default
+      my-nixpkgs.overlays.default
       rust-overlay.overlays.default
       # aws-lc-sys >= 0.42 needs a system AWS-LC, which nixpkgs' tectonic doesn't provide yet.
       (final: prev: {
