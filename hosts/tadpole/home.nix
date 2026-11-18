@@ -1,29 +1,8 @@
-{pkgs, ...}: let
-  # Fabric requires invoke < 3 but nixpkgs ships 3.x, which marks it broken.
-  # Pin it for azure-cli's Python set only, since paramiko also depends on invoke.
-  # Drop this once https://github.com/fabric/fabric/issues/2376 is fixed.
-  pkgsWithInvoke2 = pkgs.extend (_: prev: {
-    pythonPackagesExtensions =
-      prev.pythonPackagesExtensions
-      ++ [
-        (pyFinal: pyPrev: {
-          invoke = pyPrev.invoke.overridePythonAttrs (old: rec {
-            version = "2.2.1";
-            src = pyFinal.fetchPypi {
-              inherit (old) pname;
-              inherit version;
-              hash = "sha256-UVv0m0pIkyt5sCRZA0jaIvOcSULf+ZGtH7i4uuob5wc=";
-            };
-          });
-        })
-      ];
-  });
-  azure-cli = pkgs.azure-cli.override {inherit (pkgsWithInvoke2) python3;};
-in {
+{pkgs, ...}: {
   imports = [../../modules/home/profiles/dev.nix];
 
   # :: PACKAGES {
-  home.packages = [pkgs.uv azure-cli];
+  home.packages = with pkgs; [uv azure-cli];
   # :: }
 
   # :: ME {
